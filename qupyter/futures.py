@@ -12,4 +12,6 @@ def get_trade_event(ticker: str, date: str) -> pd.DataFrame:
     res = client.get_object(Bucket='qrst-kospi200-futures-data', Key=key)
     df = pd.read_csv(res['Body'])
 
+    client.close()
+
     return df
