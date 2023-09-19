@@ -15,7 +15,7 @@ setup(
     long_description_content_type='text/markdown',
     install_requires=['requests', 'pandas', 'boto3'],
     license='MIT',
-    packages=find_packages(),
+    packages=find_packages(include=['qupyter', 'qupyter.*']),
     python_requires='>=3',
     zip_safe=False,
 )
