@@ -1,5 +1,5 @@
-qupyter package
-===============
+packages
+========
 
 Submodules
 ----------
