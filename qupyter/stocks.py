@@ -50,7 +50,7 @@ async def listen_trade_event(tickers: List[str], callback: Callable, stop_event:
         while stop_event is None or not stop_event.is_set():
             data = await _recv_with_timeout(ws)
             if data is not None:
-                callback(data)
+                await callback(data)
 
             await asyncio.sleep(0.01)
 
