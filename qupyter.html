@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 
 
@@ -6,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>packages &#8212; Qupyter  documentation</title>
   
@@ -28,16 +29,16 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
   <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
 
-    <script src="_static/documentation_options.js?v=8a448e45"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'qupyter';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -351,18 +352,87 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section id="packages">
-<h1>packages<a class="headerlink" href="#packages" title="Link to this heading">#</a></h1>
+<h1>packages<a class="headerlink" href="#packages" title="Permalink to this heading">#</a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
 </section>
-<section id="qupyter-futures-module">
-<h2>qupyter.futures module<a class="headerlink" href="#qupyter-futures-module" title="Link to this heading">#</a></h2>
+<section id="module-qupyter.futures">
+<span id="qupyter-futures-module"></span><h2>qupyter.futures module<a class="headerlink" href="#module-qupyter.futures" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="qupyter.futures.get_ticker_list">
+<span class="sig-prename descclassname"><span class="pre">qupyter.futures.</span></span><span class="sig-name descname"><span class="pre">get_ticker_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qupyter.futures.get_ticker_list" title="Permalink to this definition">#</a></dt>
+<dd><p>Ticker 조회</p>
+<p>Ticker를 리스트로 반환합니다.</p>
+<section id="returns">
+<h3>Returns<a class="headerlink" href="#returns" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt>list of str</dt><dd><p>선물 Ticker 목록.</p>
+</dd>
+</dl>
 </section>
-<section id="qupyter-stocks-module">
-<h2>qupyter.stocks module<a class="headerlink" href="#qupyter-stocks-module" title="Link to this heading">#</a></h2>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qupyter.futures.get_trade_event">
+<span class="sig-prename descclassname"><span class="pre">qupyter.futures.</span></span><span class="sig-name descname"><span class="pre">get_trade_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ticker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#qupyter.futures.get_trade_event" title="Permalink to this definition">#</a></dt>
+<dd><p>거래 이벤트 조회</p>
+<p>지정한 Ticker와 날짜에 해당하는 거래 이벤트를 조회합니다.</p>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt>ticker<span class="classifier">str</span></dt><dd><p>Ticker symbol.</p>
+</dd>
+<dt>date<span class="classifier">str</span></dt><dd><p>Date in YYYYMMDD format.</p>
+</dd>
+</dl>
 </section>
-<section id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3>Returns<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt>pandas.DataFrame</dt><dd><p>거래 이벤트 데이터</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-qupyter.stocks">
+<span id="qupyter-stocks-module"></span><h2>qupyter.stocks module<a class="headerlink" href="#module-qupyter.stocks" title="Permalink to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="qupyter.stocks.get_ticker_list">
+<span class="sig-prename descclassname"><span class="pre">qupyter.stocks.</span></span><span class="sig-name descname"><span class="pre">get_ticker_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#qupyter.stocks.get_ticker_list" title="Permalink to this definition">#</a></dt>
+<dd><p>Ticker 조회</p>
+<p>지원하는 종목 Ticker를 리스트로 반환합니다.
+(현재 KOSPI 상위 200개 종목만 지원)</p>
+<section id="id2">
+<h3>Returns<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt>list of str</dt><dd><p>Ticker 목록.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qupyter.stocks.listen_trade_event">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qupyter.stocks.</span></span><span class="sig-name descname"><span class="pre">listen_trade_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tickers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callback</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_event</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Event</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qupyter.stocks.listen_trade_event" title="Permalink to this definition">#</a></dt>
+<dd><p>실시간 체결 데이터 수신</p>
+<section id="id3">
+<h3>Parameters<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<dl class="simple">
+<dt>tickers<span class="classifier">list of str</span></dt><dd><p>수신할 ticker 목록</p>
+</dd>
+<dt>callback<span class="classifier">Callable[[str], Future]</span></dt><dd><p>수신한 데이터를 처리할 함수</p>
+</dd>
+<dt>stop_event<span class="classifier">asyncio.Event</span></dt><dd><p>(Optional) 수신을 중지할 때 set()을 호출할 이벤트 객체</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</section>
+<section id="module-qupyter">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-qupyter" title="Permalink to this heading">#</a></h2>
 </section>
 </section>
 
@@ -401,9 +471,17 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submodules">Submodules</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter-futures-module">qupyter.futures module</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter-stocks-module">qupyter.stocks module</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-contents">Module contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-qupyter.futures">qupyter.futures module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.futures.get_ticker_list"><code class="docutils literal notranslate"><span class="pre">get_ticker_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.futures.get_trade_event"><code class="docutils literal notranslate"><span class="pre">get_trade_event()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-qupyter.stocks">qupyter.stocks module</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.stocks.get_ticker_list"><code class="docutils literal notranslate"><span class="pre">get_ticker_list()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.stocks.listen_trade_event"><code class="docutils literal notranslate"><span class="pre">listen_trade_event()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-qupyter">Module contents</a></li>
 </ul>
   </nav></div>
 
@@ -447,7 +525,7 @@ document.write(`
       
         <div class="footer-item">
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
     <br/>
   </p>
 </div>
