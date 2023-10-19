@@ -12,13 +12,13 @@ Qupyter platform 에서는 증권사 API key를 암호화하여 안전하게 저
 app_key: <your-app-key>
 app_secret: <your-app-secret>
 environment: live
-issue_date: 20231018
+expire_date: 20231231
 market_type: stock
 ```
 
 - app_key, app_secret - API key 입니다. 이베스트 증권 OPEN API 사이트에서 발급받을 수 있습니다.
 - environment - 실행환경을 의미합니다. 모의투자의 경우엔 `test`를 실전투자의 경우 `live`로 값을 설정합니다
-- valid_until - 키 만료일자 입니다. 증권사에서 키 발행 시 나타난 값을 입력합니다.
+- expire_date - 키 만료일자 입니다. 증권사에서 키 발행 시 나타난 값을 입력합니다.
 - market_type - 현재 증권 거래를 의미하는 `stock` 만 입력 가능합니다.
 
 2. Qupyter platform 에서 터미널을 실행합니다.
@@ -33,8 +33,8 @@ qup secret-set ./my-credentials.yaml
 
 터미널에서 `qup secret-list`를 실행하여 확인할 수 있습니다.
 
-```
+```text
 jovyan@jupyter-kghoon:~$ qup secret-list
-MARKET_TYPE     ENVIRONMENT ISSUE_DATE
-stock           live        20230730
+MARKET_TYPE     ENVIRONMENT EXPIRE_DATE
+stock           live        20231231
 ```
