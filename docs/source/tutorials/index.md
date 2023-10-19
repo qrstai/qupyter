@@ -7,5 +7,7 @@
 :maxdepth: 1
 
 credentials
+strategy
+deploy
 ```
 
