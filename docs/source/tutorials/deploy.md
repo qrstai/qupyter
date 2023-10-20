@@ -99,11 +99,11 @@ async def trade_func(user_account, pending_orders, positions, broker):
 
                 # 현재 가격이 목표가격에 도달한 경우 진입한다
                 if current_price >= target_price:
-                    budget = int(total_balance / target_asset_code)
+                    budget = int(total_balance / len(target_asset_codes))
                     quantity = int(budget / current_price)
 
                     if quantity > 0:
-                        result.append({asset_code, current_price, quantity})
+                        result.append((asset_code, current_price, quantity))
 
         return result
 ```
