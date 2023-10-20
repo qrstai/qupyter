@@ -64,19 +64,16 @@ async def on_initialize() {
 
 ```python
 async def trade_func(account_info, pending_orders, positions, broker) -> List:
-  """
-  사용자 전략 코드 구현
+  """사용자 전략 코드 구현.
 
-  Parameters
-  ----------
-  account_info 계좌 정보
-  pending_orders 미체결 주문 목록
-  positions 보유 포지션
-  broker 시세 조회를 위한 증권 사 API wrapper
+  Args:
+    account_info: 계좌 정보.
+    pending_orders: 미체결 주문 목록.
+    positions: 보유 포지션.
+    broker: 시세 조회를 위한 증권 사 API wrapper.
 
-  Returns
-  --------
-  매매 지시 목록, 없는 경우 `None`
+  Returns:
+    매매 지시 목록, 없는 경우 `None`.
   """
 
 
