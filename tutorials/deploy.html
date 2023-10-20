@@ -416,7 +416,7 @@ document.write(`
 
 
     <span class="c1"># 보유 중인 포지션을 장시작시 시장가에 모두 매도</span>
-    <span class="k">if</span> <span class="n">now</span><span class="o">.</span><span class="n">hour</span> <span class="o">==</span> <span class="mi">9</span> <span class="ow">and</span> <span class="n">minute</span> <span class="o">==</span> <span class="mi">10</span> <span class="ow">and</span> <span class="n">positions</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">now</span><span class="o">.</span><span class="n">hour</span> <span class="o">==</span> <span class="mi">9</span> <span class="ow">and</span> <span class="n">now</span><span class="o">.</span><span class="n">minute</span> <span class="o">==</span> <span class="mi">10</span> <span class="ow">and</span> <span class="n">positions</span><span class="o">.</span><span class="n">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="n">price_map</span> <span class="o">=</span> <span class="n">__get_current_price_map</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">positions</span><span class="p">)))</span>
@@ -484,8 +484,8 @@ document.write(`
 </section>
 <section id="requirements-txt">
 <h3>requirements.txt<a class="headerlink" href="#requirements-txt" title="Permalink to this heading">#</a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">finance</span><span class="o">-</span><span class="n">datareader</span><span class="o">==</span><span class="mf">0.9.50</span>
-<span class="n">bs4</span><span class="o">==</span><span class="mf">0.0.1</span>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>finance-datareader==0.9.50
+bs4==0.0.1
 </pre></div>
 </div>
 </section>
