@@ -65,9 +65,9 @@ async def trade_func(user_account, pending_orders, positions, broker):
         price_map = __get_current_price_map(target_asset_codes)
 
         for asset_code in target_asset_codes:
-            if not __have_position(asset_code[1:]):
-                shcode = asset_code[1:]
+            shcode = asset_code[1:]
 
+            if not __have_position(shcode):
                 read_start = (yesterday - timedelta(days=7)).strftime('%Y-%m-%d')
                 read_end = yesterday.strftime('%Y-%m-%d')
 
@@ -94,8 +94,8 @@ async def trade_func(user_account, pending_orders, positions, broker):
                 # 현재가격
                 current_price = price_map[shcode]['price']
 
-                print(f"today_open:{today_open} yesterday_range:{yesterday_range} k:{k}")
-                print(f"target_price:{target_price} current_price:{current_price}")
+                print(f"오늘 시작가={today_open} 최근 거래일 변동폭={yesterday_range} k:{k}", end="")
+                print(f"목표가={target_price} 현재가={current_price}")
 
                 # 현재 가격이 목표가격에 도달한 경우 진입한다
                 if current_price >= target_price:
@@ -104,6 +104,11 @@ async def trade_func(user_account, pending_orders, positions, broker):
 
                     if quantity > 0:
                         result.append((asset_code, current_price, quantity))
+
+        for p in positions:
+            print(f"{p.asset_name}({p.asset_code}) : {p.current_pnl} ({p.current_pnl_pct}%) ", end="")
+            print(f"현재가={p.current_price} 평단가={p.average_purchase_price} ", end="")
+            print(f"수수료={p.commission} 세금={p.tax} 신용이자={p.loan_interest}")
 
         return result
 ```
