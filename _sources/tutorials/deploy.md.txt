@@ -38,7 +38,7 @@ async def trade_func(user_account, pending_orders, positions, broker):
     def __have_position(asset_code):
         """ 해당 종목을 보유중이거나 주문이 진행중인지 확인 """
         for p in positions:
-            if p.asset_code == asst_code:
+            if p.asset_code == asset_code:
                 return True
 
         for o in pending_orders:
@@ -65,7 +65,7 @@ async def trade_func(user_account, pending_orders, positions, broker):
         price_map = __get_current_price_map(target_asset_codes)
 
         for asset_code in target_asset_codes:
-            if not __have_position(asset_code):
+            if not __have_position(asset_code[1:]):
                 shcode = asset_code[1:]
 
                 read_start = (yesterday - timedelta(days=7)).strftime('%Y-%m-%d')

@@ -405,7 +405,7 @@ document.write(`
     <span class="k">def</span> <span class="nf">__have_position</span><span class="p">(</span><span class="n">asset_code</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; 해당 종목을 보유중이거나 주문이 진행중인지 확인 &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">positions</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">asset_code</span> <span class="o">==</span> <span class="n">asst_code</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">asset_code</span> <span class="o">==</span> <span class="n">asset_code</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">True</span>
 
         <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">pending_orders</span><span class="p">:</span>
@@ -432,7 +432,7 @@ document.write(`
         <span class="n">price_map</span> <span class="o">=</span> <span class="n">__get_current_price_map</span><span class="p">(</span><span class="n">target_asset_codes</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">asset_code</span> <span class="ow">in</span> <span class="n">target_asset_codes</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">__have_position</span><span class="p">(</span><span class="n">asset_code</span><span class="p">):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">__have_position</span><span class="p">(</span><span class="n">asset_code</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
                 <span class="n">shcode</span> <span class="o">=</span> <span class="n">asset_code</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
 
                 <span class="n">read_start</span> <span class="o">=</span> <span class="p">(</span><span class="n">yesterday</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">7</span><span class="p">))</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
