@@ -49,7 +49,7 @@ async def trade_func(user_account, pending_orders, positions, broker):
 
 
     # 보유 중인 포지션을 장시작시 시장가에 모두 매도
-    if now.hour == 9 and minute == 10 and positions.length > 0:
+    if now.hour == 9 and now.minute == 10 and positions.length > 0:
         result = []
 
         price_map = __get_current_price_map(list(map(lambda p: p.asset_code, positions)))
@@ -117,7 +117,7 @@ async def trade_func(user_account, pending_orders, positions, broker):
 
 ### requirements.txt
 
-```
+```text
 finance-datareader==0.9.50
 bs4==0.0.1
 ```
