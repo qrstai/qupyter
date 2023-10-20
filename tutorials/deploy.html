@@ -466,11 +466,11 @@ document.write(`
 
                 <span class="c1"># 현재 가격이 목표가격에 도달한 경우 진입한다</span>
                 <span class="k">if</span> <span class="n">current_price</span> <span class="o">&gt;=</span> <span class="n">target_price</span><span class="p">:</span>
-                    <span class="n">budget</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">total_balance</span> <span class="o">/</span> <span class="n">target_asset_code</span><span class="p">)</span>
+                    <span class="n">budget</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">total_balance</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_asset_codes</span><span class="p">))</span>
                     <span class="n">quantity</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">budget</span> <span class="o">/</span> <span class="n">current_price</span><span class="p">)</span>
 
                     <span class="k">if</span> <span class="n">quantity</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">current_price</span><span class="p">,</span> <span class="n">quantity</span><span class="p">})</span>
+                        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">current_price</span><span class="p">,</span> <span class="n">quantity</span><span class="p">))</span>
 
         <span class="k">return</span> <span class="n">result</span>
 </pre></div>
