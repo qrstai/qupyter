@@ -379,24 +379,30 @@ document.write(`
   <span class="c1"># 사용자가 반환 한 설정 값을 적용합니다</span>
   <span class="n">update_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
 
-  <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-    <span class="c1"># 미체결 주문을 처리합니다</span>
-    <span class="k">await</span> <span class="n">handle_pending_positions</span><span class="p">(</span><span class="n">pending_orders</span><span class="p">)</span>
+  <span class="c1"># 당일 거래 시 `on_market_open` hook을 호출합니다.</span>
+  <span class="k">await</span> <span class="n">on_market_open</span><span class="p">(</span><span class="n">account_info</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">broker</span><span class="p">)</span>
 
-    <span class="c1"># 손절 조건이 설정 된 경우 확인하고 처리합니다.</span>
-    <span class="k">await</span> <span class="n">monitor_stop_loss</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">stop_loss_config</span><span class="p">)</span>
+  <span class="k">while</span> <span class="n">is_trading_time</span><span class="p">:</span>
+    <span class="c1"># (Hook) 미체결 주문을 처리합니다</span>
+    <span class="k">await</span> <span class="n">handle_pending_positions</span><span class="p">(</span><span class="n">pending_orders</span><span class="p">,</span> <span class="n">broker</span><span class="p">)</span>
 
-    <span class="c1"># 익절 조건을 설정 된 경우 확인하고 처리합니다.</span>
-    <span class="k">await</span> <span class="n">monitor_take_profit</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">take_profit_config</span><span class="p">)</span>
+    <span class="c1"># (Hook) 손절 조건이 설정 된 경우 확인하고 처리합니다.</span>
+    <span class="k">await</span> <span class="n">monitor_stop_loss</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">stop_loss_config</span><span class="p">,</span> <span class="n">broker</span><span class="p">)</span>
+
+    <span class="c1"># (Hook) 익절 조건을 설정 된 경우 확인하고 처리합니다.</span>
+    <span class="k">await</span> <span class="n">monitor_take_profit</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">take_profit_config</span><span class="p">,</span> <span class="n">broker</span><span class="p">)</span>
 
     <span class="c1"># (Hook) 전략을 실행하고, 매매 지시를 반환합니다.</span>
-    <span class="n">trade_signals</span> <span class="o">=</span> <span class="k">await</span> <span class="n">trade_func</span><span class="p">()</span>
+    <span class="n">trade_signals</span> <span class="o">=</span> <span class="k">await</span> <span class="n">trade_func</span><span class="p">(</span><span class="n">account_info</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">broker</span><span class="p">)</span>
 
     <span class="c1"># 증권사 API를 통해 사용자 매매 지지를 실행합니다.</span>
     <span class="n">execute_trades</span><span class="p">(</span><span class="n">trade_signals</span><span class="p">)</span>
 
     <span class="c1"># 정해 진 interval 만큼 대기합니다.</span>
     <span class="n">sleep</span><span class="p">(</span><span class="n">interval</span><span class="p">)</span>
+
+  <span class="c1"># 당일 거래 종료 시 `on_market_close` hook을 호출합니다.</span>
+  <span class="k">await</span> <span class="n">on_market_open</span><span class="p">(</span><span class="n">account_info</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">broker</span><span class="p">)</span>
 </pre></div>
 </div>
 <section id="hooks">
@@ -416,13 +422,44 @@ document.write(`
 
     <span class="s1">&#39;take_profit_config&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="c1"># 익절 조건 (optional)</span>
       <span class="s1">&#39;A005930&#39;</span><span class="p">:</span> <span class="mf">0.1</span> <span class="c1"># 삼성전자 종목을 평단가 대비 10% 이상 수익인 경우 익절</span>
-    <span class="p">}</span>
+    <span class="p">},</span>
+
+    <span class="s1">&#39;open_market_time_margin&#39;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="c1"># 장 시작 후 5분 뒤 (보통 9시 5분) 부터 거래 진행</span>
+
+    <span class="s1">&#39;close_market_time_margin&#39;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="c1"># 동시 호가 시작 5분 전 (보통 3시 15분)에 당일 거래 종료</span>
   <span class="p">}</span>
 
   <span class="k">return</span> <span class="n">config</span>
 <span class="p">}</span>
 </pre></div>
 </div>
+</section>
+<section id="on-market-open">
+<h3>on_market_open<a class="headerlink" href="#on-market-open" title="Permalink to this heading">#</a></h3>
+<p>매일 거래 시작 시 가장 먼저 1회 호출 됩니다.</p>
+<p>이 hook이 호출되는 시간은 당일 장 거래 시작 시간 (보통 9시, 수능일은 10시) + 사용자가 설정 한 <code class="docutils literal notranslate"><span class="pre">open_market_time_margin</span></code> 초를 더한 시간입니다.
+예를들어 사용자가 <code class="docutils literal notranslate"><span class="pre">open_market_time_margin</span></code>을 300(5분)으로 설정한 경우, 9시 5분에 <code class="docutils literal notranslate"><span class="pre">on_market_open</span></code>이 호출됩니다.</p>
+<section id="id2">
+<h4>on_market_open - 주의 사항<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>처음 전략 실행 또는 업데이트 시 시간이 위 호출 시간 보다 5분이 경과한 경우, 이 hook은 호출되지 않습니다.</p></li>
+<li><p>이 hook이 호출되고 5분 이내에 전략을 업데이트하게 되면 이 hook은 다시 호출 됩니다.</p></li>
+</ul>
+</section>
+</section>
+<section id="on-market-close">
+<h3>on_market_close<a class="headerlink" href="#on-market-close" title="Permalink to this heading">#</a></h3>
+<p>매일 거래 종료 시 마지막에 1회 호출 됩니다.</p>
+<p>이 hook이 호출되고 나면 해당일에는 더이상 <code class="docutils literal notranslate"><span class="pre">trade_func</span></code> 가 호출되지 않습니다.</p>
+<p>이 hook이 호출되는 시간은 당일 장 종료 전 동시 호가 시작 시간 (보통 3시 20분) 에서 사용자가 설정한 <code class="docutils literal notranslate"><span class="pre">close_market_time_margin</span></code> 초를 뺀 시간입니다.
+예를 들어 사용자가 <code class="docutils literal notranslate"><span class="pre">close_market_time_margin</span></code>을 600(10분)으로 설정한 경우, 3시 10분에 <code class="docutils literal notranslate"><span class="pre">on_market_close</span></code> hook이 호출됩니다.</p>
+<section id="id3">
+<h4>on_market_close - 주의 사항<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>당일 동시 호가 시작 이후에 전략이 새로 배포되거나 업데이트 된 경우 이 hook은 호출되지 않습니다.</p></li>
+<li><p>이 hook이 호출되고 실제 동시호가 시작 시간 전에 전략을 업데이트하게 되면 이 hook은 다시 호출됩니다.</p></li>
+</ul>
+</section>
 </section>
 <section id="trade-func">
 <h3>trade_func<a class="headerlink" href="#trade-func" title="Permalink to this heading">#</a></h3>
@@ -498,6 +535,14 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hooks">Hooks</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#on-intialize">on_intialize</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#on-market-open">on_market_open</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">on_market_open - 주의 사항</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#on-market-close">on_market_close</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">on_market_close - 주의 사항</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trade-func">trade_func</a></li>
 </ul>
 </li>
