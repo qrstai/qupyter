@@ -11,7 +11,7 @@ async def run():
   # 사용자가 반환 한 설정 값을 적용합니다
   update_config(config)
 
-  # 당일 거래 시 `on_market_open` hook을 호출합니다.
+  # (Hook) 당일 거래 시작 시 `on_market_open` hook을 호출합니다.
   await on_market_open(account_info, pending_orders, positions, broker)
 
   while is_trading_time:
@@ -33,7 +33,7 @@ async def run():
     # 정해 진 interval 만큼 대기합니다.
     sleep(interval)
 
-  # 당일 거래 종료 시 `on_market_close` hook을 호출합니다.
+  # (Hook) 당일 거래 종료 시 `on_market_close` hook을 호출합니다.
   await on_market_open(account_info, pending_orders, positions, broker)
 ```
 
@@ -81,9 +81,9 @@ async def on_initialize() {
 매일 거래 시작 시 가장 먼저 1회 호출 됩니다.
 
 이 hook이 호출되는 시간은 당일 장 거래 시작 시간 (보통 9시, 수능일은 10시) + 사용자가 설정 한 `open_market_time_margin` 초를 더한 시간입니다.
-예를들어 사용자가 `open_market_time_margin`을 300(5분)으로 설정한 경우, 9시 5분에 `on_market_open`이 호출됩니다.
+예를 들어 사용자가 `open_market_time_margin`을 300(5분)으로 설정한 경우, 9시 5분에 `on_market_open`이 호출됩니다.
 
-#### on_market_open - 주의 사항
+#### on_market_open 사용 시 주의 사항
 
 - 처음 전략 실행 또는 업데이트 시 시간이 위 호출 시간 보다 5분이 경과한 경우, 이 hook은 호출되지 않습니다.
 - 이 hook이 호출되고 5분 이내에 전략을 업데이트하게 되면 이 hook은 다시 호출 됩니다.
@@ -97,7 +97,7 @@ async def on_initialize() {
 이 hook이 호출되는 시간은 당일 장 종료 전 동시 호가 시작 시간 (보통 3시 20분) 에서 사용자가 설정한 `close_market_time_margin` 초를 뺀 시간입니다.
 예를 들어 사용자가 `close_market_time_margin`을 600(10분)으로 설정한 경우, 3시 10분에 `on_market_close` hook이 호출됩니다.
 
-#### on_market_close - 주의 사항
+#### on_market_close 사용 시 주의 사항
 
 - 당일 동시 호가 시작 이후에 전략이 새로 배포되거나 업데이트 된 경우 이 hook은 호출되지 않습니다.
 - 이 hook이 호출되고 실제 동시호가 시작 시간 전에 전략을 업데이트하게 되면 이 hook은 다시 호출됩니다.
