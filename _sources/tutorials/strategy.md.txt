@@ -49,7 +49,7 @@ async def run():
 async def on_initialize() {
   """ 필요한 사용자 초기화 코드를 실행합니다 """
   config = {
-    'interval': 30, # 전략 실행 주기. 기본값: 10분
+    'interval': 60, # 전략 실행 주기(초). 기본값: 1분
 
     'stop_loss_config': { # 손절 조건 등록 (optional)
       'A005930': -0.1 # 삼성전자 종목을 평단가 대비 -10% 손실인 경우 손절
@@ -59,14 +59,22 @@ async def on_initialize() {
       'A005930': 0.1 # 삼성전자 종목을 평단가 대비 10% 이상 수익인 경우 익절
     },
 
-    'open_market_time_margin': 300, # 장 시작 후 5분 뒤 (보통 9시 5분) 부터 거래 진행
+    'open_market_time_margin': 300, # 거래 시작 시간 조정 (초). 기본값 300(5분)
 
-    'close_market_time_margin': 300, # 동시 호가 시작 5분 전 (보통 3시 15분)에 당일 거래 종료
+    'close_market_time_margin': 300, # 거래 마감 시간 조정 (초). 기본값 300(5분)
   }
 
   return config
 }
 ```
+
+다음은 각 설정값에 대한 설명입니다.
+
+- interval : 거래 주기 (trade_func 가 호출되는 간격) 입니다. 기본 값은 1분입니다.
+- stop_loss_config : 손절 조건을 등록합니다. 가격을 확인하는 주기는 위 `interval`과 같습니다.
+- take_profit_config : 익절 조건을 등록합니다. 가격을 확인하는 주기는 위 `interval`과 같습니다.
+- open_market_time_margin : 거래 시작시간을 조정하기 위해 사용됩니다. 지정된 시간 만큼 거래 시작 시간을 지연합니다.
+- close_market_time_margin: 거래 종료시간을 조정하기 위해 사용됩니다. 지정된 시간 만큼 먼저 당일 거래를 마감합니다.
 
 ### on_market_open
 

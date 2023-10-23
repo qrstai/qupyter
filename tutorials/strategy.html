@@ -414,7 +414,7 @@ document.write(`
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">on_initialize</span><span class="p">()</span> <span class="p">{</span>
 <span class="w">  </span><span class="sd">&quot;&quot;&quot; 필요한 사용자 초기화 코드를 실행합니다 &quot;&quot;&quot;</span>
   <span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;interval&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="c1"># 전략 실행 주기. 기본값: 10분</span>
+    <span class="s1">&#39;interval&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span> <span class="c1"># 전략 실행 주기(초). 기본값: 1분</span>
 
     <span class="s1">&#39;stop_loss_config&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="c1"># 손절 조건 등록 (optional)</span>
       <span class="s1">&#39;A005930&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.1</span> <span class="c1"># 삼성전자 종목을 평단가 대비 -10% 손실인 경우 손절</span>
@@ -424,15 +424,23 @@ document.write(`
       <span class="s1">&#39;A005930&#39;</span><span class="p">:</span> <span class="mf">0.1</span> <span class="c1"># 삼성전자 종목을 평단가 대비 10% 이상 수익인 경우 익절</span>
     <span class="p">},</span>
 
-    <span class="s1">&#39;open_market_time_margin&#39;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="c1"># 장 시작 후 5분 뒤 (보통 9시 5분) 부터 거래 진행</span>
+    <span class="s1">&#39;open_market_time_margin&#39;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="c1"># 거래 시작 시간 조정 (초). 기본값 300(5분)</span>
 
-    <span class="s1">&#39;close_market_time_margin&#39;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="c1"># 동시 호가 시작 5분 전 (보통 3시 15분)에 당일 거래 종료</span>
+    <span class="s1">&#39;close_market_time_margin&#39;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="c1"># 거래 마감 시간 조정 (초). 기본값 300(5분)</span>
   <span class="p">}</span>
 
   <span class="k">return</span> <span class="n">config</span>
 <span class="p">}</span>
 </pre></div>
 </div>
+<p>다음은 각 설정값에 대한 설명입니다.</p>
+<ul class="simple">
+<li><p>interval : 거래 주기 (trade_func 가 호출되는 간격) 입니다. 기본 값은 1분입니다.</p></li>
+<li><p>stop_loss_config : 손절 조건을 등록합니다. 가격을 확인하는 주기는 위 <code class="docutils literal notranslate"><span class="pre">interval</span></code>과 같습니다.</p></li>
+<li><p>take_profit_config : 익절 조건을 등록합니다. 가격을 확인하는 주기는 위 <code class="docutils literal notranslate"><span class="pre">interval</span></code>과 같습니다.</p></li>
+<li><p>open_market_time_margin : 거래 시작시간을 조정하기 위해 사용됩니다. 지정된 시간 만큼 거래 시작 시간을 지연합니다.</p></li>
+<li><p>close_market_time_margin: 거래 종료시간을 조정하기 위해 사용됩니다. 지정된 시간 만큼 먼저 당일 거래를 마감합니다.</p></li>
+</ul>
 </section>
 <section id="on-market-open">
 <h3>on_market_open<a class="headerlink" href="#on-market-open" title="Permalink to this heading">#</a></h3>
