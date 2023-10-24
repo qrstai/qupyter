@@ -18,6 +18,30 @@ async def on_initialize():
         'interval': 60, # 거래 주기는 60초로 지정합니다
     }
 
+
+def get_current_price_map(broker, asset_codes):
+    """ 이베스트 API가 전달하는 가격정보를 종목키를 기준으로 grouping 하여 반환 """
+    docs = broker.get_current_prices(asset_codes)
+    result_map = {}
+    for d in docs:
+        result_map[d['shcode']] = d
+    return result_map
+
+
+async def on_market_open(account_info, pending_orders, positions, broker):
+    """ 장 시작 시 보유 중인 모든 종목을 매도 """
+    result = []
+
+    price_map = get_current_price_map(broker, list(map(lambda p: p.asset_code, positions)))
+
+    for p in positions:
+        if p.quantity > 0:
+            current_price = price_map[p.asset_code]['price']
+            result.append(( p.asset_code, current_price, p.quantity * -1 ))
+
+    return result
+
+
 async def trade_func(user_account, pending_orders, positions, broker):
     now = datetime.now()
     yesterday = now - timedelta(days=1)
@@ -27,90 +51,74 @@ async def trade_func(user_account, pending_orders, positions, broker):
         'A005380', # 현대자동차
     ]
 
-    def __get_current_price_map(asset_codes):
-        """ 이베스트 API가 전달하는 가격정보를 종목키를 기준으로 grouping 하여 반환 """
-        docs = broker.get_current_prices(asset_codes)
-        result_map = {}
-        for d in docs:
-            result_map[d['shcode']] = d
-        return result_map
-
-    def __have_position(asset_code):
+    def __has_position(asset_code):
         """ 해당 종목을 보유중이거나 주문이 진행중인지 확인 """
         for p in positions:
-            if p.asset_code == asset_code:
+            if p.asset_code == asset_code and p.quantity > 0:
+                print(f'- in-position: {p.asset_name}({p.asset_code}) - {p.quantity}')
                 return True
 
         for o in pending_orders:
             if o.asset_code == asset_code and o.quantity > 0:
+                print(f'- in-pending-order: {p.asset_name}({p.asset_code}) - {p.quantity}')
                 return True
 
         return False
 
+    result = []
+    total_balance = user_account['total_balance'] * 0.8
+    price_map = get_current_price_map(broker, target_asset_codes)
 
-    # 보유 중인 포지션을 장시작시 시장가에 모두 매도
-    if now.hour == 9 and now.minute == 10 and positions.length > 0:
-        result = []
+    for asset_code in target_asset_codes:
+        shcode = asset_code[1:]
 
-        price_map = __get_current_price_map(list(map(lambda p: p.asset_code, positions)))
+        if not __has_position(shcode):
+            read_start = (yesterday - timedelta(days=14)).strftime('%Y-%m-%d')
+            read_end = yesterday.strftime('%Y-%m-%d')
 
-        for p in positions:
-            result.append({ p.asset_code, price_map[p.asset_code], p.quantity * -1 })
+            # finance-datareader 에서 오늘을 제외한 최근 14일 이내의 거래일의 가격 정보를 가져온다.
+            df = fdr.DataReader(shcode, read_start, read_end)
+            if df is None or len(df) == 0:
+                print('Error: yesterday price data not available')
+                continue
 
-        return result
+            yesterday_series = df.iloc[-1]
 
-    else:
-        result = []
-        total_balance = user_account['total_balance'] * 0.8
-        price_map = __get_current_price_map(target_asset_codes)
+            # 마지막 거래일의 가격 변동폭 (고가-저가) 을 구한다.
+            yesterday_range = yesterday_series['High'] - yesterday_series['Low']
 
-        for asset_code in target_asset_codes:
-            shcode = asset_code[1:]
+            # 오늘 시가를 구한다.
+            today_open = price_map[shcode]['open']
 
-            if not __have_position(shcode):
-                read_start = (yesterday - timedelta(days=7)).strftime('%Y-%m-%d')
-                read_end = yesterday.strftime('%Y-%m-%d')
+            # 진입 조건 강도 조절을 위한 상수
+            k = 0.5
 
-                # finance-datareader 에서 오늘을 제외한 최근 7거래일의 가격 정보를 가져온다.
-                df = fdr.DataReader(shcode, read_start, read_end)
-                if df is None or len(df) == 0:
-                    print('Error: yesterday price data not available')
-                    continue
+            # 목표가격 = 오늘 시가 + 어제의 변동폭 * 상수
+            target_price = today_open + yesterday_range * k
 
-                yesterday_series = df.iloc[-1]
+            # 현재가격
+            current_price = price_map[shcode]['price']
 
-                # 마지막 거래일의 가격 변동폭 (고가-저가) 을 구한다.
-                yesterday_range = yesterday_series['High'] - yesterday_series['Low']
+            print(f"{asset_code} - today_open:{today_open} yesterday_range:{yesterday_range} k:{k}", end="")
+            print(f" target_price:{target_price} current_price:{current_price}")
 
-                # 오늘 시가를 구한다.
-                today_open = price_map[shcode]['open']
+            # 현재 가격이 목표가격에 도달한 경우 진입한다
+            if current_price >= target_price:
+                budget = int(total_balance / len(target_asset_codes))
+                quantity = int(budget / current_price)
 
-                # 진입 조건 강도 조절을 위한 상수
-                k = 0.5
+                if quantity > 0:
+                    result.append((asset_code, current_price, quantity))
+                else:
+                    print(f'{asset_code}: 주문 할 자금이 부족합니다. 가격:{current_price} 예산:{budget}')
 
-                # 목표가격 = 오늘 시가 + 어제의 변동폭 * 상수
-                target_price = today_open + yesterday_range * k
+    for p in positions:
+        if p.quantity > 0:
+            print(f"{p.asset_name}({p.asset_code}) : {p.current_pnl} ({p.current_pnl_pct}%)", end=" ")
+            print(f"현재가={p.current_price} 평단가={p.average_purchase_price} 수수료={p.commission}", end=" ")
+            print(f"세금={p.tax} 신용이자={p.loan_interest}")
 
-                # 현재가격
-                current_price = price_map[shcode]['price']
-
-                print(f"오늘 시작가={today_open} 최근 거래일 변동폭={yesterday_range} k:{k}", end="")
-                print(f"목표가={target_price} 현재가={current_price}")
-
-                # 현재 가격이 목표가격에 도달한 경우 진입한다
-                if current_price >= target_price:
-                    budget = int(total_balance / len(target_asset_codes))
-                    quantity = int(budget / current_price)
-
-                    if quantity > 0:
-                        result.append((asset_code, current_price, quantity))
-
-        for p in positions:
-            print(f"{p.asset_name}({p.asset_code}) : {p.current_pnl} ({p.current_pnl_pct}%) ", end="")
-            print(f"현재가={p.current_price} 평단가={p.average_purchase_price} ", end="")
-            print(f"수수료={p.commission} 세금={p.tax} 신용이자={p.loan_interest}")
-
-        return result
+    return result
 ```
 
 전략코드 실행에 필요한 package를 requirements.txt에 나열합니다
