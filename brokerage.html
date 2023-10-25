@@ -495,7 +495,7 @@ document.write(`
 <dd class="field-odd"><p>미체결 주문내역</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list of StockOrder</p>
+<dd class="field-even"><p>list of <a class="reference internal" href="#qrst.stock_broker.StockOrder" title="qrst.stock_broker.StockOrder">StockOrder</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -509,7 +509,7 @@ document.write(`
 <dd class="field-odd"><p>보유 포지션</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list of StockPosition</p>
+<dd class="field-even"><p>list of <a class="reference internal" href="#qrst.stock_broker.StockPosition" title="qrst.stock_broker.StockPosition">StockPosition</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -630,6 +630,59 @@ document.write(`
 
 </dd></dl>
 
+<dl class="py class">
+<dt class="sig sig-object py" id="qrst.stock_broker.StockOrder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qrst.stock_broker.</span></span><span class="sig-name descname"><span class="pre">StockOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trade_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filled_quantity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filled_price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pending_quantity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order_method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qrst.stock_broker.StockOrder" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>미체결 주문에 대한 class</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>order_id</strong> (<em>int</em>) – 주문번호</p></li>
+<li><p><strong>asset_code</strong> (<em>str</em>) – 종목코드</p></li>
+<li><p><strong>trade_type</strong> (<em>int</em>) – 매매구분 (1: 매도, 2: 매수)</p></li>
+<li><p><strong>quantity</strong> (<em>int</em>) – 주문수량</p></li>
+<li><p><strong>price</strong> (<em>int</em>) – 주문가격</p></li>
+<li><p><strong>filled_quantity</strong> (<em>int</em>) – 체결수량</p></li>
+<li><p><strong>filled_price</strong> (<em>int</em>) – 체결가격</p></li>
+<li><p><strong>pending_quantity</strong> (<em>int</em>) – 미체결잔량</p></li>
+<li><p><strong>order_time</strong> (<em>datetime.datetime</em>) – 주문시간</p></li>
+<li><p><strong>order_method</strong> (<em>str</em>) – 주문매체</p></li>
+<li><p><strong>current_price</strong> (<em>int</em>) – 현재가</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="qrst.stock_broker.StockPosition">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qrst.stock_broker.</span></span><span class="sig-name descname"><span class="pre">StockPosition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asset_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exit_available_quantity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">average_purchase_price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">purchase_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loan_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loan_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">date</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expiration_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">date</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_pnl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_pnl_pct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Decimal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commission</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loan_interest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qrst.stock_broker.StockPosition" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>보유 포지션에 대한 클래스</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>asset_code</strong> (<em>str</em>) – 종목코드</p></li>
+<li><p><strong>asset_name</strong> (<em>str</em>) – 종목명</p></li>
+<li><p><strong>quantity</strong> (<em>int</em>) – 잔고수량</p></li>
+<li><p><strong>exit_available_quantity</strong> (<em>int</em>) – 매도가능수량</p></li>
+<li><p><strong>average_purchase_price</strong> (<em>int</em>) – 평균단가</p></li>
+<li><p><strong>purchase_value</strong> (<em>int</em>) – 매입금액</p></li>
+<li><p><strong>loan_value</strong> (<em>int</em>) – 대출금액</p></li>
+<li><p><strong>loan_date</strong> (<em>Optional</em><em>[</em><em>datetime.date</em><em>]</em>) – 대출일자</p></li>
+<li><p><strong>expiration_date</strong> (<em>Optional</em><em>[</em><em>datetime.date</em><em>]</em>) – 만기일자</p></li>
+<li><p><strong>current_price</strong> (<em>int</em>) – 현재가</p></li>
+<li><p><strong>current_value</strong> (<em>int</em>) – 평가금액</p></li>
+<li><p><strong>current_pnl</strong> (<em>int</em>) – 평가손익</p></li>
+<li><p><strong>current_pnl_pct</strong> (<em>Decimal</em>) – 수익율</p></li>
+<li><p><strong>commission</strong> (<em>int</em>) – 수수료</p></li>
+<li><p><strong>tax</strong> (<em>int</em>) – 세금</p></li>
+<li><p><strong>loan_interest</strong> (<em>int</em>) – 신용이자</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </section>
 
 
@@ -667,6 +720,8 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.stock_broker.StockBroker"><code class="docutils literal notranslate"><span class="pre">StockBroker</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.stock_broker.StockOrder"><code class="docutils literal notranslate"><span class="pre">StockOrder</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.stock_broker.StockPosition"><code class="docutils literal notranslate"><span class="pre">StockPosition</span></code></a></li>
 </ul>
   </nav></div>
 
