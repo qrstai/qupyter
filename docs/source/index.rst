@@ -16,6 +16,7 @@ Qupyter는 퀀트 개발자들의 개발 경험을 향상시키기 위해 QRST A
    :caption: Contents:
 
    tutorials/index.md
+   howto/index.md
    modules
 
 Indices and tables
