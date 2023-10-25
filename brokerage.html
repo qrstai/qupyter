@@ -1,0 +1,734 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Brokerage API &#8212; Qupyter  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'brokerage';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Hooks" href="hooks.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="tutorials/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="howto/index.html">
+                        How-to
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="modules.html">
+                        API references
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__kbd-shortcut">Search</span>
+    <span><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/qrstai/qupyter" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__kbd-shortcut">Search</span>
+    <span><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="tutorials/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="howto/index.html">
+                        How-to
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="modules.html">
+                        API references
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/qrstai/qupyter" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="qupyter.html">Qupyter SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hooks.html">Hooks</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Brokerage API</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="modules.html" class="nav-link">API references</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Brokerage API</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="module-qrst.stock_broker">
+<span id="brokerage-api"></span><h1>Brokerage API<a class="headerlink" href="#module-qrst.stock_broker" title="Permalink to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="qrst.stock_broker.StockBroker">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qrst.stock_broker.</span></span><span class="sig-name descname"><span class="pre">StockBroker</span></span><a class="headerlink" href="#qrst.stock_broker.StockBroker" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>증권사 API를 사용하기 위한 클래스</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="qrst.stock_broker.StockBroker.cancel_order">
+<span class="sig-name descname"><span class="pre">cancel_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qrst.stock_broker.StockBroker.cancel_order" title="Permalink to this definition">#</a></dt>
+<dd><p>주문 취소</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>order_id</strong> (<em>str</em>) – 주문번호</p></li>
+<li><p><strong>asset_code</strong> (<em>str</em>) – 종목코드</p></li>
+<li><p><strong>quantity</strong> (<em>int</em>) – 주문수량</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qrst.stock_broker.StockBroker.create_order">
+<span class="sig-name descname"><span class="pre">create_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asset_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qrst.stock_broker.StockBroker.create_order" title="Permalink to this definition">#</a></dt>
+<dd><p>신규 주문 생성</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>asset_code</strong> (<em>str</em>) – 종목코드</p></li>
+<li><p><strong>price</strong> (<em>int</em>) – 주문가격</p></li>
+<li><p><strong>quantity</strong> (<em>int</em>) – 주문수량</p></li>
+<li><p><strong>side</strong> (<em>int</em>) – 매매구분 (1: 매도, 2: 매수)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qrst.stock_broker.StockBroker.get_account">
+<span class="sig-name descname"><span class="pre">get_account</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#qrst.stock_broker.StockBroker.get_account" title="Permalink to this definition">#</a></dt>
+<dd><p>계좌 정보 조회</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>계좌 정보</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict</p>
+</dd>
+</dl>
+<p>Dict에는 다음 필드들이 포함됩니다.</p>
+<ul class="simple">
+<li><p>investable_cache: 현금 주문 가능 금액</p></li>
+<li><p>asset_value: 주식 잔고 평가 금액</p></li>
+<li><p>receivable_amount: 미수금</p></li>
+<li><p>total_balance: 예탁자산총액</p></li>
+<li><p>pnl_pct: 손익율</p></li>
+<li><p>investment_principal: 투자원금</p></li>
+<li><p>investment_pnl_amount: 투자손익금액</p></li>
+<li><p>credit_order_amount: 신용담보주문금액</p></li>
+<li><p>credit_orderable_amount: 신용주문가능금액</p></li>
+<li><p>deposit: 예수금</p></li>
+<li><p>substitute_amount: 대용금액</p></li>
+<li><p>deposit_d1: D+1 예수금</p></li>
+<li><p>deposit_d2: D+2 예수금</p></li>
+<li><p>cash_receivables: 현금미수금액</p></li>
+<li><p>cash_collateral: 증거금현금</p></li>
+<li><p>substitute_collateral: 증거금대용</p></li>
+<li><p>cheque_amount: 수표금액</p></li>
+<li><p>substitute_orderable_amount: 대용주문가능금액</p></li>
+<li><p>margin_rate_35_pct_orderable_amount: 증거금률 35% 주문 가능금액</p></li>
+<li><p>margin_rate_50_pct_orderable_amount: 증거금률 50% 주문 가능금액</p></li>
+<li><p>margin_rate_100_pct_orderable_amount: 증거금률 100% 주문가능금액</p></li>
+<li><p>d1_overdraft_fee: D+1 연체변제소요금액</p></li>
+<li><p>d2_overdraft_fee: D+2 연체변제소요금액</p></li>
+<li><p>deposit_pledge_loan_amount: 예탁담보대출금액</p></li>
+<li><p>credit_setting_collateral: 신용설정보증금</p></li>
+<li><p>margin_loan_amount: 융자금액</p></li>
+<li><p>original_pledge_amount: 원담보금액</p></li>
+<li><p>subordinate_pledge_amount: 부담보금액</p></li>
+<li><p>required_pledge_amount: 소요담보금액</p></li>
+<li><p>original_pledge_shortage: 원담보부족금액</p></li>
+<li><p>subordinate_pledge_shortage: 담보부족금액</p></li>
+<li><p>additional_collateral_cash: 추가담보현금</p></li>
+<li><p>unpaid_interest: 신용이자미납금액</p></li>
+<li><p>other_loan_amount: 기타대여금액</p></li>
+<li><p>d1_margin_call_amount: 익일추정반대매매금액</p></li>
+<li><p>original_pledge_total_amount: 원담보합계금액</p></li>
+<li><p>subordinate_pledge_total_amount: 부담보합계금액</p></li>
+<li><p>credit_collateral_cash: 신용담보금현금</p></li>
+<li><p>credit_collateral_substitute: 신용담보대용금액</p></li>
+<li><p>additional_credit_collateral_cash: 추가신용담보현금</p></li>
+<li><p>reused_credit_collateral_amount: 신용담보재사용금액</p></li>
+<li><p>additional_credit_collateral_substitute: 추가신용담보대용</p></li>
+<li><p>sellout_collateral_loan_amount: 매도대금담보대출금액</p></li>
+<li><p>disposal_limit_amount: 처분제한금액</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qrst.stock_broker.StockBroker.get_orderbook">
+<span class="sig-name descname"><span class="pre">get_orderbook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asset_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qrst.stock_broker.StockBroker.get_orderbook" title="Permalink to this definition">#</a></dt>
+<dd><p>최근 호가 데이터 획득</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qrst.stock_broker.StockBroker.get_pending_orders">
+<span class="sig-name descname"><span class="pre">get_pending_orders</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#qrst.stock_broker.StockBroker.get_pending_orders" title="Permalink to this definition">#</a></dt>
+<dd><p>미체결 주문내역 조회</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>미체결 주문내역</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of StockOrder</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qrst.stock_broker.StockBroker.get_positions">
+<span class="sig-name descname"><span class="pre">get_positions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#qrst.stock_broker.StockBroker.get_positions" title="Permalink to this definition">#</a></dt>
+<dd><p>보유 포지션 조회</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>보유 포지션</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of StockPosition</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qrst.stock_broker.StockBroker.get_price">
+<span class="sig-name descname"><span class="pre">get_price</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asset_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#qrst.stock_broker.StockBroker.get_price" title="Permalink to this definition">#</a></dt>
+<dd><p>단일 종목 시세 조회</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>asset_code</strong> (<em>str</em>) – 종목코드</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>종목 시세</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+<p>DataFrame에는 다음 필드들이 포함됩니다.</p>
+<ul class="simple">
+<li><p>code: 종목코드</p></li>
+<li><p>name: 종목명</p></li>
+<li><p>current_price: 현재가</p></li>
+<li><p>volume: 거래량</p></li>
+<li><p>volume_nominal: 거래대금</p></li>
+<li><p>open_price: 시가</p></li>
+<li><p>high_price: 고가</p></li>
+<li><p>low_price: 저가</p></li>
+<li><p>max_price: 상한가</p></li>
+<li><p>min_price: 하한가</p></li>
+<li><p>market_capitalization: 시가총액</p></li>
+<li><p>ask_price_1~5: 매도호가 1~5차</p></li>
+<li><p>ask_volume_1~5: 매도호가수량 1~5차</p></li>
+<li><p>bid_price_1~5: 매수호가 1~5차</p></li>
+<li><p>bid_volume_1~5: 매수호가수량 1~5차</p></li>
+<li><p>ask_volume_total: 매도호가 총 잔량</p></li>
+<li><p>bid_volume_total: 매수호가 총 잔량</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Examples<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">price_df</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="n">get_price</span><span class="p">(</span><span class="n">asset_code</span><span class="o">=</span><span class="s1">&#39;005930&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">price_df</span><span class="p">)</span>
+
+<span class="go">        name  current_price    volume  volume_nominal  open_price  high_price  ...  ask_price_5  bid_price_5  ask_volume_5  bid_volume_5  ask_volume_total  bid_volume_total</span>
+<span class="go">code                                                                           ...</span>
+<span class="go">005930  삼성전자          68000  10527625    718811000000       68800       68800  ...        68500        67600        107929         99315            554013           1069461</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qrst.stock_broker.StockBroker.get_price_for_multiple_stocks">
+<span class="sig-name descname"><span class="pre">get_price_for_multiple_stocks</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asset_codes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#qrst.stock_broker.StockBroker.get_price_for_multiple_stocks" title="Permalink to this definition">#</a></dt>
+<dd><p>복수 종목 시세 조회.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>asset_codes</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – 종목코드 리스트</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>종목 시세</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+<p>DataFrame에는 다음 필드들이 포함됩니다.</p>
+<ul class="simple">
+<li><p>code: 종목코드</p></li>
+<li><p>name: 종목명</p></li>
+<li><p>current_price: 현재가</p></li>
+<li><p>volume: 거래량</p></li>
+<li><p>volume_nominal: 거래대금</p></li>
+<li><p>open_price: 시가</p></li>
+<li><p>high_price: 고가</p></li>
+<li><p>low_price: 저가</p></li>
+<li><p>max_price: 상한가</p></li>
+<li><p>min_price: 하한가</p></li>
+<li><p>ask_price_1: 1차 매도호가</p></li>
+<li><p>bid_price_1: 1차 매수호가</p></li>
+<li><p>ask_volume_total: 매도호가 총 잔량</p></li>
+<li><p>bid_volume_total: 매수호가 총 잔량</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Examples<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">price_df</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="n">get_price_for_multiple_stocks</span><span class="p">(</span><span class="n">asset_codes</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;005930&#39;</span><span class="p">,</span> <span class="s1">&#39;000660&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">price_df</span><span class="p">)</span>
+
+<span class="go">        name  current_price    volume  volume_nominal  open_price  high_price  ...  max_price  min_price  ask_price_1  bid_price_1  ask_volume_total  bid_volume_total</span>
+<span class="go">code                                                                           ...</span>
+<span class="go">005930  삼성전자          68000  10542622    719831000000       68800       68800  ...      89000      48000        68100        68000            554013           1069461</span>
+<span class="go">005380   현대차         182000    373131     68135000000      182700      183700  ...     237500     128000       182100       182000              8070             45848</span>
+
+<span class="go">[2 rows x 13 columns]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qrst.stock_broker.StockBroker.update_order">
+<span class="sig-name descname"><span class="pre">update_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">org_order_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qrst.stock_broker.StockBroker.update_order" title="Permalink to this definition">#</a></dt>
+<dd><p>정정 주문</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>org_order_id</strong> (<em>str</em>) – 원주문번호</p></li>
+<li><p><strong>asset_code</strong> (<em>str</em>) – 종목코드</p></li>
+<li><p><strong>price</strong> (<em>int</em>) – 주문가격</p></li>
+<li><p><strong>quantity</strong> (<em>int</em>) – 주문수량</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="hooks.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Hooks</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.stock_broker.StockBroker"><code class="docutils literal notranslate"><span class="pre">StockBroker</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="_sources/brokerage.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, QRST AI.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

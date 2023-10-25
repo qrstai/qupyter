@@ -1,0 +1,736 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Hooks &#8212; Qupyter  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'hooks';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Brokerage API" href="brokerage.html" />
+    <link rel="prev" title="Qupyter SDK" href="qupyter.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class=" navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class=" navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="tutorials/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="howto/index.html">
+                        How-to
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="modules.html">
+                        API references
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__kbd-shortcut">Search</span>
+    <span><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/qrstai/qupyter" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__kbd-shortcut">Search</span>
+    <span><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="tutorials/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="howto/index.html">
+                        How-to
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="modules.html">
+                        API references
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/qrstai/qupyter" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="qupyter.html">Qupyter SDK</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="brokerage.html">Brokerage API</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="modules.html" class="nav-link">API references</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Hooks</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="hooks">
+<h1>Hooks<a class="headerlink" href="#hooks" title="Permalink to this heading">#</a></h1>
+<p>사용자 전략 구현 시 사용 가능한 Hook들입니다.</p>
+<span class="target" id="module-qrst.hooks"></span><dl class="py function">
+<dt class="sig sig-object py" id="qrst.hooks.handle_pending_positions">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qrst.hooks.</span></span><span class="sig-name descname"><span class="pre">handle_pending_positions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pending_orders</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">broker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="brokerage.html#qrst.stock_broker.StockBroker" title="qrst.stock_broker.StockBroker"><span class="pre">StockBroker</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qrst.hooks.handle_pending_positions" title="Permalink to this definition">#</a></dt>
+<dd><p>미체결 주문을 처리합니다.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>이 hook을 구현하지 않은 경우의 기본 동작은 미체결 주문을 모두 취소하는 것입니다.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pending_orders</strong> (<em>List</em>) – 미체결 주문 리스트</p></li>
+<li><p><strong>broker</strong> (<a class="reference internal" href="brokerage.html#qrst.stock_broker.StockBroker" title="qrst.stock_broker.StockBroker"><em>StockBroker</em></a>) – 주식 거래를 위한 객체</p></li>
+</ul>
+</dd>
+<dt class="field-even">Examples<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">handle_pending_positions</span><span class="p">(</span><span class="n">pending_orders</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">broker</span><span class="p">:</span> <span class="n">StockBroker</span><span class="p">):</span>
+    <span class="c1"># 미체결 주문을 변경된 가격으로 정정 합니다.</span>
+    <span class="k">for</span> <span class="n">po</span> <span class="ow">in</span> <span class="n">pending_orders</span><span class="p">:</span>
+        <span class="n">price_df</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="n">get_price</span><span class="p">(</span><span class="n">po</span><span class="o">.</span><span class="n">asset_code</span><span class="p">)</span>
+        <span class="n">current_price</span> <span class="o">=</span> <span class="n">price_df</span><span class="p">[</span><span class="s1">&#39;current_price&#39;</span><span class="p">][</span><span class="n">po</span><span class="o">.</span><span class="n">asset_code</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">po</span><span class="o">.</span><span class="n">price</span> <span class="o">!=</span> <span class="n">current_price</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">broker</span><span class="o">.</span><span class="n">update_order</span><span class="p">(</span><span class="n">po</span><span class="o">.</span><span class="n">order_id</span><span class="p">,</span> <span class="n">po</span><span class="o">.</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">price</span><span class="o">=</span><span class="n">current_price</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qrst.hooks.monitor_stop_loss">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qrst.hooks.</span></span><span class="sig-name descname"><span class="pre">monitor_stop_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">positions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_loss_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">broker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="brokerage.html#qrst.stock_broker.StockBroker" title="qrst.stock_broker.StockBroker"><span class="pre">StockBroker</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qrst.hooks.monitor_stop_loss" title="Permalink to this definition">#</a></dt>
+<dd><p>손절 조건을 모니터링 합니다.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>이 hook을 구현하지 않은 경우의 기본 동작은 손절 조건에 해당하는 종목을 모두 시장가로 매도하는 것입니다.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>positions</strong> (<em>List</em>) – 보유 종목 리스트</p></li>
+<li><p><strong>stop_loss_config</strong> (<em>Dict</em>) – 손절 조건 설정</p></li>
+<li><p><strong>broker</strong> (<a class="reference internal" href="brokerage.html#qrst.stock_broker.StockBroker" title="qrst.stock_broker.StockBroker"><em>StockBroker</em></a>) – 주식 거래를 위한 객체</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qrst.hooks.monitor_take_profit">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qrst.hooks.</span></span><span class="sig-name descname"><span class="pre">monitor_take_profit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">positions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">take_profit_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">broker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="brokerage.html#qrst.stock_broker.StockBroker" title="qrst.stock_broker.StockBroker"><span class="pre">StockBroker</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qrst.hooks.monitor_take_profit" title="Permalink to this definition">#</a></dt>
+<dd><p>익절 조건을 모니터링 합니다.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>이 hook을 구현하지 않은 경우의 기본 동작은 익절 조건에 해당하는 종목을 모두 시장가로 매도하는 것입니다.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>positions</strong> (<em>List</em>) – 보유 종목 리스트</p></li>
+<li><p><strong>take_profit_config</strong> (<em>Dict</em>) – 익절 조건 설정</p></li>
+<li><p><strong>broker</strong> (<a class="reference internal" href="brokerage.html#qrst.stock_broker.StockBroker" title="qrst.stock_broker.StockBroker"><em>StockBroker</em></a>) – 주식 거래를 위한 객체</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qrst.hooks.on_initiailze">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qrst.hooks.</span></span><span class="sig-name descname"><span class="pre">on_initiailze</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#qrst.hooks.on_initiailze" title="Permalink to this definition">#</a></dt>
+<dd><p>사용자 전략 초기화.</p>
+<p>사용자 전략 실행 시 처음 한번 실행되는 함수입니다. 필요한 초기화 작업을 수행하고 실행주기, 손/익절 조건등의 설정 값을 반환하도록 작성합니다.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>사용자 전략 설정 값. 다음 필드들을 포함할 수 있습니다.</p>
+<ul class="simple">
+<li><p>interval (int): 매수/매도 주기 (초)</p></li>
+<li><p>stop_loss_config (Dict): 손절 조건 설정</p></li>
+<li><p>take_profit_config (Dict): 익절 조건 설정</p></li>
+<li><p>open_market_time_margin (int): 거래 시작 시간 조정 (초)</p></li>
+<li><p>close_market_time_margin (int): 거래 마감 시간 조정 (초)</p></li>
+<li><p>test_trade (bool): 모의 투자 여부 (default: False)</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dict</p>
+</dd>
+<dt class="field-odd">Examples<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">on_initialize</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1"># ...do-something</span>
+
+    <span class="c1"># 사용자 설정을 반환합니다</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="s1">&#39;interval&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span> <span class="c1"># 전략 실행 주기(초). 기본값: 1분</span>
+
+      <span class="s1">&#39;stop_loss_config&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="c1"># 손절 조건 등록 (optional)</span>
+        <span class="s1">&#39;A005930&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.1</span> <span class="c1"># 삼성전자 종목을 평단가 대비 -10% 손실인 경우 손절</span>
+      <span class="p">},</span>
+
+      <span class="s1">&#39;take_profit_config&#39;</span><span class="p">:</span> <span class="p">{</span> <span class="c1"># 익절 조건 (optional)</span>
+        <span class="s1">&#39;A005930&#39;</span><span class="p">:</span> <span class="mf">0.1</span> <span class="c1"># 삼성전자 종목을 평단가 대비 10% 이상 수익인 경우 익절</span>
+      <span class="p">},</span>
+
+      <span class="s1">&#39;open_market_time_margin&#39;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="c1"># 거래 시작 시간 조정 (초). 기본값 300(5분)</span>
+      <span class="s1">&#39;close_market_time_margin&#39;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="c1"># 거래 마감 시간 조정 (초). 기본값 300(5분)</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">config</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qrst.hooks.on_market_closed">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qrst.hooks.</span></span><span class="sig-name descname"><span class="pre">on_market_closed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">account_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pending_orders</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">broker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="brokerage.html#qrst.stock_broker.StockBroker" title="qrst.stock_broker.StockBroker"><span class="pre">StockBroker</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#qrst.hooks.on_market_closed" title="Permalink to this definition">#</a></dt>
+<dd><p>매일 거래 종료 시 마지막에 1회 호출 됩니다.</p>
+<p>이 hook이 호출되고 나면 해당일에는 더이상 trade_func 가 호출되지 않습니다.</p>
+<p>이 hook이 호출되는 시간은 당일 장 종료 전 동시 호가 시작 시간 (보통 3시 20분) 에서 사용자가 설정한 close_market_time_margin 초를 뺀 시간입니다. 예를 들어 사용자가 close_market_time_margin을 600(10분)으로 설정한 경우, 3시 10분에 on_market_close hook이 호출됩니다.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul class="simple">
+<li><p>당일 동시 호가 시작 이후에 전략이 새로 배포되거나 업데이트 된 경우 이 hook은 호출되지 않습니다.</p></li>
+<li><p>이 hook이 호출되고 실제 동시호가 시작 시간 전에 전략을 업데이트하게 되면 이 hook은 다시 호출됩니다.</p></li>
+</ul>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>account_info</strong> (<em>Dict</em>) – 계좌 정보</p></li>
+<li><p><strong>pending_orders</strong> (<em>List</em>) – 미체결 주문 리스트</p></li>
+<li><p><strong>positions</strong> (<em>List</em>) – 보유 종목 리스트</p></li>
+<li><p><strong>broker</strong> (<a class="reference internal" href="brokerage.html#qrst.stock_broker.StockBroker" title="qrst.stock_broker.StockBroker"><em>StockBroker</em></a>) – 주식 거래를 위한 객체</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>거래 할 종목 리스트. 종목 코드, 거래 수량, 지정 가격을 반환합니다.
+매수 인 경우 양수, 매도 인 경우 음수로 수량을 설정합니다.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[Tuple[str, int, int]]</p>
+</dd>
+<dt class="field-even">Examples<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">on_market_closed</span><span class="p">(</span><span class="n">account_info</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">positions</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">broker</span><span class="p">:</span> <span class="n">StockBroker</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+    <span class="n">asset_codes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">positions</span><span class="p">)))</span>
+    <span class="n">price_df</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="n">get_price_for_multiple_stocks</span><span class="p">(</span><span class="n">asset_codes</span><span class="p">)</span>
+
+    <span class="c1"># 보유 중인 수량 전량 매도</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">asset_code</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="o">.</span><span class="n">quantity</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">price</span><span class="p">),</span> <span class="n">positions</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qrst.hooks.on_market_opened">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qrst.hooks.</span></span><span class="sig-name descname"><span class="pre">on_market_opened</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">account_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pending_orders</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">broker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="brokerage.html#qrst.stock_broker.StockBroker" title="qrst.stock_broker.StockBroker"><span class="pre">StockBroker</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#qrst.hooks.on_market_opened" title="Permalink to this definition">#</a></dt>
+<dd><p>매일 거래 시작 시 가장 먼저 1회 호출 됩니다.</p>
+<p>이 hook은 당일 장 거래 시작 시간 (보통 9시, 수능일은 10시)에
+사용자가 설정 한 open_market_time_margin 초를 더한 시간입니다.</p>
+<p>예를 들어 사용자가 open_market_time_margin을 300(5분)으로 설정한 경우,
+9시 5분에 on_market_open이 호출됩니다.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>account_info</strong> (<em>Dict</em>) – 계좌 정보</p></li>
+<li><p><strong>pending_orders</strong> (<em>List</em>) – 미체결 주문 리스트</p></li>
+<li><p><strong>positions</strong> (<em>List</em>) – 보유 종목 리스트</p></li>
+<li><p><strong>broker</strong> (<a class="reference internal" href="brokerage.html#qrst.stock_broker.StockBroker" title="qrst.stock_broker.StockBroker"><em>StockBroker</em></a>) – 주식 거래를 위한 객체</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>거래 할 종목 리스트. 종목 코드, 거래 수량, 지정 가격을 반환합니다.
+매수 인 경우 양수, 매도 인 경우 음수로 수량을 설정합니다.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[Tuple[str, int, int]]</p>
+</dd>
+<dt class="field-even">Examples<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">on_market_opened</span><span class="p">(</span><span class="n">account_info</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">positions</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">broker</span><span class="p">:</span> <span class="n">StockBroker</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+    <span class="n">asset_codes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">positions</span><span class="p">)))</span>
+    <span class="n">price_df</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="n">get_price_for_multiple_stocks</span><span class="p">(</span><span class="n">asset_codes</span><span class="p">)</span>
+
+    <span class="c1"># 보유 중인 수량 전량 매도</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">asset_code</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="o">.</span><span class="n">quantity</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">price</span><span class="p">),</span> <span class="n">positions</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qrst.hooks.trade_func">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qrst.hooks.</span></span><span class="sig-name descname"><span class="pre">trade_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">account_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pending_orders</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">broker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="brokerage.html#qrst.stock_broker.StockBroker" title="qrst.stock_broker.StockBroker"><span class="pre">StockBroker</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#qrst.hooks.trade_func" title="Permalink to this definition">#</a></dt>
+<dd><p>사용자 전략 코드를 구현합니다.</p>
+<p>설정 된 주기마다 호출 되고 매매지시가 필요한 경우 응답으로 전달합니다.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>account_info</strong> (<em>Dict</em>) – 계좌 정보</p></li>
+<li><p><strong>pending_orders</strong> (<em>List</em>) – 미체결 주문 리스트</p></li>
+<li><p><strong>positions</strong> (<em>List</em>) – 보유 종목 리스트</p></li>
+<li><p><strong>broker</strong> (<a class="reference internal" href="brokerage.html#qrst.stock_broker.StockBroker" title="qrst.stock_broker.StockBroker"><em>StockBroker</em></a>) – 주식 거래를 위한 객체</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>거래 할 종목 리스트. 종목 코드, 거래 수량, 지정 가격을 반환합니다.
+매수 인 경우 양수, 매도 인 경우 음수로 수량을 설정합니다.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[Tuple[str, int, int]]</p>
+</dd>
+<dt class="field-even">Examples<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">trade_func</span><span class="p">(</span><span class="n">account_info</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">positions</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">broker</span><span class="p">:</span> <span class="n">StockBroker</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+    <span class="c1"># 사용자 전략 코드 작성</span>
+    <span class="c1"># ...</span>
+
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">(</span> <span class="s1">&#39;005930&#39;</span><span class="p">,</span> <span class="mi">69100</span><span class="p">,</span> <span class="mi">13</span> <span class="p">),</span> <span class="c1"># 삼성전자 13주를 69100원에 매수</span>
+        <span class="p">(</span> <span class="s1">&#39;252670&#39;</span><span class="p">,</span> <span class="mi">2800</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span> <span class="p">),</span> <span class="c1"># KODEX 200 선물 인버스2X 1주를 2800원에 매도</span>
+    <span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="qupyter.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Qupyter SDK</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="brokerage.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Brokerage API</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.handle_pending_positions"><code class="docutils literal notranslate"><span class="pre">handle_pending_positions()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.monitor_stop_loss"><code class="docutils literal notranslate"><span class="pre">monitor_stop_loss()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.monitor_take_profit"><code class="docutils literal notranslate"><span class="pre">monitor_take_profit()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.on_initiailze"><code class="docutils literal notranslate"><span class="pre">on_initiailze()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.on_market_closed"><code class="docutils literal notranslate"><span class="pre">on_market_closed()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.on_market_opened"><code class="docutils literal notranslate"><span class="pre">on_market_opened()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.trade_func"><code class="docutils literal notranslate"><span class="pre">trade_func()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="_sources/hooks.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, QRST AI.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 6.2.1.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.14.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

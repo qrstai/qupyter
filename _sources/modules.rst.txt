@@ -5,3 +5,5 @@ API references
    :maxdepth: 4
 
    qupyter
+   hooks
+   brokerage
