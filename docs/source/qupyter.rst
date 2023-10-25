@@ -1,9 +1,6 @@
 
-packages
-========
-
-Submodules
-----------
+Qupyter SDK
+===========
 
 qupyter.futures module
 ----------------------
@@ -21,10 +18,3 @@ qupyter.stocks module
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
-
-.. automodule:: qupyter
-   :members:
-   :undoc-members:
-   :show-inheritance:
