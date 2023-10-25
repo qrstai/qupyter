@@ -9,37 +9,32 @@ Qupyter platform 에 작성한 전략을 배포하는 방법을 살펴보겠습�
 ### volatility_break.py
 
 ```python
-
 import FinanceDataReader as fdr
 from datetime import timedelta, datetime
 
+
 async def on_initialize():
     return {
-        'interval': 60, # 거래 주기는 60초로 지정합니다
+        'interval': 30, # 거래 주기: 30초
     }
-
-
-def get_current_price_map(broker, asset_codes):
-    """ 이베스트 API가 전달하는 가격정보를 종목키를 기준으로 grouping 하여 반환 """
-    docs = broker.get_current_prices(asset_codes)
-    result_map = {}
-    for d in docs:
-        result_map[d['shcode']] = d
-    return result_map
 
 
 async def on_market_open(account_info, pending_orders, positions, broker):
     """ 장 시작 시 보유 중인 모든 종목을 매도 """
     result = []
-
-    price_map = get_current_price_map(broker, list(map(lambda p: p.asset_code, positions)))
+    asset_codes = list(map(lambda p: p.asset_code, positions))
+    price_df = broker.get_price_for_multiple_stocks(asset_codes)
 
     for p in positions:
         if p.quantity > 0:
-            current_price = price_map[p.asset_code]['price']
+            current_price = price_df['current_price'][p.asset_code]
             result.append(( p.asset_code, current_price, p.quantity * -1 ))
 
     return result
+
+
+async def on_market_close(account_info, pending_orders, positions, broker):
+    print("on_market_close")
 
 
 async def trade_func(user_account, pending_orders, positions, broker):
@@ -47,9 +42,10 @@ async def trade_func(user_account, pending_orders, positions, broker):
     yesterday = now - timedelta(days=1)
 
     target_asset_codes = [
-        'A005930', # 삼성전자
-        'A005380', # 현대자동차
+        '005930', # 삼성전자
+        '005380', # 현대자동차
     ]
+
 
     def __has_position(asset_code):
         """ 해당 종목을 보유중이거나 주문이 진행중인지 확인 """
@@ -65,19 +61,18 @@ async def trade_func(user_account, pending_orders, positions, broker):
 
         return False
 
+
     result = []
     total_balance = user_account['total_balance'] * 0.8
-    price_map = get_current_price_map(broker, target_asset_codes)
+    price_df = broker.get_price_for_multiple_stocks(target_asset_codes)
 
     for asset_code in target_asset_codes:
-        shcode = asset_code[1:]
-
-        if not __has_position(shcode):
-            read_start = (yesterday - timedelta(days=14)).strftime('%Y-%m-%d')
+        if not __has_position(asset_code):
+            read_start = (yesterday - timedelta(days=7)).strftime('%Y-%m-%d')
             read_end = yesterday.strftime('%Y-%m-%d')
 
-            # finance-datareader 에서 오늘을 제외한 최근 14일 이내의 거래일의 가격 정보를 가져온다.
-            df = fdr.DataReader(shcode, read_start, read_end)
+            # finance-datareader 에서 오늘을 제외한 최근 7거래일의 가격 정보를 가져온다.
+            df = fdr.DataReader(asset_code, read_start, read_end)
             if df is None or len(df) == 0:
                 print('Error: yesterday price data not available')
                 continue
@@ -88,7 +83,7 @@ async def trade_func(user_account, pending_orders, positions, broker):
             yesterday_range = yesterday_series['High'] - yesterday_series['Low']
 
             # 오늘 시가를 구한다.
-            today_open = price_map[shcode]['open']
+            today_open = price_df['open_price'][asset_code]
 
             # 진입 조건 강도 조절을 위한 상수
             k = 0.5
@@ -97,7 +92,7 @@ async def trade_func(user_account, pending_orders, positions, broker):
             target_price = today_open + yesterday_range * k
 
             # 현재가격
-            current_price = price_map[shcode]['price']
+            current_price = price_df['current_price'][asset_code]
 
             print(f"{asset_code} - today_open:{today_open} yesterday_range:{yesterday_range} k:{k}", end="")
             print(f" target_price:{target_price} current_price:{current_price}")

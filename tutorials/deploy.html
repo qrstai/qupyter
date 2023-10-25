@@ -376,37 +376,32 @@ document.write(`
 <p>사용자가 직접 작성한 전략 코드를 준비합니다. 다음은 변동성 돌파 전략을 구현한 예제 코드입니다.</p>
 <section id="volatility-break-py">
 <h3>volatility_break.py<a class="headerlink" href="#volatility-break-py" title="Permalink to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
-<span class="kn">import</span> <span class="nn">FinanceDataReader</span> <span class="k">as</span> <span class="nn">fdr</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">FinanceDataReader</span> <span class="k">as</span> <span class="nn">fdr</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span><span class="p">,</span> <span class="n">datetime</span>
+
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">on_initialize</span><span class="p">():</span>
     <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;interval&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span> <span class="c1"># 거래 주기는 60초로 지정합니다</span>
+        <span class="s1">&#39;interval&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="c1"># 거래 주기: 30초</span>
     <span class="p">}</span>
-
-
-<span class="k">def</span> <span class="nf">get_current_price_map</span><span class="p">(</span><span class="n">broker</span><span class="p">,</span> <span class="n">asset_codes</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; 이베스트 API가 전달하는 가격정보를 종목키를 기준으로 grouping 하여 반환 &quot;&quot;&quot;</span>
-    <span class="n">docs</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="n">get_current_prices</span><span class="p">(</span><span class="n">asset_codes</span><span class="p">)</span>
-    <span class="n">result_map</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">:</span>
-        <span class="n">result_map</span><span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;shcode&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">d</span>
-    <span class="k">return</span> <span class="n">result_map</span>
 
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">on_market_open</span><span class="p">(</span><span class="n">account_info</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">broker</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; 장 시작 시 보유 중인 모든 종목을 매도 &quot;&quot;&quot;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-
-    <span class="n">price_map</span> <span class="o">=</span> <span class="n">get_current_price_map</span><span class="p">(</span><span class="n">broker</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">positions</span><span class="p">)))</span>
+    <span class="n">asset_codes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">positions</span><span class="p">))</span>
+    <span class="n">price_df</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="n">get_price_for_multiple_stocks</span><span class="p">(</span><span class="n">asset_codes</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">positions</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">quantity</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">current_price</span> <span class="o">=</span> <span class="n">price_map</span><span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">asset_code</span><span class="p">][</span><span class="s1">&#39;price&#39;</span><span class="p">]</span>
+            <span class="n">current_price</span> <span class="o">=</span> <span class="n">price_df</span><span class="p">[</span><span class="s1">&#39;current_price&#39;</span><span class="p">][</span><span class="n">p</span><span class="o">.</span><span class="n">asset_code</span><span class="p">]</span>
             <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">((</span> <span class="n">p</span><span class="o">.</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">current_price</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">quantity</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span> <span class="p">))</span>
 
     <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">on_market_close</span><span class="p">(</span><span class="n">account_info</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">broker</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;on_market_close&quot;</span><span class="p">)</span>
 
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">trade_func</span><span class="p">(</span><span class="n">user_account</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">broker</span><span class="p">):</span>
@@ -414,9 +409,10 @@ document.write(`
     <span class="n">yesterday</span> <span class="o">=</span> <span class="n">now</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="n">target_asset_codes</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s1">&#39;A005930&#39;</span><span class="p">,</span> <span class="c1"># 삼성전자</span>
-        <span class="s1">&#39;A005380&#39;</span><span class="p">,</span> <span class="c1"># 현대자동차</span>
+        <span class="s1">&#39;005930&#39;</span><span class="p">,</span> <span class="c1"># 삼성전자</span>
+        <span class="s1">&#39;005380&#39;</span><span class="p">,</span> <span class="c1"># 현대자동차</span>
     <span class="p">]</span>
+
 
     <span class="k">def</span> <span class="nf">__has_position</span><span class="p">(</span><span class="n">asset_code</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; 해당 종목을 보유중이거나 주문이 진행중인지 확인 &quot;&quot;&quot;</span>
@@ -432,19 +428,18 @@ document.write(`
 
         <span class="k">return</span> <span class="kc">False</span>
 
+
     <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">total_balance</span> <span class="o">=</span> <span class="n">user_account</span><span class="p">[</span><span class="s1">&#39;total_balance&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.8</span>
-    <span class="n">price_map</span> <span class="o">=</span> <span class="n">get_current_price_map</span><span class="p">(</span><span class="n">broker</span><span class="p">,</span> <span class="n">target_asset_codes</span><span class="p">)</span>
+    <span class="n">price_df</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="n">get_price_for_multiple_stocks</span><span class="p">(</span><span class="n">target_asset_codes</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">asset_code</span> <span class="ow">in</span> <span class="n">target_asset_codes</span><span class="p">:</span>
-        <span class="n">shcode</span> <span class="o">=</span> <span class="n">asset_code</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">__has_position</span><span class="p">(</span><span class="n">shcode</span><span class="p">):</span>
-            <span class="n">read_start</span> <span class="o">=</span> <span class="p">(</span><span class="n">yesterday</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">14</span><span class="p">))</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">__has_position</span><span class="p">(</span><span class="n">asset_code</span><span class="p">):</span>
+            <span class="n">read_start</span> <span class="o">=</span> <span class="p">(</span><span class="n">yesterday</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">7</span><span class="p">))</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
             <span class="n">read_end</span> <span class="o">=</span> <span class="n">yesterday</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
 
-            <span class="c1"># finance-datareader 에서 오늘을 제외한 최근 14일 이내의 거래일의 가격 정보를 가져온다.</span>
-            <span class="n">df</span> <span class="o">=</span> <span class="n">fdr</span><span class="o">.</span><span class="n">DataReader</span><span class="p">(</span><span class="n">shcode</span><span class="p">,</span> <span class="n">read_start</span><span class="p">,</span> <span class="n">read_end</span><span class="p">)</span>
+            <span class="c1"># finance-datareader 에서 오늘을 제외한 최근 7거래일의 가격 정보를 가져온다.</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">fdr</span><span class="o">.</span><span class="n">DataReader</span><span class="p">(</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">read_start</span><span class="p">,</span> <span class="n">read_end</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">df</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: yesterday price data not available&#39;</span><span class="p">)</span>
                 <span class="k">continue</span>
@@ -455,7 +450,7 @@ document.write(`
             <span class="n">yesterday_range</span> <span class="o">=</span> <span class="n">yesterday_series</span><span class="p">[</span><span class="s1">&#39;High&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">yesterday_series</span><span class="p">[</span><span class="s1">&#39;Low&#39;</span><span class="p">]</span>
 
             <span class="c1"># 오늘 시가를 구한다.</span>
-            <span class="n">today_open</span> <span class="o">=</span> <span class="n">price_map</span><span class="p">[</span><span class="n">shcode</span><span class="p">][</span><span class="s1">&#39;open&#39;</span><span class="p">]</span>
+            <span class="n">today_open</span> <span class="o">=</span> <span class="n">price_df</span><span class="p">[</span><span class="s1">&#39;open_price&#39;</span><span class="p">][</span><span class="n">asset_code</span><span class="p">]</span>
 
             <span class="c1"># 진입 조건 강도 조절을 위한 상수</span>
             <span class="n">k</span> <span class="o">=</span> <span class="mf">0.5</span>
@@ -464,7 +459,7 @@ document.write(`
             <span class="n">target_price</span> <span class="o">=</span> <span class="n">today_open</span> <span class="o">+</span> <span class="n">yesterday_range</span> <span class="o">*</span> <span class="n">k</span>
 
             <span class="c1"># 현재가격</span>
-            <span class="n">current_price</span> <span class="o">=</span> <span class="n">price_map</span><span class="p">[</span><span class="n">shcode</span><span class="p">][</span><span class="s1">&#39;price&#39;</span><span class="p">]</span>
+            <span class="n">current_price</span> <span class="o">=</span> <span class="n">price_df</span><span class="p">[</span><span class="s1">&#39;current_price&#39;</span><span class="p">][</span><span class="n">asset_code</span><span class="p">]</span>
 
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">asset_code</span><span class="si">}</span><span class="s2"> - today_open:</span><span class="si">{</span><span class="n">today_open</span><span class="si">}</span><span class="s2"> yesterday_range:</span><span class="si">{</span><span class="n">yesterday_range</span><span class="si">}</span><span class="s2"> k:</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; target_price:</span><span class="si">{</span><span class="n">target_price</span><span class="si">}</span><span class="s2"> current_price:</span><span class="si">{</span><span class="n">current_price</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
