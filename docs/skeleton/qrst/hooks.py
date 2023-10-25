@@ -1,6 +1,6 @@
 from typing import Dict, List, Tuple
 
-from .stock_broker import StockBroker
+from .stock_broker import StockBroker, StockOrder, StockPosition
 
 
 async def on_initiailze() -> Dict:
@@ -48,7 +48,7 @@ async def on_initiailze() -> Dict:
     pass
 
 
-async def on_market_opened(account_info: Dict, pending_orders: List, positions: List, broker: StockBroker) -> List[Tuple[str, int, int]]:
+async def on_market_opened(account_info: Dict, pending_orders: List[StockOrder], positions: List[StockPosition], broker: StockBroker) -> List[Tuple[str, int, int]]:
     '''매일 거래 시작 시 가장 먼저 1회 호출 됩니다.
 
     이 hook은 당일 장 거래 시작 시간 (보통 9시, 수능일은 10시)에
@@ -61,10 +61,10 @@ async def on_market_opened(account_info: Dict, pending_orders: List, positions: 
     :type account_info: Dict
 
     :param pending_orders: 미체결 주문 리스트
-    :type pending_orders: List
+    :type pending_orders: List of StockOrder
 
     :param positions: 보유 종목 리스트
-    :type positions: List
+    :type positions: List of StockPosition
 
     :param broker: 주식 거래를 위한 객체
     :type broker: StockBroker
@@ -87,7 +87,7 @@ async def on_market_opened(account_info: Dict, pending_orders: List, positions: 
     pass
 
 
-async def on_market_closed(account_info: Dict, pending_orders: List, positions: List, broker: StockBroker) -> List[Tuple[str, int, int]]:
+async def on_market_closed(account_info: Dict, pending_orders: List[StockOrder], positions: List[StockPosition], broker: StockBroker) -> List[Tuple[str, int, int]]:
     '''매일 거래 종료 시 마지막에 1회 호출 됩니다.
 
     이 hook이 호출되고 나면 해당일에는 더이상 trade_func 가 호출되지 않습니다.
@@ -103,10 +103,10 @@ async def on_market_closed(account_info: Dict, pending_orders: List, positions: 
     :type account_info: Dict
 
     :param pending_orders: 미체결 주문 리스트
-    :type pending_orders: List
+    :type pending_orders: List of StockOrder
 
     :param positions: 보유 종목 리스트
-    :type positions: List
+    :type positions: List of StockPosition
 
     :param broker: 주식 거래를 위한 객체
     :type broker: StockBroker
@@ -129,7 +129,7 @@ async def on_market_closed(account_info: Dict, pending_orders: List, positions: 
     pass
 
 
-async def trade_func(account_info: Dict, pending_orders: List, positions: List, broker: StockBroker) -> List[Tuple[str, int, int]]:
+async def trade_func(account_info: Dict, pending_orders: List[StockOrder], positions: List[StockPosition], broker: StockBroker) -> List[Tuple[str, int, int]]:
     '''사용자 전략 코드를 구현합니다.
 
     설정 된 주기마다 호출 되고 매매지시가 필요한 경우 응답으로 전달합니다.
@@ -138,10 +138,10 @@ async def trade_func(account_info: Dict, pending_orders: List, positions: List, 
     :type account_info: Dict
 
     :param pending_orders: 미체결 주문 리스트
-    :type pending_orders: List
+    :type pending_orders: List of StockOrder
 
     :param positions: 보유 종목 리스트
-    :type positions: List
+    :type positions: List of StockPosition
 
     :param broker: 주식 거래를 위한 객체
     :type broker: StockBroker
@@ -166,14 +166,14 @@ async def trade_func(account_info: Dict, pending_orders: List, positions: List, 
     pass
 
 
-async def handle_pending_positions(pending_orders: List, broker: StockBroker):
+async def handle_pending_positions(pending_orders: List[StockOrder], broker: StockBroker):
     '''미체결 주문을 처리합니다.
 
     .. note::
         이 hook을 구현하지 않은 경우의 기본 동작은 미체결 주문을 모두 취소하는 것입니다.
 
     :param pending_orders: 미체결 주문 리스트
-    :type pending_orders: List
+    :type pending_orders: List of StockOrder
 
     :param broker: 주식 거래를 위한 객체
     :type broker: StockBroker
@@ -194,14 +194,14 @@ async def handle_pending_positions(pending_orders: List, broker: StockBroker):
     pass
 
 
-async def monitor_stop_loss(positions: List, stop_loss_config: Dict, broker: StockBroker):
+async def monitor_stop_loss(positions: List[StockPosition], stop_loss_config: Dict, broker: StockBroker):
     '''손절 조건을 모니터링 합니다.
 
     .. note::
         이 hook을 구현하지 않은 경우의 기본 동작은 손절 조건에 해당하는 종목을 모두 시장가로 매도하는 것입니다.
 
     :param positions: 보유 종목 리스트
-    :type positions: List
+    :type positions: List of StockPosition
 
     :param stop_loss_config: 손절 조건 설정
     :type stop_loss_config: Dict
@@ -212,14 +212,14 @@ async def monitor_stop_loss(positions: List, stop_loss_config: Dict, broker: Sto
     pass
 
 
-async def monitor_take_profit(positions: List, take_profit_config: Dict, broker: StockBroker):
+async def monitor_take_profit(positions: List[StockPosition], take_profit_config: Dict, broker: StockBroker):
     ''' 익절 조건을 모니터링 합니다.
 
     .. note::
         이 hook을 구현하지 않은 경우의 기본 동작은 익절 조건에 해당하는 종목을 모두 시장가로 매도하는 것입니다.
 
     :param positions: 보유 종목 리스트
-    :type positions: List
+    :type positions: List of StockPosition
 
     :param take_profit_config: 익절 조건 설정
     :type take_profit_config: Dict
