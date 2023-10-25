@@ -57,7 +57,7 @@ async def on_market_opened(account_info: Dict, pending_orders: List[StockOrder],
     예를 들어 사용자가 open_market_time_margin을 300(5분)으로 설정한 경우,
     9시 5분에 on_market_open이 호출됩니다.
 
-    :param account_info: 계좌 정보
+    :param account_info: 계좌 정보. :func:`StockBroker.get_account()<qrst.stock_broker.StockBroker.get_account>` 의 반환 값과 동일합니다.
     :type account_info: Dict
 
     :param pending_orders: 미체결 주문 리스트
@@ -99,7 +99,7 @@ async def on_market_closed(account_info: Dict, pending_orders: List[StockOrder],
       - 이 hook이 호출되고 실제 동시호가 시작 시간 전에 전략을 업데이트하게 되면 이 hook은 다시 호출됩니다.
 
 
-    :param account_info: 계좌 정보
+    :param account_info: 계좌 정보. :func:`StockBroker.get_account()<qrst.stock_broker.StockBroker.get_account>` 의 반환 값과 동일합니다.
     :type account_info: Dict
 
     :param pending_orders: 미체결 주문 리스트
@@ -134,7 +134,7 @@ async def trade_func(account_info: Dict, pending_orders: List[StockOrder], posit
 
     설정 된 주기마다 호출 되고 매매지시가 필요한 경우 응답으로 전달합니다.
 
-    :param account_info: 계좌 정보
+    :param account_info: 계좌 정보. :func:`StockBroker.get_account()<qrst.stock_broker.StockBroker.get_account>` 의 반환 값과 동일합니다.
     :type account_info: Dict
 
     :param pending_orders: 미체결 주문 리스트
