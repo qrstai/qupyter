@@ -42,7 +42,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'modules';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Hooks" href="hooks.html" />
+    <link rel="next" title="Qupyter SDK" href="qupyter.html" />
     <link rel="prev" title="VS Code - Remote tunnel 사용하기" href="howto/vscode_tunnel.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -322,6 +322,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="qupyter.html">Qupyter SDK</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hooks.html">Hooks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="brokerage.html">Brokerage API</a></li>
 </ul>
@@ -382,6 +383,19 @@ document.write(`
 <h1>API references<a class="headerlink" href="#api-references" title="Permalink to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="qupyter.html">Qupyter SDK</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="qupyter.html#module-qupyter.futures">qupyter.futures module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qupyter.html#qupyter.futures.get_ticker_list"><code class="docutils literal notranslate"><span class="pre">get_ticker_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="qupyter.html#qupyter.futures.get_trade_event"><code class="docutils literal notranslate"><span class="pre">get_trade_event()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qupyter.html#module-qupyter.stocks">qupyter.stocks module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qupyter.html#qupyter.stocks.get_ticker_list"><code class="docutils literal notranslate"><span class="pre">get_ticker_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="qupyter.html#qupyter.stocks.listen_trade_event"><code class="docutils literal notranslate"><span class="pre">listen_trade_event()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="hooks.html">Hooks</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="hooks.html#qrst.hooks.handle_pending_positions"><code class="docutils literal notranslate"><span class="pre">handle_pending_positions()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="hooks.html#qrst.hooks.monitor_stop_loss"><code class="docutils literal notranslate"><span class="pre">monitor_stop_loss()</span></code></a></li>
@@ -422,11 +436,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="hooks.html"
+       href="qupyter.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Hooks</p>
+        <p class="prev-next-title">Qupyter SDK</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
