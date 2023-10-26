@@ -201,6 +201,7 @@ class StockBroker:
 
     def get_historical_minute_data(self, asset_code: str, interval: int = 1, first_date: datetime.date = None, last_date: datetime.date = None) -> pd.DataFrame:
         """과거 분봉 데이터 조회
+
         :param asset_code: 종목코드
         :type asset_code: str
 
@@ -243,6 +244,7 @@ class StockBroker:
 
     def get_historical_daily_data(self, asset_code: str, adjusted_price: bool = False, first_date: datetime.date = None, last_date: datetime.date = None) -> pd.DataFrame:
         """과거 일봉 데이터 조회
+
         :param asset_code: 종목코드
         :type asset_code: str
 
