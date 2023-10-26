@@ -482,12 +482,11 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="qrst.stock_broker.StockBroker.get_historical_daily_data">
 <span class="sig-name descname"><span class="pre">get_historical_daily_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asset_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">adjusted_price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">date</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">date</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#qrst.stock_broker.StockBroker.get_historical_daily_data" title="Permalink to this definition">#</a></dt>
-<dd><p>과거 일봉 데이터 조회
-:param asset_code: 종목코드
-:type asset_code: str</p>
+<dd><p>과거 일봉 데이터 조회</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>asset_code</strong> (<em>str</em>) – 종목코드</p></li>
 <li><p><strong>adjusted_price</strong> (<em>bool</em>) – 수정주가여부</p></li>
 <li><p><strong>first_date</strong> (<em>datetime.date</em>) – 조회 시작일자 (<a href="#id1"><span class="problematic" id="id2">`</span></a>None`일 경우 당일 조회)</p></li>
 <li><p><strong>last_date</strong> (<em>datetime.date</em>) – 조회 종료일자 (<a href="#id3"><span class="problematic" id="id4">`</span></a>None`인 경우 당일 조회)</p></li>
@@ -528,12 +527,11 @@ document.write(`
 <dl class="py method">
 <dt class="sig sig-object py" id="qrst.stock_broker.StockBroker.get_historical_minute_data">
 <span class="sig-name descname"><span class="pre">get_historical_minute_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asset_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">date</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">date</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#qrst.stock_broker.StockBroker.get_historical_minute_data" title="Permalink to this definition">#</a></dt>
-<dd><p>과거 분봉 데이터 조회
-:param asset_code: 종목코드
-:type asset_code: str</p>
+<dd><p>과거 분봉 데이터 조회</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p><strong>asset_code</strong> (<em>str</em>) – 종목코드</p></li>
 <li><p><strong>interval</strong> (<em>int</em>) – 단위(n분)</p></li>
 <li><p><strong>first_date</strong> (<em>datetime.date</em>) – 조회 시작일자 (<a href="#id5"><span class="problematic" id="id6">`</span></a>None`일 경우 당일 조회)</p></li>
 <li><p><strong>last_date</strong> (<em>datetime.date</em>) – 조회 종료일자 (<a href="#id7"><span class="problematic" id="id8">`</span></a>None`인 경우 당일 조회)</p></li>
