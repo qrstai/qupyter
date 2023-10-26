@@ -218,6 +218,7 @@ class StockBroker:
         :rtype: pandas.DataFrame
 
         DataFrame에는 다음 필드들이 포함됩니다.
+
         - datetime (str): 일자 및 시간
         - open (int): 시가
         - high (int): 고가
