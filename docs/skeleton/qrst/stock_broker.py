@@ -296,7 +296,7 @@ class StockBroker:
 
         Dict에는 다음 필드들이 포함됩니다.
 
-        * investable_cache: 현금 주문 가능 금액
+        * investable_cash: 현금 주문 가능 금액
         * asset_value: 주식 잔고 평가 금액
         * receivable_amount: 미수금
         * total_balance: 예탁자산총액
