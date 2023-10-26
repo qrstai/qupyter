@@ -199,6 +199,91 @@ class StockBroker:
         df.set_index('code', inplace=True)
         return df
 
+    def get_historical_minute_data(self, asset_code: str, interval: int = 1, first_date: datetime.date = None, last_date: datetime.date = None) -> pd.DataFrame:
+        """과거 분봉 데이터 조회
+        :param asset_code: 종목코드
+        :type asset_code: str
+
+        :param interval: 단위(n분)
+        :type interval: int
+
+        :param first_date: 조회 시작일자 (`None`일 경우 당일 조회)
+        :type first_date: datetime.date
+
+        :param date last_date: 조회 종료일자 (`None`인 경우 당일 조회)
+        :type last_date: datetime.date
+
+        :return: 분봉 데이터
+        :rtype: pandas.DataFrame
+
+        DataFrame에는 다음 필드들이 포함됩니다.
+        - datetime (str): 일자 및 시간
+        - open (int): 시가
+        - high (int): 고가
+        - low (int): 저가
+        - close (int): 종가
+        - volume (int): 거래량
+        - volume_nominal (int): 거래대금 (단위: 백만원)
+
+        :examples:
+        .. code-block:: python
+
+            >>> df = broker.get_historical_minute_data(asset_code='005930', interval=1, first_date=datetime.date(2023, 10, 25), last_date=datetime.date(2023, 10, 26))
+            >>> print(df)
+
+                                  open   high    low  close  volume  volume_nominal
+            datetime
+            2023-10-25 09:01:00  68800  68800  68500  68700  513985     35345000000
+            2023-10-25 09:02:00  68600  68700  68600  68700   46971      3226000000
+            2023-10-25 09:03:00  68600  68800  68600  68700   68890      4733000000
+            2023-10-25 09:04:00  68700  68700  68500  68600  121569      8343000000
+            2023-10-25 09:05:00  68500  68700  68500  68600   57472      3942000000
+        """
+        pass
+
+    def get_historical_daily_data(self, asset_code: str, adjusted_price: bool = False, first_date: datetime.date = None, last_date: datetime.date = None) -> pd.DataFrame:
+        """과거 일봉 데이터 조회
+        :param asset_code: 종목코드
+        :type asset_code: str
+
+        :param adjusted_price: 수정주가여부
+        :type adjusted_price: bool
+
+        :param first_date: 조회 시작일자 (`None`일 경우 당일 조회)
+        :type first_date: datetime.date
+
+        :param last_date: 조회 종료일자 (`None`인 경우 당일 조회)
+        :type last_date: datetime.date
+
+        :return: 일봉 데이터
+        :rtype: pandas.DataFrame
+
+        DataFrame에는 다음 필드들이 포함됩니다.
+
+        - date (str): 일자
+        - open (int): 시가
+        - high (int): 고가
+        - low (int): 저가
+        - close (int): 종가
+        - volume (int): 거래량
+        - volume_nominal (int): 거래대금 (단위: 백만원)
+
+        :examples:
+
+        .. code-block:: python
+
+            >>> df = broker.get_historical_daily_data(asset_code='005930', adjusted_price=False, first_date=datetime.date(2023, 10, 23), last_date=datetime.date(2023, 10, 26))
+                         open   high    low  close    volume  volume_nominal
+            date
+            2023-10-23  68700  69100  68200  68400  10625959    728013000000
+            2023-10-24  68700  68800  67700  68500  12783836    873616000000
+            2023-10-25  68800  68800  67900  68000  10577546    722203000000
+            2023-10-26  67000  67900  66700  66900  10986832    737500000000
+        """
+        pass
+
+
+
 
     def get_account(self) -> Dict:
         """계좌 정보 조회
