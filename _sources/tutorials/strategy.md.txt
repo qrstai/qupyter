@@ -47,12 +47,12 @@ async def run():
 
 다음은 각각의 hook 들에 대한 설명입니다.
 
-### on_intialize
+### on_initialize
 
 사용자 전략 실행 시 처음 한번 실행되는 함수입니다. 필요한 초기화 작업을 수행하고 실행주기, 손/익절 조건등의 설정 값을 반환하도록 작성합니다.
 
 ```python
-async def on_initialize() {
+async def on_initialize():
   """ 필요한 사용자 초기화 코드를 실행합니다 """
   config = {
     'interval': 60, # 전략 실행 주기(초). 기본값: 1분
@@ -71,7 +71,7 @@ async def on_initialize() {
   }
 
   return config
-}
+
 ```
 
 다음은 각 설정값에 대한 설명입니다.

@@ -428,10 +428,10 @@ document.write(`
 <section id="hooks">
 <h2>Hooks<a class="headerlink" href="#hooks" title="Permalink to this heading">#</a></h2>
 <p>다음은 각각의 hook 들에 대한 설명입니다.</p>
-<section id="on-intialize">
-<h3>on_intialize<a class="headerlink" href="#on-intialize" title="Permalink to this heading">#</a></h3>
+<section id="on-initialize">
+<h3>on_initialize<a class="headerlink" href="#on-initialize" title="Permalink to this heading">#</a></h3>
 <p>사용자 전략 실행 시 처음 한번 실행되는 함수입니다. 필요한 초기화 작업을 수행하고 실행주기, 손/익절 조건등의 설정 값을 반환하도록 작성합니다.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">on_initialize</span><span class="p">()</span> <span class="p">{</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">on_initialize</span><span class="p">():</span>
 <span class="w">  </span><span class="sd">&quot;&quot;&quot; 필요한 사용자 초기화 코드를 실행합니다 &quot;&quot;&quot;</span>
   <span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;interval&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span> <span class="c1"># 전략 실행 주기(초). 기본값: 1분</span>
@@ -450,7 +450,7 @@ document.write(`
   <span class="p">}</span>
 
   <span class="k">return</span> <span class="n">config</span>
-<span class="p">}</span>
+
 </pre></div>
 </div>
 <p>다음은 각 설정값에 대한 설명입니다.</p>
@@ -562,7 +562,7 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hooks">Hooks</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#on-intialize">on_intialize</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#on-initialize">on_initialize</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#on-market-open">on_market_open</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">on_market_open 사용 시 주의 사항</a></li>
 </ul>
