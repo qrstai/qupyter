@@ -8,6 +8,10 @@ Qupyter platform 에서는 증권사 API key를 암호화하여 안전하게 저
 
 1. `my-credentials.yaml` 파일을 생성하고 다음과 같이 채워 넣습니다.
 
+```{note}
+   파일 이름은 아무 이름이나 자유롭게 사용하시면 됩니다.
+```
+
 ```yaml
 app_key: <your-app-key>
 app_secret: <your-app-secret>
@@ -18,7 +22,7 @@ market_type: stock
 
 - app_key, app_secret - API key 입니다. 이베스트 증권 OPEN API 사이트에서 발급받을 수 있습니다.
 - environment - 실행환경을 의미합니다. 모의투자의 경우엔 `test`를 실전투자의 경우 `live`로 값을 설정합니다
-- expire_date - 키 만료일자 입니다. 증권사에서 키 발행 시 나타난 값을 입력합니다.
+- expire_date - 키 만료일자 입니다. 개인 사용자는 발급일로 부터 1년입니다. 2023년 11월 1일에 키를 발급 받으신 경우, 1년 후인 '20241101' 로 지정하시면 됩니다.
 - market_type - 현재 증권 거래를 의미하는 `stock` 만 입력 가능합니다.
 
 2. Qupyter platform 에서 터미널을 실행합니다.
@@ -27,6 +31,10 @@ market_type: stock
 
 ```bash
 qup secret-set ./my-credentials.yaml
+```
+
+```{note}
+키 등록이 완료되면 `my-credentials.yaml` 파일은 더 이상 필요하지 않으니 삭제하시면 됩니다.
 ```
 
 ## 등록 된 키 확인하기

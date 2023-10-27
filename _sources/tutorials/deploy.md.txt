@@ -69,7 +69,7 @@ async def trade_func(account_info, pending_orders, positions, broker):
     return orders
 ```
 
-전략코드 실행에 필요한 package를 requirements.txt에 나열합니다
+전략코드 실행에 필요한 package가 있다면 requirements.txt에 나열합니다
 
 ### requirements.txt
 
