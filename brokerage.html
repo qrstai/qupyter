@@ -389,37 +389,6 @@ document.write(`
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>증권사 API를 사용하기 위한 클래스</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="qrst.stock_broker.StockBroker.cancel_order">
-<span class="sig-name descname"><span class="pre">cancel_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qrst.stock_broker.StockBroker.cancel_order" title="Permalink to this definition">#</a></dt>
-<dd><p>주문 취소</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>order_id</strong> (<em>str</em>) – 주문번호</p></li>
-<li><p><strong>asset_code</strong> (<em>str</em>) – 종목코드</p></li>
-<li><p><strong>quantity</strong> (<em>int</em>) – 주문수량</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="qrst.stock_broker.StockBroker.create_order">
-<span class="sig-name descname"><span class="pre">create_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asset_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">side</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qrst.stock_broker.StockBroker.create_order" title="Permalink to this definition">#</a></dt>
-<dd><p>신규 주문 생성</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>asset_code</strong> (<em>str</em>) – 종목코드</p></li>
-<li><p><strong>price</strong> (<em>int</em>) – 주문가격</p></li>
-<li><p><strong>quantity</strong> (<em>int</em>) – 주문수량</p></li>
-<li><p><strong>side</strong> (<em>int</em>) – 매매구분 (1: 매도, 2: 매수)</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="qrst.stock_broker.StockBroker.get_account">
 <span class="sig-name descname"><span class="pre">get_account</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#qrst.stock_broker.StockBroker.get_account" title="Permalink to this definition">#</a></dt>
 <dd><p>계좌 정보 조회</p>
@@ -574,40 +543,6 @@ document.write(`
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="qrst.stock_broker.StockBroker.get_orderbook">
-<span class="sig-name descname"><span class="pre">get_orderbook</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asset_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qrst.stock_broker.StockBroker.get_orderbook" title="Permalink to this definition">#</a></dt>
-<dd><p>최근 호가 데이터 획득</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="qrst.stock_broker.StockBroker.get_pending_orders">
-<span class="sig-name descname"><span class="pre">get_pending_orders</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#qrst.stock_broker.StockBroker.get_pending_orders" title="Permalink to this definition">#</a></dt>
-<dd><p>미체결 주문내역 조회</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>미체결 주문내역</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list of <a class="reference internal" href="#qrst.stock_broker.StockOrder" title="qrst.stock_broker.StockOrder">StockOrder</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="qrst.stock_broker.StockBroker.get_positions">
-<span class="sig-name descname"><span class="pre">get_positions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span></span></span><a class="headerlink" href="#qrst.stock_broker.StockBroker.get_positions" title="Permalink to this definition">#</a></dt>
-<dd><p>보유 포지션 조회</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>보유 포지션</p>
-</dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>list of <a class="reference internal" href="#qrst.stock_broker.StockPosition" title="qrst.stock_broker.StockPosition">StockPosition</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="qrst.stock_broker.StockBroker.get_price">
 <span class="sig-name descname"><span class="pre">get_price</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asset_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#qrst.stock_broker.StockBroker.get_price" title="Permalink to this definition">#</a></dt>
 <dd><p>단일 종목 시세 조회</p>
@@ -703,22 +638,6 @@ document.write(`
 <span class="go">[2 rows x 13 columns]</span>
 </pre></div>
 </div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="qrst.stock_broker.StockBroker.update_order">
-<span class="sig-name descname"><span class="pre">update_order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">org_order_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qrst.stock_broker.StockBroker.update_order" title="Permalink to this definition">#</a></dt>
-<dd><p>정정 주문</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>org_order_id</strong> (<em>str</em>) – 원주문번호</p></li>
-<li><p><strong>asset_code</strong> (<em>str</em>) – 종목코드</p></li>
-<li><p><strong>price</strong> (<em>int</em>) – 주문가격</p></li>
-<li><p><strong>quantity</strong> (<em>int</em>) – 주문수량</p></li>
-</ul>
-</dd>
-</dl>
 </dd></dl>
 
 </dd></dl>
