@@ -21,10 +21,10 @@ async def run():
     # (Hook) 미체결 주문을 처리합니다
     await handle_pending_positions(pending_orders, broker)
 
-    # (Hook) 손절 조건이 설정 된 경우 확인하고 처리합니다.
+    # 손절 조건이 설정 된 경우 확인하고 처리합니다.
     await monitor_stop_loss(positions, stop_loss_config, broker)
 
-    # (Hook) 익절 조건을 설정 된 경우 확인하고 처리합니다.
+    # 익절 조건을 설정 된 경우 확인하고 처리합니다.
     await monitor_take_profit(positions, take_profit_config, broker)
 
     # (Hook) 전략을 실행하고, 매매 지시를 반환합니다.
@@ -68,6 +68,8 @@ async def on_initialize():
     'open_market_time_margin': 300, # 거래 시작 시간 조정 (초). 기본값 300(5분)
 
     'close_market_time_margin': 300, # 거래 마감 시간 조정 (초). 기본값 300(5분)
+
+    'test_trade': False, # 모의 투자 환경 여부. 기본값 False(실거래)
   }
 
   return config
@@ -81,6 +83,7 @@ async def on_initialize():
 - take_profit_config : 익절 조건을 등록합니다. 가격을 확인하는 주기는 위 `interval`과 같습니다.
 - open_market_time_margin : 거래 시작시간을 조정하기 위해 사용됩니다. 지정된 시간 만큼 거래 시작 시간을 지연합니다.
 - close_market_time_margin: 거래 종료시간을 조정하기 위해 사용됩니다. 지정된 시간 만큼 먼저 당일 거래를 마감합니다.
+- test_trade: 모의투자 환경 여부. True로 설정하면 모의투자용 API key를 사용하여 모의투자 환경에서 거래를 진행합니다.
 
 ### on_market_open
 

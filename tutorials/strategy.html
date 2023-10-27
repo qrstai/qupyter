@@ -403,10 +403,10 @@ document.write(`
     <span class="c1"># (Hook) 미체결 주문을 처리합니다</span>
     <span class="k">await</span> <span class="n">handle_pending_positions</span><span class="p">(</span><span class="n">pending_orders</span><span class="p">,</span> <span class="n">broker</span><span class="p">)</span>
 
-    <span class="c1"># (Hook) 손절 조건이 설정 된 경우 확인하고 처리합니다.</span>
+    <span class="c1"># 손절 조건이 설정 된 경우 확인하고 처리합니다.</span>
     <span class="k">await</span> <span class="n">monitor_stop_loss</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">stop_loss_config</span><span class="p">,</span> <span class="n">broker</span><span class="p">)</span>
 
-    <span class="c1"># (Hook) 익절 조건을 설정 된 경우 확인하고 처리합니다.</span>
+    <span class="c1"># 익절 조건을 설정 된 경우 확인하고 처리합니다.</span>
     <span class="k">await</span> <span class="n">monitor_take_profit</span><span class="p">(</span><span class="n">positions</span><span class="p">,</span> <span class="n">take_profit_config</span><span class="p">,</span> <span class="n">broker</span><span class="p">)</span>
 
     <span class="c1"># (Hook) 전략을 실행하고, 매매 지시를 반환합니다.</span>
@@ -447,6 +447,8 @@ document.write(`
     <span class="s1">&#39;open_market_time_margin&#39;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="c1"># 거래 시작 시간 조정 (초). 기본값 300(5분)</span>
 
     <span class="s1">&#39;close_market_time_margin&#39;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span> <span class="c1"># 거래 마감 시간 조정 (초). 기본값 300(5분)</span>
+
+    <span class="s1">&#39;test_trade&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="c1"># 모의 투자 환경 여부. 기본값 False(실거래)</span>
   <span class="p">}</span>
 
   <span class="k">return</span> <span class="n">config</span>
@@ -460,6 +462,7 @@ document.write(`
 <li><p>take_profit_config : 익절 조건을 등록합니다. 가격을 확인하는 주기는 위 <code class="docutils literal notranslate"><span class="pre">interval</span></code>과 같습니다.</p></li>
 <li><p>open_market_time_margin : 거래 시작시간을 조정하기 위해 사용됩니다. 지정된 시간 만큼 거래 시작 시간을 지연합니다.</p></li>
 <li><p>close_market_time_margin: 거래 종료시간을 조정하기 위해 사용됩니다. 지정된 시간 만큼 먼저 당일 거래를 마감합니다.</p></li>
+<li><p>test_trade: 모의투자 환경 여부. True로 설정하면 모의투자용 API key를 사용하여 모의투자 환경에서 거래를 진행합니다.</p></li>
 </ul>
 </section>
 <section id="on-market-open">
