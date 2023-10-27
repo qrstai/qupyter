@@ -6,7 +6,7 @@ Qupyter platform 에 작성한 전략을 배포하는 방법을 살펴보겠습�
 
 사용자가 직접 작성한 전략 코드를 준비합니다. 다음은 예제 전략코드입니다.
 
-### volatility_break.py
+### 5min_breakout_strategy.py
 
 ```python
 from typing import List
