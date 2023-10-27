@@ -286,8 +286,6 @@ class StockBroker:
         pass
 
 
-
-
     def get_account(self) -> Dict:
         """계좌 정보 조회
 
@@ -343,95 +341,3 @@ class StockBroker:
 
         """
         pass
-
-
-    def create_order(self, asset_code: str, price: int, quantity: int, side: int):
-        """신규 주문 생성
-
-        :param asset_code: 종목코드
-        :type asset_code: str
-
-        :param price: 주문가격
-        :type price: int
-
-        :param quantity: 주문수량
-        :type quantity: int
-
-        :param side: 매매구분 (1: 매도, 2: 매수)
-        :type side: int
-        """
-        self.stock_broker.create_order(
-            asset_code=asset_code,
-            price=price,
-            quantity=quantity,
-            side=side,
-        )
-
-
-    def update_order(self, org_order_id: int, asset_code: str, price: int, quantity: int):
-        """정정 주문
-
-        :param org_order_id: 원주문번호
-        :type org_order_id: str
-
-        :param asset_code: 종목코드
-        :type asset_code: str
-
-        :param price: 주문가격
-        :type price: int
-
-        :param quantity: 주문수량
-        :type quantity: int
-        """
-        self.stock_broker.update_order(
-            org_order_no=org_order_id,
-            asset_code=asset_code,
-            price=price,
-            quantity=quantity,
-        )
-
-
-    def cancel_order(self, order_id: int, asset_code: str, quantity: int):
-        """주문 취소
-
-        :param order_id: 주문번호
-        :type order_id: str
-
-        :param asset_code: 종목코드
-        :type asset_code: str
-
-        :param quantity: 주문수량
-        :type quantity: int
-        """
-        self.stock_broker.cancel_order(
-            org_order_no=order_id,
-            asset_code=asset_code,
-            quantity=quantity,
-        )
-
-
-    def get_positions(self) -> List:
-        """보유 포지션 조회
-
-        :return: 보유 포지션
-        :rtype: list of StockPosition
-        """
-        stock_positions = self.stock_broker.get_positions()
-
-        return stock_positions
-
-
-    def get_pending_orders(self) -> List:
-        """미체결 주문내역 조회
-
-        :return: 미체결 주문내역
-        :rtype: list of StockOrder
-        """
-        stock_pending_orders = self.stock_broker.get_pending_orders()
-
-        return stock_pending_orders
-
-
-    def get_orderbook(self, asset_code: str):
-        """ 최근 호가 데이터 획득 """
-        return
