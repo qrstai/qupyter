@@ -27,7 +27,6 @@ exclude_patterns = []
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_logo = '_static/images/logo/logo.png'
 html_static_path = ['_static']
 
 html_theme = 'pydata_sphinx_theme'
@@ -40,6 +39,10 @@ html_theme_options = {
         }
     ],
     'navbar_align': 'left',
+    'logo': {
+        'image_light': '/_static/qupyter-logo-black.png',
+        'image_dark': '/_static/qupyter-logo-white.png',
+    }
 }
 
 import os

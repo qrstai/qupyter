@@ -4,9 +4,8 @@ import datetime
 from typing import List, Dict, Optional
 
 
-
 class StockOrder:
-    """미체결 주문에 대한 class
+    """미체결 주문에 대한 class.
 
     :param order_id: 주문번호
     :type order_id: int
@@ -45,7 +44,6 @@ class StockOrder:
         self.order_time = order_time
         self.order_method = order_method
         self.current_price = current_price
-
 
 
 class StockPosition:
