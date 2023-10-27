@@ -193,38 +193,3 @@ async def handle_pending_positions(pending_orders: List[StockOrder], broker: Sto
     '''
     pass
 
-
-async def monitor_stop_loss(positions: List[StockPosition], stop_loss_config: Dict, broker: StockBroker):
-    '''손절 조건을 모니터링 합니다.
-
-    .. note::
-        이 hook을 구현하지 않은 경우의 기본 동작은 손절 조건에 해당하는 종목을 모두 시장가로 매도하는 것입니다.
-
-    :param positions: 보유 종목 리스트
-    :type positions: List of StockPosition
-
-    :param stop_loss_config: 손절 조건 설정
-    :type stop_loss_config: Dict
-
-    :param broker: 주식 거래를 위한 객체
-    :type broker: StockBroker
-    '''
-    pass
-
-
-async def monitor_take_profit(positions: List[StockPosition], take_profit_config: Dict, broker: StockBroker):
-    ''' 익절 조건을 모니터링 합니다.
-
-    .. note::
-        이 hook을 구현하지 않은 경우의 기본 동작은 익절 조건에 해당하는 종목을 모두 시장가로 매도하는 것입니다.
-
-    :param positions: 보유 종목 리스트
-    :type positions: List of StockPosition
-
-    :param take_profit_config: 익절 조건 설정
-    :type take_profit_config: Dict
-
-    :param broker: 주식 거래를 위한 객체
-    :type broker: StockBroker
-    '''
-    pass
