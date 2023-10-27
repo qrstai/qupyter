@@ -4,116 +4,69 @@ Qupyter platform 에 작성한 전략을 배포하는 방법을 살펴보겠습�
 
 ## 전략 코드 준비
 
-사용자가 직접 작성한 전략 코드를 준비합니다. 다음은 변동성 돌파 전략을 구현한 예제 코드입니다.
+사용자가 직접 작성한 전략 코드를 준비합니다. 다음은 예제 전략코드입니다.
 
 ### volatility_break.py
 
 ```python
-import FinanceDataReader as fdr
-from datetime import timedelta, datetime
+from typing import List
+import datetime
+import time
 
 
-async def on_initialize():
-    return {
-        'interval': 30, # 거래 주기: 30초
-    }
+async def trade_func(account_info, pending_orders, positions, broker):
+    """
+    전략에 의한 매매 지시 목록을 생성합니다
 
+    전략: 최근 5분봉의 저가를 하향 돌파시 매수, 고가를 상향 돌파시 매도
+    """
 
-async def on_market_open(account_info, pending_orders, positions, broker):
-    """ 장 시작 시 보유 중인 모든 종목을 매도 """
-    result = []
-    asset_codes = list(map(lambda p: p.asset_code, positions))
-    price_df = broker.get_price_for_multiple_stocks(asset_codes)
+    # 현재 시간을 데이터 조회 기준 분봉으로 변환
+    current_time = datetime.datetime.now().replace(second=0, microsecond=0)
 
-    for p in positions:
-        if p.quantity > 0:
-            current_price = price_df['current_price'][p.asset_code]
-            result.append(( p.asset_code, current_price, p.quantity * -1 ))
+    asset_code = 'A005930'  # 거래 종목 코드 (삼성전자)
+    orders = []  # 매매 지시 내역
 
-    return result
+    # 증권사 함수를 활용하여 현재가 조회
+    current_data_df = broker.get_price(asset_code=asset_code)
+    current_price = current_data_df.iloc[0]['current_price']
 
+    # 증권사 함수를 활용하여 1분봉 데이터 조회
+    minute_data_df = broker.get_historical_minute_data(asset_code=asset_code, interval=1)
 
-async def on_market_close(account_info, pending_orders, positions, broker):
-    print("on_market_close")
+    # 최근 5분봉의 고가와 저가 획득
+    range_df = minute_data_df[minute_data_df.index < current_time].tail(5)
+    range_high = range_df['high'].max()
+    range_low = range_df['low'].min()
 
-
-async def trade_func(user_account, pending_orders, positions, broker):
-    now = datetime.now()
-    yesterday = now - timedelta(days=1)
-
-    target_asset_codes = [
-        '005930', # 삼성전자
-        '005380', # 현대자동차
-    ]
-
-
-    def __has_position(asset_code):
-        """ 해당 종목을 보유중이거나 주문이 진행중인지 확인 """
+    # 현재가가 최근 5분봉의 고가를 상향 돌파한 경우, 1주 매도
+    if current_price > range_high:
+        # 포지션 보유 여부 확인
+        position_size = 0
         for p in positions:
-            if p.asset_code == asset_code and p.quantity > 0:
-                print(f'- in-position: {p.asset_name}({p.asset_code}) - {p.quantity}')
-                return True
+            if p.asset_code == asset_code:
+                position_size = p.quantity
+                break
 
-        for o in pending_orders:
-            if o.asset_code == asset_code and o.quantity > 0:
-                print(f'- in-pending-order: {p.asset_name}({p.asset_code}) - {p.quantity}')
-                return True
+        # 포지션이 있는 경우, 1주 매도를 매매 지시 수량(음수)으로 지정
+        if position_size > 0:
+            sell_size = -1
+            orders.append((asset_code, current_price, sell_size))
 
-        return False
+    # 현재가가 최근 5분봉의 저가를 하향 돌파한 경우, 1주 매수
+    elif current_price < range_low:
+        # 현금 주문 가능 금액 조회
+        investable_cash = account_info['investable_cash']
 
+        # 매매 수수료(0.015%)를 포함한 1주 매수시 소요되는 금액 확인
+        buy_size = 1
+        buy_amount = int(current_price * buy_size * (1 + 0.00015))
 
-    result = []
-    total_balance = user_account['total_balance'] * 0.8
-    price_df = broker.get_price_for_multiple_stocks(target_asset_codes)
+        # 매수 가능한 현금이 있는 경우, 1주 매수를 매매 지시 수량(양수)으로 지정
+        if investable_cash > buy_amount:
+            orders.append((asset_code, current_price, buy_size))
 
-    for asset_code in target_asset_codes:
-        if not __has_position(asset_code):
-            read_start = (yesterday - timedelta(days=7)).strftime('%Y-%m-%d')
-            read_end = yesterday.strftime('%Y-%m-%d')
-
-            # finance-datareader 에서 오늘을 제외한 최근 7거래일의 가격 정보를 가져온다.
-            df = fdr.DataReader(asset_code, read_start, read_end)
-            if df is None or len(df) == 0:
-                print('Error: yesterday price data not available')
-                continue
-
-            yesterday_series = df.iloc[-1]
-
-            # 마지막 거래일의 가격 변동폭 (고가-저가) 을 구한다.
-            yesterday_range = yesterday_series['High'] - yesterday_series['Low']
-
-            # 오늘 시가를 구한다.
-            today_open = price_df['open_price'][asset_code]
-
-            # 진입 조건 강도 조절을 위한 상수
-            k = 0.5
-
-            # 목표가격 = 오늘 시가 + 어제의 변동폭 * 상수
-            target_price = today_open + yesterday_range * k
-
-            # 현재가격
-            current_price = price_df['current_price'][asset_code]
-
-            print(f"{asset_code} - today_open:{today_open} yesterday_range:{yesterday_range} k:{k}", end="")
-            print(f" target_price:{target_price} current_price:{current_price}")
-
-            # 현재 가격이 목표가격에 도달한 경우 진입한다
-            if current_price >= target_price:
-                budget = int(total_balance / len(target_asset_codes))
-                quantity = int(budget / current_price)
-
-                if quantity > 0:
-                    result.append((asset_code, current_price, quantity))
-                else:
-                    print(f'{asset_code}: 주문 할 자금이 부족합니다. 가격:{current_price} 예산:{budget}')
-
-    for p in positions:
-        if p.quantity > 0:
-            print(f"{p.asset_name}({p.asset_code}) : {p.current_pnl} ({p.current_pnl_pct}%)", end=" ")
-            print(f"현재가={p.current_price} 평단가={p.average_purchase_price} 수수료={p.commission}", end=" ")
-            print(f"세금={p.tax} 신용이자={p.loan_interest}")
-
-    return result
+    return orders
 ```
 
 전략코드 실행에 필요한 package를 requirements.txt에 나열합니다
@@ -122,7 +75,6 @@ async def trade_func(user_account, pending_orders, positions, broker):
 
 ```text
 finance-datareader==0.9.50
-bs4==0.0.1
 ```
 
 ## 배포
@@ -149,10 +101,10 @@ Options:
 아래와 같이 실행하여 배포를 진행합니다.
 
 ```bash
-jovyan@jupyter-kghoon:~/strategy2$ qup deploy ./volatility_break.py
+jovyan@jupyter-kghoon:~/strategy2$ qup deploy ./5min_breakout_strategy.py
 START DEPLOYMENT
-- strategy_name: volatility-break
-- entry_filename: ./volatility_break.py
+- strategy_name: 5min-breakout-strategy
+- entry_filename: ./5min_breakout_strategy.py
 
 done. kghoon_7e888d06.zip
 Create new pod...
@@ -169,7 +121,7 @@ jovyan@jupyter-kghoon:~/strategy2$
 ```bash
 jovyan@jupyter-kghoon:~/strategy2$ qup list
 STRATEGY           DEPLOYMENT ID                      STATUS     CREATED AT
-volatility-break   kghoon-volatility-break-zfclnmrp   Running    2023-10-19 06:49:28
+5min-breakout-strategy   kghoon-5min-breakout-strategy-zfclnmrp   Running    2023-10-19 06:49:28
 jovyan@jupyter-kghoon:~/strategy2$
 ```
 
@@ -191,7 +143,7 @@ Options:
 `-f` 옵션을 사용하면 로그를 실시간으로 tailing 할 수 있습니다.
 
 ```bash
-jovyan@jupyter-kghoon:~/strategy2$ qup logs kghoon-volatility-break-zfclnmrp
+jovyan@jupyter-kghoon:~/strategy2$ qup logs kghoon-5min-breakout-strategy-zfclnmrp
 Collecting finance-datareader==0.9.50
   Downloading finance_datareader-0.9.50-py3-none-any.whl (19 kB)
 Collecting bs4==0.0.1

@@ -5,42 +5,59 @@ Qupyter engine은 다음과 같은 순서로 동작합니다.
 
 ```python
 async def run():
-  # (Hook) 초기화를 진행합니다. 필요한 설정 값을 반환합니다.
-  config = await on_initialize()
+  async def trade_func(account_info, pending_orders, positions, broker):
+    """
+    전략에 의한 매매 지시 목록을 생성합니다
 
-  # 사용자가 반환 한 설정 값을 적용합니다
-  update_config(config)
+    전략: 최근 5분봉의 저가를 하향 돌파시 매수, 고가를 상향 돌파시 매도
+    """
 
-  # (Hook) 당일 거래 시작 시 `on_market_open` hook을 호출합니다.
-  trade_signals = await on_market_open(account_info, pending_orders, positions, broker)
+    # 현재 시간을 데이터 조회 기준 분봉으로 변환
+    current_time = datetime.datetime.now().replace(second=0, microsecond=0)
 
-  # 증권사 API를 통해 매매 지시를 실행합니다.
-  execute_trades(trade_signals)
+    asset_code = 'A005930'  # 거래 종목 코드 (삼성전자)
+    orders = []  # 매매 지시 내역
 
-  while is_trading_time:
-    # (Hook) 미체결 주문을 처리합니다
-    await handle_pending_positions(pending_orders, broker)
+    # 증권사 함수를 활용하여 현재가 조회
+    current_data_df = broker.get_price(asset_code=asset_code)
+    current_price = current_data_df.iloc[0]['current_price']
 
-    # 손절 조건이 설정 된 경우 확인하고 처리합니다.
-    await monitor_stop_loss(positions, stop_loss_config, broker)
+    # 증권사 함수를 활용하여 1분봉 데이터 조회
+    minute_data_df = broker.get_historical_minute_data(asset_code=asset_code, interval=1)
 
-    # 익절 조건을 설정 된 경우 확인하고 처리합니다.
-    await monitor_take_profit(positions, take_profit_config, broker)
+    # 최근 5분봉의 고가와 저가 획득
+    range_df = minute_data_df[minute_data_df.index < current_time].tail(5)
+    range_high = range_df['high'].max()
+    range_low = range_df['low'].min()
 
-    # (Hook) 전략을 실행하고, 매매 지시를 반환합니다.
-    trade_signals = await trade_func(account_info, pending_orders, positions, broker)
+    # 현재가가 최근 5분봉의 고가를 상향 돌파한 경우, 1주 매도
+    if current_price > range_high:
+        # 포지션 보유 여부 확인
+        position_size = 0
+        for p in positions:
+            if p.asset_code == asset_code:
+                position_size = p.quantity
+                break
 
-    # 증권사 API를 통해 사용자 매매 지지를 실행합니다.
-    execute_trades(trade_signals)
+        # 포지션이 있는 경우, 1주 매도를 매매 지시 수량(음수)으로 지정
+        if position_size > 0:
+            sell_size = -1
+            orders.append((asset_code, current_price, sell_size))
 
-    # 정해 진 interval 만큼 대기합니다.
-    sleep(interval)
+    # 현재가가 최근 5분봉의 저가를 하향 돌파한 경우, 1주 매수
+    elif current_price < range_low:
+        # 현금 주문 가능 금액 조회
+        investable_cash = account_info['investable_cash']
 
-  # (Hook) 당일 거래 종료 시 `on_market_close` hook을 호출합니다.
-  trade_signals = await on_market_open(account_info, pending_orders, positions, broker)
+        # 매매 수수료(0.015%)를 포함한 1주 매수시 소요되는 금액 확인
+        buy_size = 1
+        buy_amount = int(current_price * buy_size * (1 + 0.00015))
 
-    # 증권사 API를 통해 매매 지시를 실행합니다.
-  execute_trades(trade_signals)
+        # 매수 가능한 현금이 있는 경우, 1주 매수를 매매 지시 수량(양수)으로 지정
+        if investable_cash > buy_amount:
+            orders.append((asset_code, current_price, buy_size))
+
+    return orders
 ```
 
 ## Hooks

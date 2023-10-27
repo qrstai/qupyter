@@ -387,114 +387,67 @@ document.write(`
 <p>Qupyter platform 에 작성한 전략을 배포하는 방법을 살펴보겠습니다.</p>
 <section id="id2">
 <h2>전략 코드 준비<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>사용자가 직접 작성한 전략 코드를 준비합니다. 다음은 변동성 돌파 전략을 구현한 예제 코드입니다.</p>
+<p>사용자가 직접 작성한 전략 코드를 준비합니다. 다음은 예제 전략코드입니다.</p>
 <section id="volatility-break-py">
 <h3>volatility_break.py<a class="headerlink" href="#volatility-break-py" title="Permalink to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">FinanceDataReader</span> <span class="k">as</span> <span class="nn">fdr</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span><span class="p">,</span> <span class="n">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">time</span>
 
 
-<span class="k">async</span> <span class="k">def</span> <span class="nf">on_initialize</span><span class="p">():</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s1">&#39;interval&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="c1"># 거래 주기: 30초</span>
-    <span class="p">}</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">trade_func</span><span class="p">(</span><span class="n">account_info</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">broker</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    전략에 의한 매매 지시 목록을 생성합니다</span>
 
+<span class="sd">    전략: 최근 5분봉의 저가를 하향 돌파시 매수, 고가를 상향 돌파시 매도</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-<span class="k">async</span> <span class="k">def</span> <span class="nf">on_market_open</span><span class="p">(</span><span class="n">account_info</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">broker</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; 장 시작 시 보유 중인 모든 종목을 매도 &quot;&quot;&quot;</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">asset_codes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="n">p</span><span class="o">.</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">positions</span><span class="p">))</span>
-    <span class="n">price_df</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="n">get_price_for_multiple_stocks</span><span class="p">(</span><span class="n">asset_codes</span><span class="p">)</span>
+    <span class="c1"># 현재 시간을 데이터 조회 기준 분봉으로 변환</span>
+    <span class="n">current_time</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">second</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">microsecond</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">positions</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">quantity</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">current_price</span> <span class="o">=</span> <span class="n">price_df</span><span class="p">[</span><span class="s1">&#39;current_price&#39;</span><span class="p">][</span><span class="n">p</span><span class="o">.</span><span class="n">asset_code</span><span class="p">]</span>
-            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">((</span> <span class="n">p</span><span class="o">.</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">current_price</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">quantity</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span> <span class="p">))</span>
+    <span class="n">asset_code</span> <span class="o">=</span> <span class="s1">&#39;A005930&#39;</span>  <span class="c1"># 거래 종목 코드 (삼성전자)</span>
+    <span class="n">orders</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># 매매 지시 내역</span>
 
-    <span class="k">return</span> <span class="n">result</span>
+    <span class="c1"># 증권사 함수를 활용하여 현재가 조회</span>
+    <span class="n">current_data_df</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="n">get_price</span><span class="p">(</span><span class="n">asset_code</span><span class="o">=</span><span class="n">asset_code</span><span class="p">)</span>
+    <span class="n">current_price</span> <span class="o">=</span> <span class="n">current_data_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;current_price&#39;</span><span class="p">]</span>
 
+    <span class="c1"># 증권사 함수를 활용하여 1분봉 데이터 조회</span>
+    <span class="n">minute_data_df</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="n">get_historical_minute_data</span><span class="p">(</span><span class="n">asset_code</span><span class="o">=</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="k">async</span> <span class="k">def</span> <span class="nf">on_market_close</span><span class="p">(</span><span class="n">account_info</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">broker</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;on_market_close&quot;</span><span class="p">)</span>
+    <span class="c1"># 최근 5분봉의 고가와 저가 획득</span>
+    <span class="n">range_df</span> <span class="o">=</span> <span class="n">minute_data_df</span><span class="p">[</span><span class="n">minute_data_df</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">current_time</span><span class="p">]</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">range_high</span> <span class="o">=</span> <span class="n">range_df</span><span class="p">[</span><span class="s1">&#39;high&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">range_low</span> <span class="o">=</span> <span class="n">range_df</span><span class="p">[</span><span class="s1">&#39;low&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
 
-
-<span class="k">async</span> <span class="k">def</span> <span class="nf">trade_func</span><span class="p">(</span><span class="n">user_account</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">broker</span><span class="p">):</span>
-    <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
-    <span class="n">yesterday</span> <span class="o">=</span> <span class="n">now</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-
-    <span class="n">target_asset_codes</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="s1">&#39;005930&#39;</span><span class="p">,</span> <span class="c1"># 삼성전자</span>
-        <span class="s1">&#39;005380&#39;</span><span class="p">,</span> <span class="c1"># 현대자동차</span>
-    <span class="p">]</span>
-
-
-    <span class="k">def</span> <span class="nf">__has_position</span><span class="p">(</span><span class="n">asset_code</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; 해당 종목을 보유중이거나 주문이 진행중인지 확인 &quot;&quot;&quot;</span>
+    <span class="c1"># 현재가가 최근 5분봉의 고가를 상향 돌파한 경우, 1주 매도</span>
+    <span class="k">if</span> <span class="n">current_price</span> <span class="o">&gt;</span> <span class="n">range_high</span><span class="p">:</span>
+        <span class="c1"># 포지션 보유 여부 확인</span>
+        <span class="n">position_size</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">positions</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">asset_code</span> <span class="o">==</span> <span class="n">asset_code</span> <span class="ow">and</span> <span class="n">p</span><span class="o">.</span><span class="n">quantity</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;- in-position: </span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">asset_name</span><span class="si">}</span><span class="s1">(</span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">asset_code</span><span class="si">}</span><span class="s1">) - </span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">quantity</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-                <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">asset_code</span> <span class="o">==</span> <span class="n">asset_code</span><span class="p">:</span>
+                <span class="n">position_size</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">quantity</span>
+                <span class="k">break</span>
 
-        <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">pending_orders</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">o</span><span class="o">.</span><span class="n">asset_code</span> <span class="o">==</span> <span class="n">asset_code</span> <span class="ow">and</span> <span class="n">o</span><span class="o">.</span><span class="n">quantity</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;- in-pending-order: </span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">asset_name</span><span class="si">}</span><span class="s1">(</span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">asset_code</span><span class="si">}</span><span class="s1">) - </span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">quantity</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-                <span class="k">return</span> <span class="kc">True</span>
+        <span class="c1"># 포지션이 있는 경우, 1주 매도를 매매 지시 수량(음수)으로 지정</span>
+        <span class="k">if</span> <span class="n">position_size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sell_size</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="n">orders</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">current_price</span><span class="p">,</span> <span class="n">sell_size</span><span class="p">))</span>
 
-        <span class="k">return</span> <span class="kc">False</span>
+    <span class="c1"># 현재가가 최근 5분봉의 저가를 하향 돌파한 경우, 1주 매수</span>
+    <span class="k">elif</span> <span class="n">current_price</span> <span class="o">&lt;</span> <span class="n">range_low</span><span class="p">:</span>
+        <span class="c1"># 현금 주문 가능 금액 조회</span>
+        <span class="n">investable_cash</span> <span class="o">=</span> <span class="n">account_info</span><span class="p">[</span><span class="s1">&#39;investable_cash&#39;</span><span class="p">]</span>
 
+        <span class="c1"># 매매 수수료(0.015%)를 포함한 1주 매수시 소요되는 금액 확인</span>
+        <span class="n">buy_size</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">buy_amount</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">current_price</span> <span class="o">*</span> <span class="n">buy_size</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.00015</span><span class="p">))</span>
 
-    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">total_balance</span> <span class="o">=</span> <span class="n">user_account</span><span class="p">[</span><span class="s1">&#39;total_balance&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.8</span>
-    <span class="n">price_df</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="n">get_price_for_multiple_stocks</span><span class="p">(</span><span class="n">target_asset_codes</span><span class="p">)</span>
+        <span class="c1"># 매수 가능한 현금이 있는 경우, 1주 매수를 매매 지시 수량(양수)으로 지정</span>
+        <span class="k">if</span> <span class="n">investable_cash</span> <span class="o">&gt;</span> <span class="n">buy_amount</span><span class="p">:</span>
+            <span class="n">orders</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">current_price</span><span class="p">,</span> <span class="n">buy_size</span><span class="p">))</span>
 
-    <span class="k">for</span> <span class="n">asset_code</span> <span class="ow">in</span> <span class="n">target_asset_codes</span><span class="p">:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">__has_position</span><span class="p">(</span><span class="n">asset_code</span><span class="p">):</span>
-            <span class="n">read_start</span> <span class="o">=</span> <span class="p">(</span><span class="n">yesterday</span> <span class="o">-</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">7</span><span class="p">))</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
-            <span class="n">read_end</span> <span class="o">=</span> <span class="n">yesterday</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
-
-            <span class="c1"># finance-datareader 에서 오늘을 제외한 최근 7거래일의 가격 정보를 가져온다.</span>
-            <span class="n">df</span> <span class="o">=</span> <span class="n">fdr</span><span class="o">.</span><span class="n">DataReader</span><span class="p">(</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">read_start</span><span class="p">,</span> <span class="n">read_end</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">df</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: yesterday price data not available&#39;</span><span class="p">)</span>
-                <span class="k">continue</span>
-
-            <span class="n">yesterday_series</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-
-            <span class="c1"># 마지막 거래일의 가격 변동폭 (고가-저가) 을 구한다.</span>
-            <span class="n">yesterday_range</span> <span class="o">=</span> <span class="n">yesterday_series</span><span class="p">[</span><span class="s1">&#39;High&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">yesterday_series</span><span class="p">[</span><span class="s1">&#39;Low&#39;</span><span class="p">]</span>
-
-            <span class="c1"># 오늘 시가를 구한다.</span>
-            <span class="n">today_open</span> <span class="o">=</span> <span class="n">price_df</span><span class="p">[</span><span class="s1">&#39;open_price&#39;</span><span class="p">][</span><span class="n">asset_code</span><span class="p">]</span>
-
-            <span class="c1"># 진입 조건 강도 조절을 위한 상수</span>
-            <span class="n">k</span> <span class="o">=</span> <span class="mf">0.5</span>
-
-            <span class="c1"># 목표가격 = 오늘 시가 + 어제의 변동폭 * 상수</span>
-            <span class="n">target_price</span> <span class="o">=</span> <span class="n">today_open</span> <span class="o">+</span> <span class="n">yesterday_range</span> <span class="o">*</span> <span class="n">k</span>
-
-            <span class="c1"># 현재가격</span>
-            <span class="n">current_price</span> <span class="o">=</span> <span class="n">price_df</span><span class="p">[</span><span class="s1">&#39;current_price&#39;</span><span class="p">][</span><span class="n">asset_code</span><span class="p">]</span>
-
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">asset_code</span><span class="si">}</span><span class="s2"> - today_open:</span><span class="si">{</span><span class="n">today_open</span><span class="si">}</span><span class="s2"> yesterday_range:</span><span class="si">{</span><span class="n">yesterday_range</span><span class="si">}</span><span class="s2"> k:</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; target_price:</span><span class="si">{</span><span class="n">target_price</span><span class="si">}</span><span class="s2"> current_price:</span><span class="si">{</span><span class="n">current_price</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-            <span class="c1"># 현재 가격이 목표가격에 도달한 경우 진입한다</span>
-            <span class="k">if</span> <span class="n">current_price</span> <span class="o">&gt;=</span> <span class="n">target_price</span><span class="p">:</span>
-                <span class="n">budget</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">total_balance</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_asset_codes</span><span class="p">))</span>
-                <span class="n">quantity</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">budget</span> <span class="o">/</span> <span class="n">current_price</span><span class="p">)</span>
-
-                <span class="k">if</span> <span class="n">quantity</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">current_price</span><span class="p">,</span> <span class="n">quantity</span><span class="p">))</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">asset_code</span><span class="si">}</span><span class="s1">: 주문 할 자금이 부족합니다. 가격:</span><span class="si">{</span><span class="n">current_price</span><span class="si">}</span><span class="s1"> 예산:</span><span class="si">{</span><span class="n">budget</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">positions</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">quantity</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">asset_name</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">asset_code</span><span class="si">}</span><span class="s2">) : </span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">current_pnl</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">current_pnl_pct</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;현재가=</span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">current_price</span><span class="si">}</span><span class="s2"> 평단가=</span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">average_purchase_price</span><span class="si">}</span><span class="s2"> 수수료=</span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">commission</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;세금=</span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">tax</span><span class="si">}</span><span class="s2"> 신용이자=</span><span class="si">{</span><span class="n">p</span><span class="o">.</span><span class="n">loan_interest</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">orders</span>
 </pre></div>
 </div>
 <p>전략코드 실행에 필요한 package를 requirements.txt에 나열합니다</p>
@@ -502,7 +455,6 @@ document.write(`
 <section id="requirements-txt">
 <h3>requirements.txt<a class="headerlink" href="#requirements-txt" title="Permalink to this heading">#</a></h3>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>finance-datareader==0.9.50
-bs4==0.0.1
 </pre></div>
 </div>
 </section>
@@ -526,10 +478,10 @@ Options:
 <p>작성한 전략 파일을 인자로 전달합니다. <code class="docutils literal notranslate"><span class="pre">-n</span></code> 옵션을 사용해 전략의 이름을 따로 지정할 수 있습니다.
 지정하지 않는 경우 파일이름을 전략 이름으로 사용합니다.</p>
 <p>아래와 같이 실행하여 배포를 진행합니다.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jovyan@jupyter-kghoon:~/strategy2$<span class="w"> </span>qup<span class="w"> </span>deploy<span class="w"> </span>./volatility_break.py
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jovyan@jupyter-kghoon:~/strategy2$<span class="w"> </span>qup<span class="w"> </span>deploy<span class="w"> </span>./5min_breakout_strategy.py
 START<span class="w"> </span>DEPLOYMENT
--<span class="w"> </span>strategy_name:<span class="w"> </span>volatility-break
--<span class="w"> </span>entry_filename:<span class="w"> </span>./volatility_break.py
+-<span class="w"> </span>strategy_name:<span class="w"> </span>5min-breakout-strategy
+-<span class="w"> </span>entry_filename:<span class="w"> </span>./5min_breakout_strategy.py
 
 <span class="k">done</span>.<span class="w"> </span>kghoon_7e888d06.zip
 Create<span class="w"> </span>new<span class="w"> </span>pod...
@@ -544,7 +496,7 @@ jovyan@jupyter-kghoon:~/strategy2$
 <p>배포가 완료되면 아래와 같이 <code class="docutils literal notranslate"><span class="pre">qup</span> <span class="pre">list</span></code> 명령을 사용해서 배포된 전략 목록에서 확인 할 수 있습니다.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jovyan@jupyter-kghoon:~/strategy2$<span class="w"> </span>qup<span class="w"> </span>list
 STRATEGY<span class="w">           </span>DEPLOYMENT<span class="w"> </span>ID<span class="w">                      </span>STATUS<span class="w">     </span>CREATED<span class="w"> </span>AT
-volatility-break<span class="w">   </span>kghoon-volatility-break-zfclnmrp<span class="w">   </span>Running<span class="w">    </span><span class="m">2023</span>-10-19<span class="w"> </span><span class="m">06</span>:49:28
+5min-breakout-strategy<span class="w">   </span>kghoon-5min-breakout-strategy-zfclnmrp<span class="w">   </span>Running<span class="w">    </span><span class="m">2023</span>-10-19<span class="w"> </span><span class="m">06</span>:49:28
 jovyan@jupyter-kghoon:~/strategy2$
 </pre></div>
 </div>
@@ -563,7 +515,7 @@ Options:
 </div>
 <p>로그 확인 시에는 <code class="docutils literal notranslate"><span class="pre">qup</span> <span class="pre">list</span></code>에서 확인 할 수 있는 <code class="docutils literal notranslate"><span class="pre">DEPLOYMENT</span> <span class="pre">ID</span></code> 를 인자로 전달합니다.
 <code class="docutils literal notranslate"><span class="pre">-f</span></code> 옵션을 사용하면 로그를 실시간으로 tailing 할 수 있습니다.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jovyan@jupyter-kghoon:~/strategy2$<span class="w"> </span>qup<span class="w"> </span>logs<span class="w"> </span>kghoon-volatility-break-zfclnmrp
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jovyan@jupyter-kghoon:~/strategy2$<span class="w"> </span>qup<span class="w"> </span>logs<span class="w"> </span>kghoon-5min-breakout-strategy-zfclnmrp
 Collecting<span class="w"> </span>finance-datareader<span class="o">==</span><span class="m">0</span>.9.50
 <span class="w">  </span>Downloading<span class="w"> </span>finance_datareader-0.9.50-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">19</span><span class="w"> </span>kB<span class="o">)</span>
 Collecting<span class="w"> </span><span class="nv">bs4</span><span class="o">==</span><span class="m">0</span>.0.1
