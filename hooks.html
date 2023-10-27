@@ -416,44 +416,6 @@ document.write(`
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="qrst.hooks.monitor_stop_loss">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qrst.hooks.</span></span><span class="sig-name descname"><span class="pre">monitor_stop_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">positions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="brokerage.html#qrst.stock_broker.StockPosition" title="qrst.stock_broker.StockPosition"><span class="pre">StockPosition</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_loss_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">broker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="brokerage.html#qrst.stock_broker.StockBroker" title="qrst.stock_broker.StockBroker"><span class="pre">StockBroker</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qrst.hooks.monitor_stop_loss" title="Permalink to this definition">#</a></dt>
-<dd><p>손절 조건을 모니터링 합니다.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>이 hook을 구현하지 않은 경우의 기본 동작은 손절 조건에 해당하는 종목을 모두 시장가로 매도하는 것입니다.</p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>positions</strong> (<em>List</em><em> of </em><a class="reference internal" href="brokerage.html#qrst.stock_broker.StockPosition" title="qrst.stock_broker.StockPosition"><em>StockPosition</em></a>) – 보유 종목 리스트</p></li>
-<li><p><strong>stop_loss_config</strong> (<em>Dict</em>) – 손절 조건 설정</p></li>
-<li><p><strong>broker</strong> (<a class="reference internal" href="brokerage.html#qrst.stock_broker.StockBroker" title="qrst.stock_broker.StockBroker"><em>StockBroker</em></a>) – 주식 거래를 위한 객체</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="qrst.hooks.monitor_take_profit">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qrst.hooks.</span></span><span class="sig-name descname"><span class="pre">monitor_take_profit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">positions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="brokerage.html#qrst.stock_broker.StockPosition" title="qrst.stock_broker.StockPosition"><span class="pre">StockPosition</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">take_profit_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">broker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="brokerage.html#qrst.stock_broker.StockBroker" title="qrst.stock_broker.StockBroker"><span class="pre">StockBroker</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qrst.hooks.monitor_take_profit" title="Permalink to this definition">#</a></dt>
-<dd><p>익절 조건을 모니터링 합니다.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>이 hook을 구현하지 않은 경우의 기본 동작은 익절 조건에 해당하는 종목을 모두 시장가로 매도하는 것입니다.</p>
-</div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>positions</strong> (<em>List</em><em> of </em><a class="reference internal" href="brokerage.html#qrst.stock_broker.StockPosition" title="qrst.stock_broker.StockPosition"><em>StockPosition</em></a>) – 보유 종목 리스트</p></li>
-<li><p><strong>take_profit_config</strong> (<em>Dict</em>) – 익절 조건 설정</p></li>
-<li><p><strong>broker</strong> (<a class="reference internal" href="brokerage.html#qrst.stock_broker.StockBroker" title="qrst.stock_broker.StockBroker"><em>StockBroker</em></a>) – 주식 거래를 위한 객체</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
 <dt class="sig sig-object py" id="qrst.hooks.on_initiailze">
 <em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qrst.hooks.</span></span><span class="sig-name descname"><span class="pre">on_initiailze</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#qrst.hooks.on_initiailze" title="Permalink to this definition">#</a></dt>
 <dd><p>사용자 전략 초기화.</p>
@@ -663,8 +625,6 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.handle_pending_positions"><code class="docutils literal notranslate"><span class="pre">handle_pending_positions()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.monitor_stop_loss"><code class="docutils literal notranslate"><span class="pre">monitor_stop_loss()</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.monitor_take_profit"><code class="docutils literal notranslate"><span class="pre">monitor_take_profit()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.on_initiailze"><code class="docutils literal notranslate"><span class="pre">on_initiailze()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.on_market_closed"><code class="docutils literal notranslate"><span class="pre">on_market_closed()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.on_market_opened"><code class="docutils literal notranslate"><span class="pre">on_market_opened()</span></code></a></li>
