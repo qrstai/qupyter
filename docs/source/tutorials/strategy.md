@@ -39,7 +39,7 @@ async def run():
   # (Hook) 당일 거래 종료 시 `on_market_close` hook을 호출합니다.
   trade_signals = await on_market_close(account_info, pending_orders, positions, broker)
 
-    # 증권사 API를 통해 매매 지시를 실행합니다.
+  # 증권사 API를 통해 매매 지시를 실행합니다.
   execute_trades(trade_signals)
 ```
 
