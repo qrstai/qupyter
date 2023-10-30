@@ -467,35 +467,42 @@ document.write(`
 </section>
 <section id="on-market-open">
 <h3>on_market_open<a class="headerlink" href="#on-market-open" title="Permalink to this heading">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>파라미터와 반환값 정보는 <a class="reference internal" href="../hooks.html#qrst.hooks.on_market_open" title="qrst.hooks.on_market_open"><span class="xref myst py py-func">Hooks - on_market_open</span></a> 문서를 참고하세요.</p>
+</div>
 <p>매일 거래 시작 시 가장 먼저 1회 호출 됩니다.</p>
-<p>이 hook이 호출되는 시간은 당일 장 거래 시작 시간 (보통 9시, 수능일은 10시) + 사용자가 설정 한 <code class="docutils literal notranslate"><span class="pre">open_market_time_margin</span></code> 초를 더한 시간입니다.
-예를 들어 사용자가 <code class="docutils literal notranslate"><span class="pre">open_market_time_margin</span></code>을 300(5분)으로 설정한 경우, 9시 5분에 <code class="docutils literal notranslate"><span class="pre">on_market_open</span></code>이 호출됩니다.</p>
-<section id="id2">
-<h4>on_market_open 사용 시 주의 사항<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h4>
+<p>이 hook이 호출되는 시간은 당일 장 거래 시작 시간 (보통 9시, 수능일은 10시) + 사용자가 설정 한 <code class="docutils literal notranslate"><span class="pre">open_market_time_margin</span></code> 초를 더한 시간입니다. 예를 들어 사용자가 <code class="docutils literal notranslate"><span class="pre">open_market_time_margin</span></code>을 300(5분)으로 설정한 경우, 9시 5분에 <code class="docutils literal notranslate"><span class="pre">on_market_open</span></code>이 호출됩니다.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <ul class="simple">
 <li><p>처음 전략 실행 또는 업데이트 시 시간이 위 호출 시간 보다 5분이 경과한 경우, 이 hook은 호출되지 않습니다.</p></li>
 <li><p>이 hook이 호출되고 5분 이내에 전략을 업데이트하게 되면 이 hook은 다시 호출 됩니다.</p></li>
 </ul>
-</section>
+</div>
 </section>
 <section id="on-market-close">
 <h3>on_market_close<a class="headerlink" href="#on-market-close" title="Permalink to this heading">#</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>파라미터와 반환값 정보는 <a class="reference internal" href="../hooks.html#qrst.hooks.on_market_close" title="qrst.hooks.on_market_close"><span class="xref myst py py-func">Hooks - on_market_close</span></a> 문서를 참고하세요.</p>
+</div>
 <p>매일 거래 종료 시 마지막에 1회 호출 됩니다.</p>
 <p>이 hook이 호출되고 나면 해당일에는 더이상 <code class="docutils literal notranslate"><span class="pre">trade_func</span></code> 가 호출되지 않습니다.</p>
-<p>이 hook이 호출되는 시간은 당일 장 종료 전 동시 호가 시작 시간 (보통 3시 20분) 에서 사용자가 설정한 <code class="docutils literal notranslate"><span class="pre">close_market_time_margin</span></code> 초를 뺀 시간입니다.
-예를 들어 사용자가 <code class="docutils literal notranslate"><span class="pre">close_market_time_margin</span></code>을 600(10분)으로 설정한 경우, 3시 10분에 <code class="docutils literal notranslate"><span class="pre">on_market_close</span></code> hook이 호출됩니다.</p>
-<section id="id3">
-<h4>on_market_close 사용 시 주의 사항<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h4>
+<p>이 hook이 호출되는 시간은 당일 장 종료 전 동시 호가 시작 시간 (보통 3시 20분) 에서 사용자가 설정한 <code class="docutils literal notranslate"><span class="pre">close_market_time_margin</span></code> 초를 뺀 시간입니다.</p>
+<p>예를 들어 사용자가 <code class="docutils literal notranslate"><span class="pre">close_market_time_margin</span></code>을 600(10분)으로 설정한 경우, 3시 10분에 <code class="docutils literal notranslate"><span class="pre">on_market_close</span></code> hook이 호출됩니다.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <ul class="simple">
 <li><p>당일 동시 호가 시작 이후에 전략이 새로 배포되거나 업데이트 된 경우 이 hook은 호출되지 않습니다.</p></li>
 <li><p>이 hook이 호출되고 실제 동시호가 시작 시간 전에 전략을 업데이트하게 되면 이 hook은 다시 호출됩니다.</p></li>
 </ul>
-</section>
+</div>
 </section>
 <section id="trade-func">
 <h3>trade_func<a class="headerlink" href="#trade-func" title="Permalink to this heading">#</a></h3>
 <p>사용자 전략 코드를 구현합니다. 설정 된 주기마다 호출 되고 매매지시가 필요한 경우 응답으로 전달합니다.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">trade_func</span><span class="p">(</span><span class="n">account_info</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">broker</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">trade_func</span><span class="p">(</span><span class="n">account_info</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">StockOrder</span><span class="p">],</span> <span class="n">positions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">StockPosition</span><span class="p">],</span> <span class="n">broker</span><span class="p">:</span> <span class="n">StockBroker</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
 <span class="w">  </span><span class="sd">&quot;&quot;&quot;사용자 전략 코드 구현.</span>
 
 <span class="sd">  Args:</span>
@@ -516,6 +523,11 @@ document.write(`
     <span class="p">(</span> <span class="s1">&#39;A252670&#39;</span><span class="p">,</span> <span class="mi">2800</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span> <span class="p">),</span> <span class="c1"># KODEX 200 선물 인버스2X 1주를 2800원에 매도</span>
   <span class="p">]</span>
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>파라미터에 대한 자세한 설명은 <a class="reference internal" href="../hooks.html#qrst.hooks.trade_func" title="qrst.hooks.trade_func"><span class="xref myst py py-func">Hooks - trade_func()</span></a>
+문서를 참고하세요.</p>
 </div>
 </section>
 </section>
@@ -566,14 +578,8 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hooks">Hooks</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#on-initialize">on_initialize</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#on-market-open">on_market_open</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">on_market_open 사용 시 주의 사항</a></li>
-</ul>
-</li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#on-market-close">on_market_close</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">on_market_close 사용 시 주의 사항</a></li>
-</ul>
-</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#on-market-open">on_market_open</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#on-market-close">on_market_close</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trade-func">trade_func</a></li>
 </ul>
 </li>
