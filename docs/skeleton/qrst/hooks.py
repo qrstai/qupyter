@@ -48,7 +48,7 @@ async def on_initiailze() -> Dict:
     pass
 
 
-async def on_market_opened(account_info: Dict, pending_orders: List[StockOrder], positions: List[StockPosition], broker: StockBroker) -> List[Tuple[str, int, int]]:
+async def on_market_open(account_info: Dict, pending_orders: List[StockOrder], positions: List[StockPosition], broker: StockBroker) -> List[Tuple[str, int, int]]:
     '''매일 거래 시작 시 가장 먼저 1회 호출 됩니다.
 
     이 hook은 당일 장 거래 시작 시간 (보통 9시, 수능일은 10시)에
@@ -77,7 +77,7 @@ async def on_market_opened(account_info: Dict, pending_orders: List[StockOrder],
 
     .. code-block:: python
 
-        async def on_market_opened(account_info: Dict, pending_orders: List, positions: List, broker: StockBroker) -> List[Tuple[str, int, int]]:
+        async def on_market_open(account_info: Dict, pending_orders: List, positions: List, broker: StockBroker) -> List[Tuple[str, int, int]]:
             asset_codes = list(map(lambda x: x.asset_code, positions)))
             price_df = broker.get_price_for_multiple_stocks(asset_codes)
 
@@ -87,7 +87,7 @@ async def on_market_opened(account_info: Dict, pending_orders: List[StockOrder],
     pass
 
 
-async def on_market_closed(account_info: Dict, pending_orders: List[StockOrder], positions: List[StockPosition], broker: StockBroker) -> List[Tuple[str, int, int]]:
+async def on_market_close(account_info: Dict, pending_orders: List[StockOrder], positions: List[StockPosition], broker: StockBroker) -> List[Tuple[str, int, int]]:
     '''매일 거래 종료 시 마지막에 1회 호출 됩니다.
 
     이 hook이 호출되고 나면 해당일에는 더이상 trade_func 가 호출되지 않습니다.
@@ -119,7 +119,7 @@ async def on_market_closed(account_info: Dict, pending_orders: List[StockOrder],
 
     .. code-block:: python
 
-        async def on_market_closed(account_info: Dict, pending_orders: List, positions: List, broker: StockBroker) -> List[Tuple[str, int, int]]:
+        async def on_market_close(account_info: Dict, pending_orders: List, positions: List, broker: StockBroker) -> List[Tuple[str, int, int]]:
             asset_codes = list(map(lambda x: x.asset_code, positions)))
             price_df = broker.get_price_for_multiple_stocks(asset_codes)
 
