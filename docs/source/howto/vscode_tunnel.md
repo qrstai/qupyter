@@ -2,7 +2,7 @@
 
 JupyterLab은 강력한 도구이지만, 때로는 TextEditor만으로는 개발에 제한이 있을 수 있습니다. VS Code는 개발 환경을 더 풍부하게 만들어주며, Remote Tunnel을 통해 원격 서버 환경을 사용하여 개발할 수 있는 기능을 제공합니다. 이 문서에서는 VS Code의 Remote Tunnel을 Jupyter 플랫폼에 적용하는 방법을 설명합니다.
 
-## JupyterLab에서 Tunnel 생성하기
+## JupyterLab(Qupyter)에서 Tunnel 생성하기
 
 1. 먼저 VS Code CLI를 설치합니다. 다음 명령어를 사용하여 CLI를 다운로드하고 압축을 해제합니다:
 
@@ -46,7 +46,7 @@ Open this link in your browser https://vscode.dev/tunnel/jupyter-kghoon/home/jov
 
 5. 터미널에 출력된 주소를 웹 브라우저에서 열어주세요.
 
-## 로컬에 설치된 VS Code를 사용하여 접속하기
+## 로컬(PC)에 설치된 VS Code를 사용하여 접속하기
 
 Dev Containers extension을 사용하면 로컬에 설치 된 VS code를 사용해 위에서 생성한 터널에 접근할 수 있습니다.
 
