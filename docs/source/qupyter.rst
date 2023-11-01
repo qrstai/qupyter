@@ -2,19 +2,15 @@
 Qupyter SDK
 ===========
 
-qupyter.futures module
-----------------------
 
-.. automodule:: qupyter.futures
+qupyter.brokerage module
+------------------------
+.. automodule:: qupyter.brokerage
    :members:
-   :undoc-members:
    :show-inheritance:
 
-qupyter.stocks module
----------------------
-
-.. automodule:: qupyter.stocks
-   :members:
-   :undoc-members:
+qupyter.brokerage.ebest.EBestStockBroker class
+----------------------------------------------
+.. autoclass:: qupyter.brokerage.ebest.EBestStockBroker
+   :exclude-members:
    :show-inheritance:
-
