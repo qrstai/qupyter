@@ -6,4 +6,3 @@ API references
 
    qupyter
    hooks
-   brokerage

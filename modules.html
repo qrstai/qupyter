@@ -324,7 +324,6 @@ document.write(`
   <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="qupyter.html">Qupyter SDK</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hooks.html">Hooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="brokerage.html">Brokerage API</a></li>
 </ul>
 </div>
 </nav></div>
@@ -384,14 +383,21 @@ document.write(`
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="qupyter.html">Qupyter SDK</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="qupyter.html#module-qupyter.futures">qupyter.futures module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qupyter.html#qupyter.futures.get_ticker_list"><code class="docutils literal notranslate"><span class="pre">get_ticker_list()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qupyter.html#qupyter.futures.get_trade_event"><code class="docutils literal notranslate"><span class="pre">get_trade_event()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="qupyter.html#module-qupyter.brokerage">qupyter.brokerage module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockBroker"><code class="docutils literal notranslate"><span class="pre">StockBroker</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockBroker.get_account"><code class="docutils literal notranslate"><span class="pre">StockBroker.get_account()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockBroker.get_historical_daily_data"><code class="docutils literal notranslate"><span class="pre">StockBroker.get_historical_daily_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockBroker.get_historical_minute_data"><code class="docutils literal notranslate"><span class="pre">StockBroker.get_historical_minute_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockBroker.get_price"><code class="docutils literal notranslate"><span class="pre">StockBroker.get_price()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockBroker.get_price_for_multiple_stocks"><code class="docutils literal notranslate"><span class="pre">StockBroker.get_price_for_multiple_stocks()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="qupyter.html#module-qupyter.stocks">qupyter.stocks module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="qupyter.html#qupyter.stocks.get_ticker_list"><code class="docutils literal notranslate"><span class="pre">get_ticker_list()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qupyter.html#qupyter.stocks.listen_trade_event"><code class="docutils literal notranslate"><span class="pre">listen_trade_event()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockOrder"><code class="docutils literal notranslate"><span class="pre">StockOrder</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockPosition"><code class="docutils literal notranslate"><span class="pre">StockPosition</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qupyter.html#qupyter-brokerage-ebest-ebeststockbroker-class">qupyter.brokerage.ebest.EBestStockBroker class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qupyter.html#qupyter.brokerage.ebest.EBestStockBroker"><code class="docutils literal notranslate"><span class="pre">EBestStockBroker</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -402,12 +408,6 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="hooks.html#qrst.hooks.on_market_close"><code class="docutils literal notranslate"><span class="pre">on_market_close()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="hooks.html#qrst.hooks.on_market_open"><code class="docutils literal notranslate"><span class="pre">on_market_open()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="hooks.html#qrst.hooks.trade_func"><code class="docutils literal notranslate"><span class="pre">trade_func()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="brokerage.html">Brokerage API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="brokerage.html#qrst.stock_broker.StockBroker"><code class="docutils literal notranslate"><span class="pre">StockBroker</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="brokerage.html#qrst.stock_broker.StockOrder"><code class="docutils literal notranslate"><span class="pre">StockOrder</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="brokerage.html#qrst.stock_broker.StockPosition"><code class="docutils literal notranslate"><span class="pre">StockPosition</span></code></a></li>
 </ul>
 </li>
 </ul>
