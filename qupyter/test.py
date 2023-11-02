@@ -1,16 +1,11 @@
 import random
-import string
 
 from datetime import datetime
 from qupyter.brokerage import StockOrder, StockPosition
 
 
-def random_number(k: int) -> str:
-    return ''.join(random.choices(string.digits, k=k))
-
-
 def order(**kwargs) -> StockOrder:
-    order_id = kwargs.get('order_id', random_number(8))
+    order_id = kwargs.get('order_id', random.randint(1, 999999))
     asset_code = kwargs.get('asset_code', '005930') # 삼성전자
     trade_type = kwargs.get('trade_type', '1') # 매도
     quantity = kwargs.get('quantity', 1)
