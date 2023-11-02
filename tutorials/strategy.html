@@ -386,6 +386,10 @@ document.write(`
 <h1>전략 코드 작성하기<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <p>Qupyter engine은 다음과 같은 순서로 동작합니다.
 아래 설명 중 코멘트에 <code class="docutils literal notranslate"><span class="pre">(Hook)</span></code> 적혀있는 함수들은 사용자가 직접 작성이 가능한 함수 입니다.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>아래 코드(run 함수)는 사용자가 직접 작성하는 부분이 아닌, Qupyter Engine의 동작 흐름를 보여주기 위한 의사 코드(psuedo code) 입니다.</p>
+</div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">run</span><span class="p">():</span>
   <span class="c1"># (Hook) 초기화를 진행합니다. 필요한 설정 값을 반환합니다.</span>
   <span class="n">config</span> <span class="o">=</span> <span class="k">await</span> <span class="n">on_initialize</span><span class="p">()</span>
