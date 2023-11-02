@@ -3,7 +3,7 @@ import pandas as pd
 from datetime import datetime
 from qupyter.brokerage import StockBroker, StockOrder, StockPosition
 from qupyter.brokerage.ebest.stocks.stocks import EBestStocks
-from typing import List, Dict
+from typing import List, Dict, Tuple
 
 
 class EBestStockBroker(StockBroker):
@@ -106,7 +106,7 @@ class EBestStockBroker(StockBroker):
         return stock_positions
 
 
-    def get_pending_orders(self) -> List[StockOrder]:
+    def get_pending_orders(self) -> List[Tuple[str, List[StockOrder]]]:
         stock_pending_orders = self.api.get_pending_orders()
 
         return stock_pending_orders

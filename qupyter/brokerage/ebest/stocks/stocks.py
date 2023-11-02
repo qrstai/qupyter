@@ -573,7 +573,8 @@ class EBestStocks(EBest):
         tr_cd = 't0425'
 
         cts_ordno = ' '
-        pending_orders: List[StockOrder] = []
+        # pending_orders: List[StockOrder] = []
+        pending_orders_dict = {}
 
         while True:
             if cts_ordno.strip() == '':
@@ -607,14 +608,23 @@ class EBestStocks(EBest):
 
                 out_block_1 = data.get(f'{tr_cd}OutBlock1', [])
                 for item in out_block_1:
-                    order = self._create_stock_order_from_json(item)
-                    pending_orders.append(order)
+                    order = StockOrder.from_json(json_dict=item)
+                    # pending_orders.append(order)
+
+                    if order.asset_code in pending_orders_dict:
+                        pending_orders_dict[order.asset_code].append(order)
+                    else:
+                        pending_orders_dict[order.asset_code] = [order]
 
                 if cts_ordno.strip() == '':
                     break
 
             else:
                 break
+
+        pending_orders = []
+        for k, v in pending_orders_dict.items():
+            pending_orders.append((k, v))
 
         return pending_orders
 
