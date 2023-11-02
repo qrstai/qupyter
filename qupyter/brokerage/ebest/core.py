@@ -58,7 +58,7 @@ class EBest:
             'test_trade': test_trade,
         }
         headers = {
-            'Authorization': f'Bearer {config.QUPYTER_API_TOKEN}'
+            'Authorization': f'Bearer {config.JUPYTERHUB_API_TOKEN}'
         }
 
         r = requests.get(config.QUPYTER_API_URL + '/brokerage-secret', params=params, headers=headers)
