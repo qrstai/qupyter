@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Qupyter &#8212; Qupyter  documentation</title>
+    <title>전략 실행 하기 &#8212; Qupyter  documentation</title>
   
   
   
@@ -19,30 +19,31 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=927b94d3fcb96560df09" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=927b94d3fcb96560df09"></script>
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'index';</script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Tutorials" href="tutorials/index.html" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutorials/local_test';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="전략 배포 하기" href="deploy.html" />
+    <link rel="prev" title="전략 코드 작성하기" href="strategy.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -79,7 +80,7 @@
     <div class="search-button__overlay"></div>
     <div class="search-button__search-container">
 <form class="bd-search d-flex align-items-center"
-      action="search.html"
+      action="../search.html"
       method="get">
   <i class="fa-solid fa-magnifying-glass"></i>
   <input type="search"
@@ -108,7 +109,7 @@
       <div class="navbar-item">
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="../index.html">
   
   
   
@@ -118,8 +119,8 @@
       
     
     
-    <img src="_static/qupyter-logo-black.png" class="logo__image only-light" alt="Logo image"/>
-    <script>document.write(`<img src="_static/qupyter-logo-white.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+    <img src="../_static/qupyter-logo-black.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/qupyter-logo-white.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
   
   
 </a></div>
@@ -139,22 +140,22 @@
   </p>
   <ul class="bd-navbar-elements navbar-nav">
     
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="tutorials/index.html">
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
                         Tutorials
                       </a>
                     </li>
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="howto/index.html">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
                         How-to
                       </a>
                     </li>
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="modules.html">
+                      <a class="nav-link nav-internal" href="../modules.html">
                         API references
                       </a>
                     </li>
@@ -238,7 +239,7 @@ document.write(`
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
-      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -256,22 +257,22 @@ document.write(`
   </p>
   <ul class="bd-navbar-elements navbar-nav">
     
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="tutorials/index.html">
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
                         Tutorials
                       </a>
                     </li>
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="howto/index.html">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
                         How-to
                       </a>
                     </li>
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="modules.html">
+                      <a class="nav-link nav-internal" href="../modules.html">
                         API references
                       </a>
                     </li>
@@ -316,6 +317,20 @@ document.write(`
     
   </div>
   
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="credentials.html">증권사 API key 설정하기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="strategy.html">전략 코드 작성하기</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">전략 실행 하기</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deploy.html">전략 배포 하기</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
@@ -331,7 +346,36 @@ document.write(`
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article"></div>
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Tutorials</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">전략 실행 하기</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
               
               
               
@@ -339,41 +383,51 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="qupyter">
-<h1>Qupyter<a class="headerlink" href="#qupyter" title="Permalink to this heading">#</a></h1>
-<p>Qupyter는 퀀트 개발자들의 개발 경험을 향상시키기 위해 QRST AI 에서 개발된 강력한 도구입니다. JupyterLab 기반으로 제작된 Qupyter는 퀀트 금융 전문가들의 특별한 요구에 맞춰 편리하고 효율적인 개발 환경을 제공합니다.</p>
-<p>본 문서는 Qupyter 에서 제공하는 데이터 조회 방법 및 데이터 분석을 위한 유틸리티에 대한 안내를 포함하고 있습니다.</p>
-<div class="video_wrapper align-center" style="text-align: center">
-<iframe allowfullscreen="true" src="https://www.youtube.com/embed/0ivPmIIIdjE" style="border: 0; height: 345px; width: 560px">
-</iframe></div><div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorials/index.html">Tutorials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/credentials.html">증권사 API key 설정하기</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/strategy.html">전략 코드 작성하기</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/local_test.html">전략 실행 하기</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials/deploy.html">전략 배포 하기</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="howto/index.html">How-to</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="howto/vscode_tunnel.html">VS Code - Remote tunnel 사용하기</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">API references</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="qupyter.html">Qupyter SDK</a></li>
-<li class="toctree-l2"><a class="reference internal" href="hooks.html">Hooks</a></li>
-</ul>
-</li>
-</ul>
+  <section id="id1">
+<h1>전략 실행 하기<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p>Qupyter platform 에 전략을 배포하기 전 <code class="docutils literal notranslate"><span class="pre">qup</span> <span class="pre">run</span></code> 커맨드를 사용하여 로컬 환경에서 미리 실행해 볼 수 있습니다.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>배포 전 테스트를 위한 도구로 실행 후 최대 10분간만 동작합니다.</p>
+</div>
+<section id="id2">
+<h2>사용 방법<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>작성한 전략 소스코드가 있는 위치에서 <code class="docutils literal notranslate"><span class="pre">qup</span> <span class="pre">run</span> <span class="pre">&lt;파일</span> <span class="pre">이름&gt;</span></code>으로 실행합니다.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>base<span class="o">)</span><span class="w"> </span>jovyan@jupyter-kghoon:~/5min_breakout$<span class="w"> </span>qup<span class="w"> </span>run<span class="w"> </span>./5min_breakout.py
+<span class="m">2023</span>-11-02<span class="w"> </span><span class="m">14</span>:13:16.018177<span class="w"> </span><span class="o">[</span>EXECUTOR<span class="o">]</span><span class="w"> </span>Call<span class="w"> </span>on_initialize<span class="w"> </span>hook
+New<span class="w"> </span>day.<span class="w"> </span><span class="m">2023</span>-11-02
+-<span class="w">       </span>market_open_time:<span class="w"> </span><span class="m">09</span>:00:00
+-<span class="w">  </span>user_market_open_time:<span class="w"> </span><span class="m">09</span>:05:00
+-<span class="w"> </span>user_market_close_time:<span class="w"> </span><span class="m">15</span>:15:00
+-<span class="w">      </span>market_close_time:<span class="w"> </span><span class="m">15</span>:20:00
+-<span class="w">               </span>interval:<span class="w"> </span><span class="m">60</span><span class="w"> </span>seconds
+-<span class="w">           </span>start_margin:<span class="w"> </span><span class="m">300</span><span class="w"> </span>seconds
+-<span class="w">             </span>end_margin:<span class="w"> </span><span class="m">300</span><span class="w"> </span>seconds
+
+<span class="m">2023</span>-11-02<span class="w"> </span><span class="m">14</span>:13:18.474280<span class="w"> </span><span class="o">[</span>EXECUTOR<span class="o">]</span><span class="w"> </span>Call<span class="w"> </span>trade_func<span class="w"> </span>hook
+</pre></div>
 </div>
 </section>
-<section id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">#</a></h1>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
-</ul>
+<section id="id3">
+<h2>실행 종료<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>실행 중 멈추고 싶으면 <code class="docutils literal notranslate"><span class="pre">Ctrl</span></code> + <code class="docutils literal notranslate"><span class="pre">C</span></code> 를 누르시면 됩니다.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>base<span class="o">)</span><span class="w"> </span>jovyan@jupyter-kghoon:~/5min_breakout$<span class="w"> </span>qup<span class="w"> </span>run<span class="w"> </span>./5min_breakout.py
+<span class="m">2023</span>-11-02<span class="w"> </span><span class="m">14</span>:17:34.151357<span class="w"> </span><span class="o">[</span>EXECUTOR<span class="o">]</span><span class="w"> </span>Call<span class="w"> </span>on_initialize<span class="w"> </span>hook
+New<span class="w"> </span>day.<span class="w"> </span><span class="m">2023</span>-11-02
+-<span class="w">       </span>market_open_time:<span class="w"> </span><span class="m">09</span>:00:00
+-<span class="w">  </span>user_market_open_time:<span class="w"> </span><span class="m">09</span>:05:00
+-<span class="w"> </span>user_market_close_time:<span class="w"> </span><span class="m">15</span>:15:00
+-<span class="w">      </span>market_close_time:<span class="w"> </span><span class="m">15</span>:20:00
+-<span class="w">               </span>interval:<span class="w"> </span><span class="m">60</span><span class="w"> </span>seconds
+-<span class="w">           </span>start_margin:<span class="w"> </span><span class="m">300</span><span class="w"> </span>seconds
+-<span class="w">             </span>end_margin:<span class="w"> </span><span class="m">300</span><span class="w"> </span>seconds
+
+<span class="c1"># -&gt;&gt; Ctrl + C 누름</span>
+^CGot<span class="w"> </span>keyboard<span class="w"> </span>interrupt.<span class="w"> </span>stop<span class="w"> </span>loop
+<span class="o">(</span>base<span class="o">)</span><span class="w"> </span>jovyan@jupyter-kghoon:~/5min_breakout$
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -386,12 +440,21 @@ document.write(`
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="strategy.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">전략 코드 작성하기</p>
+      </div>
+    </a>
     <a class="right-next"
-       href="tutorials/index.html"
+       href="deploy.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Tutorials</p>
+        <p class="prev-next-title">전략 배포 하기</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -410,15 +473,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Qupyter</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#indices-and-tables">Indices and tables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">사용 방법</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">실행 종료</a></li>
 </ul>
-
   </nav></div>
 
   <div class="sidebar-secondary-item">
   <div class="tocsection sourcelink">
-    <a href="_sources/index.rst.txt">
+    <a href="../_sources/tutorials/local_test.md.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>
@@ -437,8 +499,8 @@ document.write(`
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=927b94d3fcb96560df09"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=927b94d3fcb96560df09"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
