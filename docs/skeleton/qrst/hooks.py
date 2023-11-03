@@ -166,30 +166,41 @@ async def trade_func(account_info: Dict, pending_orders: List[StockOrder], posit
     pass
 
 
-async def handle_pending_positions(pending_orders: List[StockOrder], broker: StockBroker):
-    '''미체결 주문을 처리합니다.
+async def handle_pending_orders(pending_orders: List[Tuple[str, List[StockOrder]]]):
+    '''미체결 주문을 확인하고 정정/취소 할 내역을 반환합니다.
 
     .. note::
         이 hook을 구현하지 않은 경우의 기본 동작은 미체결 주문을 모두 취소하는 것입니다.
 
-    :param pending_orders: 미체결 주문 리스트
-    :type pending_orders: List of StockOrder
+    **전량/일부취소**
 
-    :param broker: 주식 거래를 위한 객체
-    :type broker: StockBroker
-
-    :examples:
+    취소 지시는 가격은 None으로 지정하고, 취소하고자 하는 수량(최대 '잔량'과 같거나 적은 수량)을 지정합니다.
+    수량은 음수로 지정합니다.
 
     .. code-block:: python
 
-        async def handle_pending_positions(pending_orders: List, broker: StockBroker):
-            # 미체결 주문을 변경된 가격으로 정정 합니다.
-            for po in pending_orders:
-                price_df = broker.get_price(po.asset_code)
-                current_price = price_df['current_price'][po.asset_code]
+        # 남은 수량 전량 취소
+        return [( order.asset_code, order.order_id, None, -order.pending_quantity ) for order in pending_orders]
 
-                if po.price != current_price:
-                    await broker.update_order(po.order_id, po.asset_code, price=current_price)
+    **정정**
+
+    정정은 기존 주문 수량 최대까지만 가능합니다. (그 이상은 추가 매수이기 때문에 새로운 주문을 발행해야 합니다)
+    가격은 필수로 지정해야 합니다.
+    수량은 양수로 지정합니다.
+
+    .. code-block:: python
+
+        # 가격을 현재가로 변경하고, 남은 수량 전량 정정
+        return [( order.asset_code, order.order_id, order.current_price, order.pending_quantity ) for order in pending_orders]
+
+
+
+    :param pending_orders: 미체결 주문 리스트
+    :type pending_orders: List of Tuple (종목코드, 주문목록)
+
+    :return: 정정/취소 할 내역을 담은 리스트. 각 내역은 종목코드, 주문 ID, 가격, 수량을 반환합니다.
+    :rtype: List[Tuple[str, int, int, int]]
+
     '''
     pass
 
