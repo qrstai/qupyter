@@ -11,7 +11,11 @@ qupyter 전략 단위 테스트를 위한 Mock 객체들을 정의합니다.
     from qupyter import test
     from qupyter.brokerage.ebest import EBestStockBroker
 
-    def test_trade_func():
+    def trade_func(account_info, pending_orders, positions, stock_broker):
+        # 사용자 전략 코드 작성
+        # ...
+
+    if __name__ == '__main__':
         broker = EBestStockBroker(test_trade=True)
         account_info = broker.get_account()
 
@@ -25,7 +29,7 @@ qupyter 전략 단위 테스트를 위한 Mock 객체들을 정의합니다.
             test.order(asset_code='252670', trade_type='2', quantity=10, price=2800),
         ]
 
-        result = asyncio.run(trade_func(account_info, pending_orders, positions, broker))
+        result = trade_func(account_info, pending_orders, positions, broker)
         print(result)
 
 
