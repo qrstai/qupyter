@@ -384,6 +384,34 @@ document.write(`
                   
   <section id="module-qupyter.test">
 <span id="unittest-helpers"></span><h1>Unittest Helpers<a class="headerlink" href="#module-qupyter.test" title="Permalink to this heading">#</a></h1>
+<p>qupyter 전략 단위 테스트를 위한 Mock 객체들을 정의합니다.</p>
+<p>아래와 같은 방법으로 사용할 수 있습니다.</p>
+<dl class="field-list simple">
+<dt class="field-odd">examples<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">qupyter</span> <span class="kn">import</span> <span class="n">test</span>
+<span class="kn">from</span> <span class="nn">qupyter.brokerage.ebest</span> <span class="kn">import</span> <span class="n">EBestStockBroker</span>
+
+<span class="k">def</span> <span class="nf">test_trade_func</span><span class="p">():</span>
+    <span class="n">broker</span> <span class="o">=</span> <span class="n">EBestStockBroker</span><span class="p">(</span><span class="n">test_trade</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">account_info</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="n">get_account</span><span class="p">()</span>
+
+    <span class="n">positions</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">test</span><span class="o">.</span><span class="n">position</span><span class="p">(</span><span class="n">asset_code</span><span class="o">=</span><span class="s1">&#39;005930&#39;</span><span class="p">,</span> <span class="n">quantity</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">average_purchase_price</span><span class="o">=</span><span class="mi">68000</span><span class="p">,</span> <span class="n">current_price</span><span class="o">=</span><span class="mi">70000</span><span class="p">),</span>
+        <span class="n">test</span><span class="o">.</span><span class="n">position</span><span class="p">(</span><span class="n">asset_code</span><span class="o">=</span><span class="s1">&#39;252670&#39;</span><span class="p">,</span> <span class="n">quantity</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">average_purchase_price</span><span class="o">=</span><span class="mi">2800</span><span class="p">,</span> <span class="n">current_price</span><span class="o">=</span><span class="mi">3000</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="n">pending_orders</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">test</span><span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="n">asset_code</span><span class="o">=</span><span class="s1">&#39;005930&#39;</span><span class="p">,</span> <span class="n">trade_type</span><span class="o">=</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="n">quantity</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">price</span><span class="o">=</span><span class="mi">68000</span><span class="p">),</span>
+        <span class="n">test</span><span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="n">asset_code</span><span class="o">=</span><span class="s1">&#39;252670&#39;</span><span class="p">,</span> <span class="n">trade_type</span><span class="o">=</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="n">quantity</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">price</span><span class="o">=</span><span class="mi">2800</span><span class="p">),</span>
+    <span class="p">]</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">trade_func</span><span class="p">(</span><span class="n">account_info</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">broker</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
 <dl class="py function">
 <dt class="sig sig-object py" id="qupyter.test.order">
 <span class="sig-prename descclassname"><span class="pre">qupyter.test.</span></span><span class="sig-name descname"><span class="pre">order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockOrder" title="qupyter.brokerage.models.StockOrder"><span class="pre">StockOrder</span></a></span></span><a class="headerlink" href="#qupyter.test.order" title="Permalink to this definition">#</a></dt>
