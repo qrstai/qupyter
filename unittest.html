@@ -394,7 +394,11 @@ document.write(`
 <span class="kn">from</span> <span class="nn">qupyter</span> <span class="kn">import</span> <span class="n">test</span>
 <span class="kn">from</span> <span class="nn">qupyter.brokerage.ebest</span> <span class="kn">import</span> <span class="n">EBestStockBroker</span>
 
-<span class="k">def</span> <span class="nf">test_trade_func</span><span class="p">():</span>
+<span class="k">def</span> <span class="nf">trade_func</span><span class="p">(</span><span class="n">account_info</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">stock_broker</span><span class="p">):</span>
+    <span class="c1"># 사용자 전략 코드 작성</span>
+    <span class="c1"># ...</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">broker</span> <span class="o">=</span> <span class="n">EBestStockBroker</span><span class="p">(</span><span class="n">test_trade</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">account_info</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="n">get_account</span><span class="p">()</span>
 
@@ -408,7 +412,7 @@ document.write(`
         <span class="n">test</span><span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="n">asset_code</span><span class="o">=</span><span class="s1">&#39;252670&#39;</span><span class="p">,</span> <span class="n">trade_type</span><span class="o">=</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="n">quantity</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">price</span><span class="o">=</span><span class="mi">2800</span><span class="p">),</span>
     <span class="p">]</span>
 
-    <span class="n">result</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">trade_func</span><span class="p">(</span><span class="n">account_info</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">broker</span><span class="p">))</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">trade_func</span><span class="p">(</span><span class="n">account_info</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">broker</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </pre></div>
 </div>
