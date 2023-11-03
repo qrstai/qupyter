@@ -385,33 +385,39 @@ document.write(`
 <h1>Hooks<a class="headerlink" href="#hooks" title="Permalink to this heading">#</a></h1>
 <p>사용자 전략 구현 시 사용 가능한 Hook들입니다.</p>
 <span class="target" id="module-qrst.hooks"></span><dl class="py function">
-<dt class="sig sig-object py" id="qrst.hooks.handle_pending_positions">
-<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qrst.hooks.</span></span><span class="sig-name descname"><span class="pre">handle_pending_positions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pending_orders</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockOrder" title="qupyter.brokerage.models.StockOrder"><span class="pre">StockOrder</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">broker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockBroker" title="qupyter.brokerage.stock_broker.StockBroker"><span class="pre">StockBroker</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qrst.hooks.handle_pending_positions" title="Permalink to this definition">#</a></dt>
-<dd><p>미체결 주문을 처리합니다.</p>
+<dt class="sig sig-object py" id="qrst.hooks.handle_pending_orders">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qrst.hooks.</span></span><span class="sig-name descname"><span class="pre">handle_pending_orders</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pending_orders</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockOrder" title="qupyter.brokerage.models.StockOrder"><span class="pre">StockOrder</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qrst.hooks.handle_pending_orders" title="Permalink to this definition">#</a></dt>
+<dd><p>미체결 주문을 확인하고 정정/취소 할 내역을 반환합니다.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>이 hook을 구현하지 않은 경우의 기본 동작은 미체결 주문을 모두 취소하는 것입니다.</p>
 </div>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>pending_orders</strong> (<em>List</em><em> of </em><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockOrder" title="qupyter.brokerage.StockOrder"><em>StockOrder</em></a>) – 미체결 주문 리스트</p></li>
-<li><p><strong>broker</strong> (<a class="reference internal" href="qupyter.html#qupyter.brokerage.StockBroker" title="qupyter.brokerage.StockBroker"><em>StockBroker</em></a>) – 주식 거래를 위한 객체</p></li>
-</ul>
-</dd>
-<dt class="field-even">Examples<span class="colon">:</span></dt>
-<dd class="field-even"><p></p></dd>
-</dl>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">handle_pending_positions</span><span class="p">(</span><span class="n">pending_orders</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">broker</span><span class="p">:</span> <span class="n">StockBroker</span><span class="p">):</span>
-    <span class="c1"># 미체결 주문을 변경된 가격으로 정정 합니다.</span>
-    <span class="k">for</span> <span class="n">po</span> <span class="ow">in</span> <span class="n">pending_orders</span><span class="p">:</span>
-        <span class="n">price_df</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="n">get_price</span><span class="p">(</span><span class="n">po</span><span class="o">.</span><span class="n">asset_code</span><span class="p">)</span>
-        <span class="n">current_price</span> <span class="o">=</span> <span class="n">price_df</span><span class="p">[</span><span class="s1">&#39;current_price&#39;</span><span class="p">][</span><span class="n">po</span><span class="o">.</span><span class="n">asset_code</span><span class="p">]</span>
-
-        <span class="k">if</span> <span class="n">po</span><span class="o">.</span><span class="n">price</span> <span class="o">!=</span> <span class="n">current_price</span><span class="p">:</span>
-            <span class="k">await</span> <span class="n">broker</span><span class="o">.</span><span class="n">update_order</span><span class="p">(</span><span class="n">po</span><span class="o">.</span><span class="n">order_id</span><span class="p">,</span> <span class="n">po</span><span class="o">.</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">price</span><span class="o">=</span><span class="n">current_price</span><span class="p">)</span>
+<p><strong>전량/일부취소</strong></p>
+<p>취소 지시는 가격은 None으로 지정하고, 취소하고자 하는 수량(최대 ‘잔량’과 같거나 적은 수량)을 지정합니다.
+수량은 음수로 지정합니다.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 남은 수량 전량 취소</span>
+<span class="k">return</span> <span class="p">[(</span> <span class="n">order</span><span class="o">.</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">order</span><span class="o">.</span><span class="n">order_id</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="o">-</span><span class="n">order</span><span class="o">.</span><span class="n">pending_quantity</span> <span class="p">)</span> <span class="k">for</span> <span class="n">order</span> <span class="ow">in</span> <span class="n">pending_orders</span><span class="p">]</span>
 </pre></div>
 </div>
+<p><strong>정정</strong></p>
+<p>정정은 기존 주문 수량 최대까지만 가능합니다. (그 이상은 추가 매수이기 때문에 새로운 주문을 발행해야 합니다)
+가격은 필수로 지정해야 합니다.
+수량은 양수로 지정합니다.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 가격을 현재가로 변경하고, 남은 수량 전량 정정</span>
+<span class="k">return</span> <span class="p">[(</span> <span class="n">order</span><span class="o">.</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">order</span><span class="o">.</span><span class="n">order_id</span><span class="p">,</span> <span class="n">order</span><span class="o">.</span><span class="n">current_price</span><span class="p">,</span> <span class="n">order</span><span class="o">.</span><span class="n">pending_quantity</span> <span class="p">)</span> <span class="k">for</span> <span class="n">order</span> <span class="ow">in</span> <span class="n">pending_orders</span><span class="p">]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>pending_orders</strong> (<em>List</em><em> of </em><em>Tuple</em><em> (</em><em>종목코드</em><em>, </em><em>주문목록</em><em>)</em>) – 미체결 주문 리스트</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>정정/취소 할 내역을 담은 리스트. 각 내역은 종목코드, 주문 ID, 가격, 수량을 반환합니다.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[Tuple[str, int, int, int]]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py function">
@@ -614,7 +620,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.handle_pending_positions"><code class="docutils literal notranslate"><span class="pre">handle_pending_positions()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.handle_pending_orders"><code class="docutils literal notranslate"><span class="pre">handle_pending_orders()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.on_initiailze"><code class="docutils literal notranslate"><span class="pre">on_initiailze()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.on_market_close"><code class="docutils literal notranslate"><span class="pre">on_market_close()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.on_market_open"><code class="docutils literal notranslate"><span class="pre">on_market_open()</span></code></a></li>
