@@ -7,8 +7,9 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Python Module Index &#8212; Qupyter  documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Unittest Helpers &#8212; Qupyter  documentation</title>
   
   
   
@@ -38,14 +39,13 @@
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/sphinx_highlight.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'py-modindex';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'unittest';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-
+    <link rel="next" title="Hooks" href="hooks.html" />
+    <link rel="prev" title="Brokerage API" href="qupyter.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
-
-
   </head>
   
   
@@ -154,7 +154,7 @@
                     </li>
                 
 
-                    <li class="nav-item">
+                    <li class="nav-item current active">
                       <a class="nav-link nav-internal" href="modules.html">
                         API references
                       </a>
@@ -228,6 +228,10 @@ document.write(`
   
 
   
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
 </div>
 
     </nav>
@@ -235,7 +239,7 @@ document.write(`
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
       
-      <div class="bd-sidebar-primary bd-sidebar hide-on-wide">
+      <div class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -267,7 +271,7 @@ document.write(`
                     </li>
                 
 
-                    <li class="nav-item">
+                    <li class="nav-item current active">
                       <a class="nav-link nav-internal" href="modules.html">
                         API references
                       </a>
@@ -313,6 +317,19 @@ document.write(`
     
   </div>
   
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="qupyter.html">Brokerage API</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Unittest Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hooks.html">Hooks</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
@@ -328,7 +345,36 @@ document.write(`
           <div class="bd-content">
             <div class="bd-article-container">
               
-              <div class="bd-header-article"></div>
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="modules.html" class="nav-link">API references</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Unittest Helpers</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
               
               
               
@@ -336,40 +382,74 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
+  <section id="module-qupyter.test">
+<span id="unittest-helpers"></span><h1>Unittest Helpers<a class="headerlink" href="#module-qupyter.test" title="Permalink to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="qupyter.test.order">
+<span class="sig-prename descclassname"><span class="pre">qupyter.test.</span></span><span class="sig-name descname"><span class="pre">order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockOrder" title="qupyter.brokerage.models.StockOrder"><span class="pre">StockOrder</span></a></span></span><a class="headerlink" href="#qupyter.test.order" title="Permalink to this definition">#</a></dt>
+<dd><p>StockOrder Mock 객체 생성</p>
+<p>아래 필드들은 모두 선택적으로 지정할 수 있습니다.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>order_id</strong> (<em>int</em>) – 주문번호 (기본값: 1~999999 사이의 임의의 정수)</p></li>
+<li><p><strong>asset_code</strong> (<em>str</em>) – 종목코드 (기본값: ‘005930’)</p></li>
+<li><p><strong>trade_type</strong> (<em>str</em>) – 매매구분 (1: 매도, 2: 매수) (기본값: 1)</p></li>
+<li><p><strong>quantity</strong> (<em>int</em>) – 주문수량 (기본값: 1)</p></li>
+<li><p><strong>price</strong> (<em>int</em>) – 주문가격 (기본값: 68000)</p></li>
+<li><p><strong>filled_quantity</strong> (<em>int</em>) – 체결수량 (기본값: 0)</p></li>
+<li><p><strong>filled_price</strong> (<em>int</em>) – 체결가격 (기본값: 0)</p></li>
+<li><p><strong>pending_quantity</strong> (<em>int</em>) – 미체결수량 (기본값: quantity - filled_quantity)</p></li>
+<li><p><strong>order_time</strong> (<em>datetime</em>) – 주문시간 (기본값: 현재시간)</p></li>
+<li><p><strong>order_method</strong> (<em>str</em>) – 주문방식 (기본값: ‘TEST’)</p></li>
+<li><p><strong>current_price</strong> (<em>int</em>) – 현재가 (기본값: 68000)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>주문 객체</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockOrder" title="qupyter.brokerage.StockOrder">StockOrder</a></p>
+</dd>
+</dl>
+</dd></dl>
 
-   <h1>Python Module Index</h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="qupyter.test.position">
+<span class="sig-prename descclassname"><span class="pre">qupyter.test.</span></span><span class="sig-name descname"><span class="pre">position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockPosition" title="qupyter.brokerage.models.StockPosition"><span class="pre">StockPosition</span></a></span></span><a class="headerlink" href="#qupyter.test.position" title="Permalink to this definition">#</a></dt>
+<dd><p>StockPosition Mock 객체 생성</p>
+<p>아래 필드들은 모두 선택적으로 지정할 수 있습니다.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>asset_code</strong> (<em>str</em>) – 종목코드 (기본값: ‘005930’)</p></li>
+<li><p><strong>asset_name</strong> (<em>str</em>) – 종목명 (기본값: ‘삼성전자’)</p></li>
+<li><p><strong>quantity</strong> (<em>int</em>) – 보유수량 (기본값: 1)</p></li>
+<li><p><strong>exit_available_quantity</strong> (<em>int</em>) – 청산가능수량 (기본값: quantity)</p></li>
+<li><p><strong>average_purchase_price</strong> (<em>int</em>) – 평균매입가 (기본값: 68000)</p></li>
+<li><p><strong>purchase_value</strong> (<em>int</em>) – 매입금액 (기본값: average_purchase_price * quantity)</p></li>
+<li><p><strong>loan_value</strong> (<em>int</em>) – 대출금액 (기본값: 0)</p></li>
+<li><p><strong>loan_date</strong> (<em>datetime.date</em>) – 대출일 (기본값: None)</p></li>
+<li><p><strong>expiration_date</strong> (<em>datetime.date</em>) – 만기일 (기본값: None)</p></li>
+<li><p><strong>current_price</strong> (<em>int</em>) – 현재가 (기본값: 68000)</p></li>
+<li><p><strong>commission</strong> (<em>int</em>) – 수수료 (기본값: 0)</p></li>
+<li><p><strong>tax</strong> (<em>int</em>) – 세금 (기본값: 0)</p></li>
+<li><p><strong>loan_interest</strong> (<em>int</em>) – 대출이자 (기본값: 0)</p></li>
+<li><p><strong>current_value</strong> (<em>int</em>) – 평가금액 (기본값: current_price * quantity)</p></li>
+<li><p><strong>current_pnl</strong> (<em>int</em>) – 평가손익 (기본값: (current_price - average_purchase_price) * quantity -  commission - loan_interest)</p></li>
+<li><p><strong>current_pnl_pct</strong> (<em>float</em>) – 수익률 (기본값: current_pnl / (average_purchase_price * quantity) * 100)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>포지션 객체</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockPosition" title="qupyter.brokerage.StockPosition">StockPosition</a></p>
+</dd>
+</dl>
+</dd></dl>
 
-   <div class="modindex-jumpbox">
-   <a href="#cap-q"><strong>q</strong></a>
-   </div>
-
-   <table class="indextable modindextable">
-     <tr class="pcap"><td></td><td>&#160;</td><td></td></tr>
-     <tr class="cap" id="cap-q"><td></td><td>
-       <strong>q</strong></td><td></td></tr>
-     <tr>
-       <td><img src="_static/minus.png" class="toggler"
-              id="toggle-1" style="display: none" alt="-" /></td>
-       <td>
-       <code class="xref">qrst</code></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="hooks.html#module-qrst.hooks"><code class="xref">qrst.hooks</code></a></td><td>
-       <em></em></td></tr>
-     <tr>
-       <td><img src="_static/minus.png" class="toggler"
-              id="toggle-2" style="display: none" alt="-" /></td>
-       <td>
-       <code class="xref">qupyter</code></td><td>
-       <em></em></td></tr>
-     <tr class="cg-2">
-       <td></td>
-       <td>&#160;&#160;&#160;
-       <a href="unittest.html#module-qupyter.test"><code class="xref">qupyter.test</code></a></td><td>
-       <em></em></td></tr>
-   </table>
+</section>
 
 
                 </article>
@@ -381,12 +461,53 @@ document.write(`
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="qupyter.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Brokerage API</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="hooks.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Hooks</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.test.order"><code class="docutils literal notranslate"><span class="pre">order()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.test.position"><code class="docutils literal notranslate"><span class="pre">position()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="_sources/unittest.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
               
             
           </div>

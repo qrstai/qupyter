@@ -5,4 +5,5 @@ API references
    :maxdepth: 4
 
    qupyter
+   unittest
    hooks

@@ -42,7 +42,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'modules';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Qupyter SDK" href="qupyter.html" />
+    <link rel="next" title="Brokerage API" href="qupyter.html" />
     <link rel="prev" title="VS Code - Remote tunnel 사용하기" href="howto/vscode_tunnel.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -322,7 +322,8 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="qupyter.html">Qupyter SDK</a></li>
+<li class="toctree-l1"><a class="reference internal" href="qupyter.html">Brokerage API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unittest.html">Unittest Helpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hooks.html">Hooks</a></li>
 </ul>
 </div>
@@ -382,8 +383,8 @@ document.write(`
 <h1>API references<a class="headerlink" href="#api-references" title="Permalink to this heading">#</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="qupyter.html">Qupyter SDK</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="qupyter.html#module-qupyter.brokerage">qupyter.brokerage module</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="qupyter.html">Brokerage API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="qupyter.html#stockbroker-class">StockBroker class</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockBroker"><code class="docutils literal notranslate"><span class="pre">StockBroker</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockBroker.get_account"><code class="docutils literal notranslate"><span class="pre">StockBroker.get_account()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockBroker.get_historical_daily_data"><code class="docutils literal notranslate"><span class="pre">StockBroker.get_historical_daily_data()</span></code></a></li>
@@ -392,14 +393,25 @@ document.write(`
 <li class="toctree-l4"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockBroker.get_price_for_multiple_stocks"><code class="docutils literal notranslate"><span class="pre">StockBroker.get_price_for_multiple_stocks()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockOrder"><code class="docutils literal notranslate"><span class="pre">StockOrder</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockPosition"><code class="docutils literal notranslate"><span class="pre">StockPosition</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="qupyter.html#qupyter-brokerage-ebest-ebeststockbroker-class">qupyter.brokerage.ebest.EBestStockBroker class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="qupyter.html#ebeststockbroker-class">EBestStockBroker class</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="qupyter.html#qupyter.brokerage.ebest.EBestStockBroker"><code class="docutils literal notranslate"><span class="pre">EBestStockBroker</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="qupyter.html#stockorder-class">StockOrder class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockOrder"><code class="docutils literal notranslate"><span class="pre">StockOrder</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="qupyter.html#stockposition-class">StockPosition class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockPosition"><code class="docutils literal notranslate"><span class="pre">StockPosition</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="unittest.html">Unittest Helpers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="unittest.html#qupyter.test.order"><code class="docutils literal notranslate"><span class="pre">order()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="unittest.html#qupyter.test.position"><code class="docutils literal notranslate"><span class="pre">position()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="hooks.html">Hooks</a><ul>
@@ -438,7 +450,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Qupyter SDK</p>
+        <p class="prev-next-title">Brokerage API</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

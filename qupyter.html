@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Qupyter SDK &#8212; Qupyter  documentation</title>
+    <title>Brokerage API &#8212; Qupyter  documentation</title>
   
   
   
@@ -42,7 +42,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'qupyter';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Hooks" href="hooks.html" />
+    <link rel="next" title="Unittest Helpers" href="unittest.html" />
     <link rel="prev" title="API references" href="modules.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -322,7 +322,8 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Qupyter SDK</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Brokerage API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="unittest.html">Unittest Helpers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="hooks.html">Hooks</a></li>
 </ul>
 </div>
@@ -364,7 +365,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="modules.html" class="nav-link">API references</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">Qupyter SDK</li>
+    <li class="breadcrumb-item active" aria-current="page">Brokerage API</li>
   </ul>
 </nav>
 </div>
@@ -381,10 +382,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="qupyter-sdk">
-<h1>Qupyter SDK<a class="headerlink" href="#qupyter-sdk" title="Permalink to this heading">#</a></h1>
-<section id="module-qupyter.brokerage">
-<span id="qupyter-brokerage-module"></span><h2>qupyter.brokerage module<a class="headerlink" href="#module-qupyter.brokerage" title="Permalink to this heading">#</a></h2>
+  <section id="brokerage-api">
+<h1>Brokerage API<a class="headerlink" href="#brokerage-api" title="Permalink to this heading">#</a></h1>
+<section id="stockbroker-class">
+<h2>StockBroker class<a class="headerlink" href="#stockbroker-class" title="Permalink to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="qupyter.brokerage.StockBroker">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qupyter.brokerage.</span></span><span class="sig-name descname"><span class="pre">StockBroker</span></span><a class="headerlink" href="#qupyter.brokerage.StockBroker" title="Permalink to this definition">#</a></dt>
@@ -644,6 +645,19 @@ document.write(`
 
 </dd></dl>
 
+</section>
+<section id="ebeststockbroker-class">
+<h2>EBestStockBroker class<a class="headerlink" href="#ebeststockbroker-class" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="qupyter.brokerage.ebest.EBestStockBroker">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qupyter.brokerage.ebest.</span></span><span class="sig-name descname"><span class="pre">EBestStockBroker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_trade</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_secret</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expire_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qupyter.brokerage.ebest.EBestStockBroker" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#qupyter.brokerage.StockBroker" title="qupyter.brokerage.stock_broker.StockBroker"><code class="xref py py-class docutils literal notranslate"><span class="pre">StockBroker</span></code></a></p>
+<p>이베스트 증권 StockBroker 구현체</p>
+</dd></dl>
+
+</section>
+<section id="stockorder-class">
+<h2>StockOrder class<a class="headerlink" href="#stockorder-class" title="Permalink to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="qupyter.brokerage.StockOrder">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qupyter.brokerage.</span></span><span class="sig-name descname"><span class="pre">StockOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trade_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filled_quantity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filled_price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pending_quantity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">order_method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qupyter.brokerage.StockOrder" title="Permalink to this definition">#</a></dt>
@@ -668,6 +682,9 @@ document.write(`
 </dl>
 </dd></dl>
 
+</section>
+<section id="stockposition-class">
+<h2>StockPosition class<a class="headerlink" href="#stockposition-class" title="Permalink to this heading">#</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="qupyter.brokerage.StockPosition">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qupyter.brokerage.</span></span><span class="sig-name descname"><span class="pre">StockPosition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asset_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exit_available_quantity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">average_purchase_price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">purchase_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loan_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loan_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">date</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expiration_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">date</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_price</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_pnl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_pnl_pct</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Decimal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commission</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loan_interest</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qupyter.brokerage.StockPosition" title="Permalink to this definition">#</a></dt>
@@ -698,16 +715,6 @@ document.write(`
 </dd></dl>
 
 </section>
-<section id="qupyter-brokerage-ebest-ebeststockbroker-class">
-<h2>qupyter.brokerage.ebest.EBestStockBroker class<a class="headerlink" href="#qupyter-brokerage-ebest-ebeststockbroker-class" title="Permalink to this heading">#</a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="qupyter.brokerage.ebest.EBestStockBroker">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qupyter.brokerage.ebest.</span></span><span class="sig-name descname"><span class="pre">EBestStockBroker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">test_trade</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">app_secret</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">expire_date</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qupyter.brokerage.ebest.EBestStockBroker" title="Permalink to this definition">#</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#qupyter.brokerage.StockBroker" title="qupyter.brokerage.stock_broker.StockBroker"><code class="xref py py-class docutils literal notranslate"><span class="pre">StockBroker</span></code></a></p>
-<p>이베스트 증권 StockBroker 구현체</p>
-</dd></dl>
-
-</section>
 </section>
 
 
@@ -730,11 +737,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="hooks.html"
+       href="unittest.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Hooks</p>
+        <p class="prev-next-title">Unittest Helpers</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -753,7 +760,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#module-qupyter.brokerage">qupyter.brokerage module</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stockbroker-class">StockBroker class</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.brokerage.StockBroker"><code class="docutils literal notranslate"><span class="pre">StockBroker</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.brokerage.StockBroker.get_account"><code class="docutils literal notranslate"><span class="pre">StockBroker.get_account()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.brokerage.StockBroker.get_historical_daily_data"><code class="docutils literal notranslate"><span class="pre">StockBroker.get_historical_daily_data()</span></code></a></li>
@@ -762,12 +769,18 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.brokerage.StockBroker.get_price_for_multiple_stocks"><code class="docutils literal notranslate"><span class="pre">StockBroker.get_price_for_multiple_stocks()</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.brokerage.StockOrder"><code class="docutils literal notranslate"><span class="pre">StockOrder</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.brokerage.StockPosition"><code class="docutils literal notranslate"><span class="pre">StockPosition</span></code></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter-brokerage-ebest-ebeststockbroker-class">qupyter.brokerage.ebest.EBestStockBroker class</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ebeststockbroker-class">EBestStockBroker class</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.brokerage.ebest.EBestStockBroker"><code class="docutils literal notranslate"><span class="pre">EBestStockBroker</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stockorder-class">StockOrder class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.brokerage.StockOrder"><code class="docutils literal notranslate"><span class="pre">StockOrder</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stockposition-class">StockPosition class</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.brokerage.StockPosition"><code class="docutils literal notranslate"><span class="pre">StockPosition</span></code></a></li>
 </ul>
 </li>
 </ul>
