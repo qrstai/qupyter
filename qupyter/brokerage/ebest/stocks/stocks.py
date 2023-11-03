@@ -432,7 +432,7 @@ class EBestStocks(EBest):
         return res
 
 
-    def _create_stock_position_from_json(json_dict: Dict) -> StockPosition:
+    def _create_stock_position_from_json(self, json_dict: Dict) -> StockPosition:
         asset_code = json_dict.get('expcode')  # 종목번호
         asset_name = json_dict.get('hname')  # 종목명
         quantity = int(json_dict.get('janqty'))  # 잔고수량
