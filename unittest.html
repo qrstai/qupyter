@@ -382,40 +382,166 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="module-qupyter.test">
-<span id="unittest-helpers"></span><h1>Unittest Helpers<a class="headerlink" href="#module-qupyter.test" title="Permalink to this heading">#</a></h1>
-<p>qupyter 전략 단위 테스트를 위한 Mock 객체들을 정의합니다.</p>
-<p>아래와 같은 방법으로 사용할 수 있습니다.</p>
+  <section id="unittest-helpers">
+<h1>Unittest Helpers<a class="headerlink" href="#unittest-helpers" title="Permalink to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="qupyter.test.MockStockBroker">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qupyter.test.</span></span><span class="sig-name descname"><span class="pre">MockStockBroker</span></span><a class="headerlink" href="#qupyter.test.MockStockBroker" title="Permalink to this definition">#</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="qupyter.test.MockStockBroker.set_account">
+<span class="sig-name descname"><span class="pre">set_account</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qupyter.test.MockStockBroker.set_account" title="Permalink to this definition">#</a></dt>
+<dd><p>Mock 계좌 정보 설정</p>
 <dl class="field-list simple">
-<dt class="field-odd">examples<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>kwargs</strong> (<em>Dict</em>) – 설정 할 계좌 정보</p>
+</dd>
+<dt class="field-even">Examples<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
 </dl>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">asyncio</span>
-<span class="kn">from</span> <span class="nn">qupyter</span> <span class="kn">import</span> <span class="n">test</span>
-<span class="kn">from</span> <span class="nn">qupyter.brokerage.ebest</span> <span class="kn">import</span> <span class="n">EBestStockBroker</span>
-
-<span class="k">def</span> <span class="nf">trade_func</span><span class="p">(</span><span class="n">account_info</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">stock_broker</span><span class="p">):</span>
-    <span class="c1"># 사용자 전략 코드 작성</span>
-    <span class="c1"># ...</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="n">broker</span> <span class="o">=</span> <span class="n">EBestStockBroker</span><span class="p">(</span><span class="n">test_trade</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">account_info</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="n">get_account</span><span class="p">()</span>
-
-    <span class="n">positions</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">test</span><span class="o">.</span><span class="n">position</span><span class="p">(</span><span class="n">asset_code</span><span class="o">=</span><span class="s1">&#39;005930&#39;</span><span class="p">,</span> <span class="n">quantity</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">average_purchase_price</span><span class="o">=</span><span class="mi">68000</span><span class="p">,</span> <span class="n">current_price</span><span class="o">=</span><span class="mi">70000</span><span class="p">),</span>
-        <span class="n">test</span><span class="o">.</span><span class="n">position</span><span class="p">(</span><span class="n">asset_code</span><span class="o">=</span><span class="s1">&#39;252670&#39;</span><span class="p">,</span> <span class="n">quantity</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">average_purchase_price</span><span class="o">=</span><span class="mi">2800</span><span class="p">,</span> <span class="n">current_price</span><span class="o">=</span><span class="mi">3000</span><span class="p">),</span>
-    <span class="p">]</span>
-
-    <span class="n">pending_orders</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">test</span><span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="n">asset_code</span><span class="o">=</span><span class="s1">&#39;005930&#39;</span><span class="p">,</span> <span class="n">trade_type</span><span class="o">=</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="n">quantity</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">price</span><span class="o">=</span><span class="mi">68000</span><span class="p">),</span>
-        <span class="n">test</span><span class="o">.</span><span class="n">order</span><span class="p">(</span><span class="n">asset_code</span><span class="o">=</span><span class="s1">&#39;252670&#39;</span><span class="p">,</span> <span class="n">trade_type</span><span class="o">=</span><span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="n">quantity</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">price</span><span class="o">=</span><span class="mi">2800</span><span class="p">),</span>
-    <span class="p">]</span>
-
-    <span class="n">result</span> <span class="o">=</span> <span class="n">trade_func</span><span class="p">(</span><span class="n">account_info</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">,</span> <span class="n">positions</span><span class="p">,</span> <span class="n">broker</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">broker</span><span class="o">.</span><span class="n">set_account</span><span class="p">(</span><span class="n">investable_cash</span><span class="o">=</span><span class="mi">1000000</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">broker</span><span class="o">.</span><span class="n">get_account</span><span class="p">()</span>
+<span class="go">{&#39;investable_cash&#39;: 1000000, &#39;asset_value&#39;: 0, &#39;receivable_amount&#39;: 0, &#39;total_balance&#39;: 0, &#39;pnl_pct&#39;: 0, &#39;investment_principal&#39;: 0, &#39;investment_pnl_amount&#39;: 0, &#39;credit_order_amount&#39;: 0, &#39;credit_orderable_amount&#39;: 0, &#39;deposit&#39;: 0, &#39;substitute_amount&#39;: 0, &#39;deposit_d1&#39;: 0, &#39;deposit_d2&#39;: 0, &#39;cash_receivables&#39;: 0, &#39;cash_collateral&#39;: 0, &#39;substitute_collateral&#39;: 0, &#39;cheque_amount&#39;: 0, &#39;substitute_orderable_amount&#39;: 0, &#39;margin_rate_35_pct_orderable_amount&#39;: 0, &#39;margin_rate_50_pct_orderable_amount&#39;: 0, &#39;margin_rate_100_pct_orderable_amount&#39;: 0, &#39;d1_overdraft_fee&#39;: 0, &#39;d2_overdraft_fee&#39;: 0, &#39;deposit_pledge_loan_amount&#39;: 0, &#39;credit_setting_collateral&#39;: 0, &#39;margin_loan_amount&#39;: 0, &#39;original_pledge_amount&#39;: 0, &#39;subordinate_pledge_amount&#39;: 0, &#39;required_pledge_amount&#39;: 0, &#39;original_pledge_shortage&#39;: 0, &#39;subordinate_pledge_shortage&#39;: 0, &#39;additional_collateral_cash&#39;: 0, &#39;unpaid_interest&#39;: 0, &#39;other_loan_amount&#39;: 0, &#39;d1_margin_call_amount&#39;: 0, &#39;original_pledge_total_amount&#39;: 0, &#39;subordinate_pledge_total_amount&#39;: 0, &#39;credit_collateral_cash&#39;: 0, &#39;credit_collateral_substitute&#39;: 0, &#39;additional_credit_collateral_cash&#39;: 0, &#39;reused_credit_collateral_amount&#39;: 0, &#39;additional_credit_collateral_substitute&#39;: 0, &#39;sellout_collateral_loan_amount&#39;: 0, &#39;disposal_limit_amount&#39;: 0}</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qupyter.test.MockStockBroker.set_historical_daily_data">
+<span class="sig-name descname"><span class="pre">set_historical_daily_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asset_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qupyter.test.MockStockBroker.set_historical_daily_data" title="Permalink to this definition">#</a></dt>
+<dd><p>Mock 일봉 데이터 설정</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>asset_code</strong> (<em>str</em>) – 종목코드</p></li>
+<li><p><strong>values</strong> (<em>List</em><em>[</em><em>Dict</em><em>|</em><em>int</em><em>]</em>) – 설정 할 일봉 데이터</p></li>
+</ul>
+</dd>
+<dt class="field-even">Examples<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qupyter.test</span> <span class="kn">import</span> <span class="n">MockStockBroker</span>
+<span class="go">from datetime import date</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mock_broker</span> <span class="o">=</span> <span class="n">MockStockBroker</span><span class="p">()</span>
+
+<span class="go"># 최근 4일치 데이터 설정</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mock_broker</span><span class="o">.</span><span class="n">set_historical_daily_data</span><span class="p">(</span><span class="s1">&#39;005930&#39;</span><span class="p">,</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">{</span><span class="s1">&#39;open&#39;</span><span class="p">:</span> <span class="mi">70000</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">:</span> <span class="mi">70000</span><span class="p">,</span> <span class="s1">&#39;low&#39;</span><span class="p">:</span> <span class="mi">70000</span><span class="p">,</span> <span class="s1">&#39;close&#39;</span><span class="p">:</span> <span class="mi">70000</span><span class="p">,</span> <span class="s1">&#39;volume&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;volume_nominal&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+<span class="gp">... </span>    <span class="p">{</span><span class="s1">&#39;open&#39;</span><span class="p">:</span> <span class="mi">70000</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">:</span> <span class="mi">71000</span><span class="p">,</span> <span class="s1">&#39;low&#39;</span><span class="p">:</span> <span class="mi">70000</span><span class="p">,</span> <span class="s1">&#39;close&#39;</span><span class="p">:</span> <span class="mi">71000</span><span class="p">,</span> <span class="s1">&#39;volume&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;volume_nominal&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+<span class="gp">... </span>    <span class="p">{</span><span class="s1">&#39;open&#39;</span><span class="p">:</span> <span class="mi">71000</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">:</span> <span class="mi">72000</span><span class="p">,</span> <span class="s1">&#39;low&#39;</span><span class="p">:</span> <span class="mi">70000</span><span class="p">,</span> <span class="s1">&#39;close&#39;</span><span class="p">:</span> <span class="mi">72000</span><span class="p">,</span> <span class="s1">&#39;volume&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;volume_nominal&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+<span class="gp">... </span>    <span class="p">{</span><span class="s1">&#39;open&#39;</span><span class="p">:</span> <span class="mi">72000</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">:</span> <span class="mi">72000</span><span class="p">,</span> <span class="s1">&#39;low&#39;</span><span class="p">:</span> <span class="mi">70000</span><span class="p">,</span> <span class="s1">&#39;close&#39;</span><span class="p">:</span> <span class="mi">70000</span><span class="p">,</span> <span class="s1">&#39;volume&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;volume_nominal&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+<span class="gp">... </span><span class="p">])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mock_broker</span><span class="o">.</span><span class="n">get_historical_daily_data</span><span class="p">(</span><span class="s1">&#39;005930&#39;</span><span class="p">,</span> <span class="n">first_date</span><span class="o">=</span><span class="n">date</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span>
+<span class="go">            open   high    low  close  volume  volume_nominal</span>
+<span class="go">date</span>
+<span class="go">2023-10-26  70000  70000  70000  70000       0               0</span>
+<span class="go">2023-10-27  70000  70000  70000  70000       0               0</span>
+<span class="go">2023-10-30  70000  70000  70000  70000       0               0</span>
+<span class="go">2023-10-31  70000  70000  70000  70000       0               0</span>
+<span class="go">2023-11-01  70000  71000  70000  71000       0               0</span>
+<span class="go">2023-11-02  71000  72000  70000  72000       0               0</span>
+<span class="go">2023-11-03  72000  72000  70000  70000       0               0</span>
+
+<span class="go"># 최근 3일치 데이터 설정 (open, high, low, close 모두 하나의 값으로 설정)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mock_broker</span><span class="o">.</span><span class="n">set_historical_daily_data</span><span class="p">(</span><span class="s1">&#39;005380&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">182000</span><span class="p">,</span> <span class="mi">184000</span><span class="p">,</span> <span class="mi">186000</span><span class="p">])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mock_broker</span><span class="o">.</span><span class="n">get_historical_daily_data</span><span class="p">(</span><span class="s1">&#39;005380&#39;</span><span class="p">,</span> <span class="n">first_date</span><span class="o">=</span><span class="n">date</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span>
+<span class="go">            open    high     low   close  volume  volume_nominal</span>
+<span class="go">date</span>
+<span class="go">2023-10-26  182000  182000  182000  182000       0               0</span>
+<span class="go">2023-10-27  182000  182000  182000  182000       0               0</span>
+<span class="go">2023-10-30  182000  182000  182000  182000       0               0</span>
+<span class="go">2023-10-31  182000  182000  182000  182000       0               0</span>
+<span class="go">2023-11-01  182000  182000  182000  182000       0               0</span>
+<span class="go">2023-11-02  184000  184000  184000  184000       0               0</span>
+<span class="go">2023-11-03  186000  186000  186000  186000       0               0</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qupyter.test.MockStockBroker.set_historical_minute_data">
+<span class="sig-name descname"><span class="pre">set_historical_minute_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asset_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qupyter.test.MockStockBroker.set_historical_minute_data" title="Permalink to this definition">#</a></dt>
+<dd><p>Mock 분봉 데이터 설정</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>asset_code</strong> (<em>str</em>) – 종목코드</p></li>
+<li><p><strong>values</strong> (<em>List</em><em>[</em><em>Dict</em><em>|</em><em>int</em><em>]</em>) – 설정 할 분봉 데이터</p></li>
+</ul>
+</dd>
+<dt class="field-even">Examples<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">qupyter.test</span> <span class="kn">import</span> <span class="n">MockStockBroker</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mock_broker</span> <span class="o">=</span> <span class="n">MockStockBroker</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mock_broker</span><span class="o">.</span><span class="n">set_historical_minute_data</span><span class="p">(</span><span class="s1">&#39;005930&#39;</span><span class="p">,</span> <span class="p">[</span>
+<span class="gp">... </span>    <span class="p">{</span><span class="s1">&#39;open&#39;</span><span class="p">:</span> <span class="mi">70000</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">:</span> <span class="mi">70000</span><span class="p">,</span> <span class="s1">&#39;low&#39;</span><span class="p">:</span> <span class="mi">70000</span><span class="p">,</span> <span class="s1">&#39;close&#39;</span><span class="p">:</span> <span class="mi">70000</span><span class="p">,</span> <span class="s1">&#39;volume&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;volume_nominal&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+<span class="gp">... </span>    <span class="p">{</span><span class="s1">&#39;open&#39;</span><span class="p">:</span> <span class="mi">70000</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">:</span> <span class="mi">71000</span><span class="p">,</span> <span class="s1">&#39;low&#39;</span><span class="p">:</span> <span class="mi">70000</span><span class="p">,</span> <span class="s1">&#39;close&#39;</span><span class="p">:</span> <span class="mi">71000</span><span class="p">,</span> <span class="s1">&#39;volume&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;volume_nominal&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+<span class="gp">... </span>    <span class="p">{</span><span class="s1">&#39;open&#39;</span><span class="p">:</span> <span class="mi">71000</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">:</span> <span class="mi">72000</span><span class="p">,</span> <span class="s1">&#39;low&#39;</span><span class="p">:</span> <span class="mi">70000</span><span class="p">,</span> <span class="s1">&#39;close&#39;</span><span class="p">:</span> <span class="mi">72000</span><span class="p">,</span> <span class="s1">&#39;volume&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;volume_nominal&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+<span class="gp">... </span>    <span class="p">{</span><span class="s1">&#39;open&#39;</span><span class="p">:</span> <span class="mi">72000</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">:</span> <span class="mi">72000</span><span class="p">,</span> <span class="s1">&#39;low&#39;</span><span class="p">:</span> <span class="mi">70000</span><span class="p">,</span> <span class="s1">&#39;close&#39;</span><span class="p">:</span> <span class="mi">70000</span><span class="p">,</span> <span class="s1">&#39;volume&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;volume_nominal&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mock_broker</span><span class="o">.</span><span class="n">get_historical_minute_data</span><span class="p">(</span><span class="s1">&#39;005930&#39;</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">first_date</span><span class="o">=</span><span class="n">date</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="go">                    open   high    low  close  volume  volume_nominal</span>
+<span class="go">datetime</span>
+<span class="go">2023-11-02 09:05:00  70000  70000  70000  70000       0               0</span>
+<span class="go">2023-11-02 09:06:00  70000  70000  70000  70000       0               0</span>
+<span class="go">2023-11-02 09:07:00  70000  70000  70000  70000       0               0</span>
+<span class="go">2023-11-02 09:08:00  70000  70000  70000  70000       0               0</span>
+<span class="go">2023-11-02 09:09:00  70000  70000  70000  70000       0               0</span>
+<span class="go">...                    ...    ...    ...    ...     ...             ...</span>
+<span class="go">2023-11-03 15:15:00  70000  70000  70000  70000       0               0</span>
+<span class="go">2023-11-03 15:16:00  70000  70000  70000  70000       0               0</span>
+<span class="go">2023-11-03 15:17:00  70000  71000  70000  71000       0               0</span>
+<span class="go">2023-11-03 15:18:00  71000  72000  70000  72000       0               0</span>
+<span class="go">2023-11-03 15:19:00  72000  72000  70000  70000       0               0</span>
+
+<span class="go">[750 rows x 6 columns]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mock_broker</span><span class="o">.</span><span class="n">set_historical_minute_data</span><span class="p">(</span><span class="s1">&#39;005380&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">182000</span><span class="p">,</span> <span class="mi">183000</span><span class="p">,</span> <span class="mi">184000</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mock_broker</span><span class="o">.</span><span class="n">get_historical_minute_data</span><span class="p">(</span><span class="s1">&#39;005380&#39;</span><span class="p">,</span> <span class="n">first_date</span><span class="o">=</span><span class="n">date</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="go">                    open    high     low   close  volume  volume_nominal</span>
+<span class="go">datetime</span>
+<span class="go">2023-11-02 09:05:00  182000  182000  182000  182000       0               0</span>
+<span class="go">2023-11-02 09:06:00  182000  182000  182000  182000       0               0</span>
+<span class="go">2023-11-02 09:07:00  182000  182000  182000  182000       0               0</span>
+<span class="go">2023-11-02 09:08:00  182000  182000  182000  182000       0               0</span>
+<span class="go">2023-11-02 09:09:00  182000  182000  182000  182000       0               0</span>
+<span class="go">...                     ...     ...     ...     ...     ...             ...</span>
+<span class="go">2023-11-03 15:15:00  182000  182000  182000  182000       0               0</span>
+<span class="go">2023-11-03 15:16:00  182000  182000  182000  182000       0               0</span>
+<span class="go">2023-11-03 15:17:00  182000  182000  182000  182000       0               0</span>
+<span class="go">2023-11-03 15:18:00  183000  183000  183000  183000       0               0</span>
+<span class="go">2023-11-03 15:19:00  184000  184000  184000  184000       0               0</span>
+
+<span class="go">[750 rows x 6 columns]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qupyter.test.MockStockBroker.set_price">
+<span class="sig-name descname"><span class="pre">set_price</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asset_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#qupyter.test.MockStockBroker.set_price" title="Permalink to this definition">#</a></dt>
+<dd><p>Mock 가격 데이터 설정</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>asset_code</strong> (<em>str</em>) – 종목코드</p></li>
+<li><p><strong>kwargs</strong> (<em>Dict</em>) – 설정 할 가격 데이터</p></li>
+</ul>
+</dd>
+<dt class="field-even">Examples<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mock_broker</span><span class="o">.</span><span class="n">set_price</span><span class="p">(</span><span class="s1">&#39;005930&#39;</span><span class="p">,</span> <span class="n">current_price</span><span class="o">=</span><span class="mi">70000</span><span class="p">,</span> <span class="n">max_price</span><span class="o">=</span><span class="mi">82560</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="qupyter.test.order">
 <span class="sig-prename descclassname"><span class="pre">qupyter.test.</span></span><span class="sig-name descname"><span class="pre">order</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockOrder" title="qupyter.brokerage.models.StockOrder"><span class="pre">StockOrder</span></a></span></span><a class="headerlink" href="#qupyter.test.order" title="Permalink to this definition">#</a></dt>
@@ -526,6 +652,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.test.MockStockBroker"><code class="docutils literal notranslate"><span class="pre">MockStockBroker</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.test.MockStockBroker.set_account"><code class="docutils literal notranslate"><span class="pre">MockStockBroker.set_account()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.test.MockStockBroker.set_historical_daily_data"><code class="docutils literal notranslate"><span class="pre">MockStockBroker.set_historical_daily_data()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.test.MockStockBroker.set_historical_minute_data"><code class="docutils literal notranslate"><span class="pre">MockStockBroker.set_historical_minute_data()</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.test.MockStockBroker.set_price"><code class="docutils literal notranslate"><span class="pre">MockStockBroker.set_price()</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.test.order"><code class="docutils literal notranslate"><span class="pre">order()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.test.position"><code class="docutils literal notranslate"><span class="pre">position()</span></code></a></li>
 </ul>
