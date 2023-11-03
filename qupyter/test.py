@@ -1,3 +1,36 @@
+"""
+qupyter 전략 단위 테스트를 위한 Mock 객체들을 정의합니다.
+
+아래와 같은 방법으로 사용할 수 있습니다.
+
+:examples:
+
+.. code-block:: python
+
+    import asyncio
+    from qupyter import test
+    from qupyter.brokerage.ebest import EBestStockBroker
+
+    def test_trade_func():
+        broker = EBestStockBroker(test_trade=True)
+        account_info = broker.get_account()
+
+        positions = [
+            test.position(asset_code='005930', quantity=10, average_purchase_price=68000, current_price=70000),
+            test.position(asset_code='252670', quantity=10, average_purchase_price=2800, current_price=3000),
+        ]
+
+        pending_orders = [
+            test.order(asset_code='005930', trade_type='1', quantity=10, price=68000),
+            test.order(asset_code='252670', trade_type='2', quantity=10, price=2800),
+        ]
+
+        result = asyncio.run(trade_func(account_info, pending_orders, positions, broker))
+        print(result)
+
+
+"""
+
 import random
 
 from datetime import datetime
