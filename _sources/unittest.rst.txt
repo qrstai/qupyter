@@ -11,3 +11,6 @@ Unittest Helpers
 
 .. autofunction:: position
 
+.. autofunction:: validate_trade_func_result
+
+.. autofunction:: validate_handle_pending_orders_result
