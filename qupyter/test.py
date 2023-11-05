@@ -38,7 +38,7 @@ qupyter 전략 단위 테스트를 위한 Mock 객체들을 정의합니다.
 import random
 
 from datetime import datetime, timedelta
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Tuple
 
 import pandas as pd
 from qupyter.brokerage import StockOrder, StockPosition, StockBroker
@@ -604,15 +604,83 @@ class MockStockBroker(StockBroker):
         return res
 
 
+def validate_trade_func_result(result: List[Tuple[str, int, int]]):
+    """ trade_func 의 리턴값 검증
+
+    :param result: trade_func 의 리턴값
+    :type result: List[Tuple[str, int, int]]
+
+    """
+    if result == None:
+        return
+    if not isinstance(result, list):
+        raise ValueError('orderlist should be list')
+
+    for item in result:
+        if not isinstance(item, tuple):
+            raise ValueError('orderlist item should be tuple')
+        if len(item) != 3:
+            raise ValueError('orderlist item should have 3 elements')
+
+        code = item[0]
+        price = item[1]
+        quantity = item[2]
+
+        if not isinstance(code, str):
+            raise ValueError('code should be str')
+
+        if not isinstance(price, int):
+            raise ValueError('price should be int')
+
+        if price < 0:
+            raise ValueError('price should not be negative')
+
+        if not isinstance(quantity, int):
+            raise ValueError('quantity should be int')
+
+        if quantity <= 0:
+            raise ValueError('quantity should be positive')
 
 
+def validate_handle_pending_orders_result(result: List[Tuple[str, int, int|None, int]]):
+    """
+    handle_pending_orders 의 리턴값 검증
 
+    :param result: handle_pending_orders 의 리턴값
+    :type result: List[Tuple[str, int, int|None, int]]
 
+    """
+    if result == None:
+        return
+    if not isinstance(result, list):
+        raise ValueError('result should be list')
+    if len(result) == 0:
+        return
 
+    for item in result:
+        if not isinstance(item, tuple):
+            raise ValueError('result item should be tuple')
+        if len(item) != 4:
+            raise ValueError('result item should have 4 elements')
 
+        code = item[0]
+        order_id = item[1]
+        price = item[2]
+        quantity = item[3]
 
+        if not isinstance(code, str):
+            raise ValueError('code should be str')
 
+        if not isinstance(order_id, int):
+            raise ValueError('order_id should be int')
 
+        if price != None and not isinstance(price, int):
+            raise ValueError('price should be int or None')
 
+        if not isinstance(quantity, int):
+            raise ValueError('quantity should be int')
+
+        if quantity > 0 and price == None:
+            raise ValueError('price should be specified when quantity > 0')
 
 
