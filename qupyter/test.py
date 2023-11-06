@@ -641,8 +641,8 @@ def validate_trade_func_result(result: List[Tuple[str, int, int]]):
         if not isinstance(int(quantity), int):
             raise ValueError('quantity should be int')
 
-        if quantity <= 0:
-            raise ValueError('quantity should be positive')
+        if quantity == 0:
+            raise ValueError('quantity should not be zero')
 
 
 def validate_handle_pending_orders_result(result: List[Tuple[str, int, int|None, int]]):
