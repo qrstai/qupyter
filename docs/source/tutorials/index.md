@@ -9,4 +9,5 @@ credentials
 strategy
 local_test
 deploy
+unittest
 ```
