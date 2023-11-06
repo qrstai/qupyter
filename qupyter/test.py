@@ -177,7 +177,7 @@ class MockStockBroker(StockBroker):
         """
         self.prices[asset_code] = kwargs
 
-    def get_price(self, asset_code) -> pd.DataFrame:
+    def get_price(self, asset_code: str, raw_data: bool  = False) -> pd.DataFrame:
         data = {
             'code': asset_code,
             'name': asset_code,
@@ -217,16 +217,19 @@ class MockStockBroker(StockBroker):
         if asset_code in self.prices:
             data.update(self.prices[asset_code])
 
-        df = pd.DataFrame([data])
-        df.set_index('code', inplace=True)
-        return df
+        if raw_data:
+            return data
+        else:
+            df = pd.DataFrame([data])
+            df.set_index('code', inplace=True)
+            return df
 
 
     def get_price_for_multiple_stocks(self, asset_codes: List[str]) -> pd.DataFrame:
         dataset = []
 
         for asset_code in asset_codes:
-            dataset.append(self.get_price(asset_code))
+            dataset.append(self.get_price(asset_code, raw_data=True))
 
         df = pd.DataFrame(dataset)
         df.set_index('code', inplace=True)
