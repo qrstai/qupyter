@@ -632,13 +632,13 @@ def validate_trade_func_result(result: List[Tuple[str, int, int]]):
         if not isinstance(code, str):
             raise ValueError('code should be str')
 
-        if not isinstance(price, int):
+        if not isinstance(int(price), int):
             raise ValueError('price should be int')
 
         if price < 0:
             raise ValueError('price should not be negative')
 
-        if not isinstance(quantity, int):
+        if not isinstance(int(quantity), int):
             raise ValueError('quantity should be int')
 
         if quantity <= 0:
@@ -677,10 +677,10 @@ def validate_handle_pending_orders_result(result: List[Tuple[str, int, int|None,
         if not isinstance(order_id, int):
             raise ValueError('order_id should be int')
 
-        if price != None and not isinstance(price, int):
+        if price != None and not isinstance(int(price), int):
             raise ValueError('price should be int or None')
 
-        if not isinstance(quantity, int):
+        if not isinstance(int(quantity), int):
             raise ValueError('quantity should be int')
 
         if quantity > 0 and price == None:
