@@ -612,7 +612,7 @@ class EBestStocks(EBest):
 
                 out_block_1 = data.get(f'{tr_cd}OutBlock1', [])
                 for item in out_block_1:
-                    order = StockOrder.from_json(json_dict=item)
+                    order = self._create_stock_order_from_json(item)
                     # pending_orders.append(order)
 
                     if order.asset_code in pending_orders_dict:
