@@ -129,14 +129,14 @@ async def on_initialize():
 사용자 전략 코드를 구현합니다. 설정 된 주기마다 호출 되고 매매지시가 필요한 경우 응답으로 전달합니다.
 
 ```python
-async def trade_func(account_info: Dict, pending_orders: List[StockOrder], positions: List[StockPosition], broker: StockBroker) -> List:
+async def trade_func(account_info, pending_orders, positions, broker):
   """사용자 전략 코드 구현.
 
   Args:
-    account_info: 계좌 정보.
-    pending_orders: 미체결 주문 목록.
-    positions: 보유 포지션.
-    broker: 시세 조회를 위한 증권 사 API wrapper.
+    account_info (dict): 계좌 정보.
+    pending_orders (tuple): 미체결 주문 목록.
+    positions (list): 보유 포지션.
+    broker (StockBroker): 시세 조회를 위한 증권 사 API wrapper.
 
   Returns:
     매매 지시 목록, 없는 경우 `None`.
