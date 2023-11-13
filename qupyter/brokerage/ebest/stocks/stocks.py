@@ -328,7 +328,7 @@ class EBestStocks(EBest):
                 }
             }
 
-            data, r_headers = self.post_with_retry(url, headers=headers, json=body, return_headers=True)
+            data, r_headers = self.post_with_retry(url, headers, body, return_headers=True)
 
             tr_cont = r_headers.get('tr_cont')
             tr_cont_key = r_headers.get('tr_cont_key')
