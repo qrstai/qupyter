@@ -531,7 +531,7 @@ class EBestStocks(EBest):
 
         return positions
 
-    def _create_stock_order_from_json(json_dict: Dict) -> StockOrder:
+    def _create_stock_order_from_json(self, json_dict: Dict) -> StockOrder:
         order_id = int(json_dict.get('ordno'))  # 주문번호
         asset_code = json_dict.get('expcode')  # 종목번호
         trade_type = json_dict.get('medosu')  # 구분
