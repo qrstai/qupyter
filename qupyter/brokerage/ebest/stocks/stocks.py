@@ -1,12 +1,16 @@
 import datetime
 from decimal import Decimal
+import json
 import time
 
-from typing import Dict, List
+from typing import Dict, List, Tuple
+
+from requests import HTTPError
 from qupyter.brokerage.ebest.core import EBest
 from qupyter.brokerage.models import StockOrder
 from qupyter.brokerage.models import StockPosition
 from qupyter.brokerage.utils.limit_calls import CallLimiter, limit_calls
+from qupyter.brokerage.utils.retry import retry
 
 
 
@@ -14,6 +18,21 @@ class EBestStocks(EBest):
 
     def __init__(self, test_trade: bool = None, app_key: str = None, app_secret: str = None, expire_date: str = None):
         super().__init__(test_trade=test_trade, account_type='stock', app_key=app_key, app_secret=app_secret, expire_date=expire_date)
+
+    @retry(HTTPError)
+    def post_with_retry(self, url: str, headers: Dict, body: Dict, return_headers: bool = False) -> Dict | Tuple[Dict, Dict]:
+        r = self.session.post(url, headers=headers, json=body)
+        body = r.json()
+        if r.status_code != 200:
+            print(body)
+            r.raise_for_status()
+
+        if return_headers:
+            headers = r.headers
+            return body, headers
+        else:
+            return body
+
 
     # ----------------------------------------------------------------------------------------------------
     # 시세 관련
@@ -34,9 +53,7 @@ class EBestStocks(EBest):
             }
         }
 
-        r = self.session.post(url, headers=headers, json=body)
-        data = r.json()
-
+        data = self.post_with_retry(url, headers, body)
         out_block = data.get(f'{tr_cd}OutBlock')
 
         res = {
@@ -83,9 +100,7 @@ class EBestStocks(EBest):
             }
         }
 
-        r = self.session.post(url, headers=headers, json=body)
-        data = r.json()
-
+        data = self.post_with_retry(url, headers, body)
         out_block = data.get(f'{tr_cd}OutBlock')
 
         res = {
@@ -149,9 +164,7 @@ class EBestStocks(EBest):
                 }
             }
 
-            r = self.session.post(url, headers=headers, json=body)
-            data = r.json()
-
+            data = self.post_with_retry(url, headers, body)
             out_block_1 = data.get(f'{tr_cd}OutBlock1')
 
             for item in out_block_1:
@@ -228,13 +241,10 @@ class EBestStocks(EBest):
                 }
             }
 
-            r = self.session.post(url, headers=headers, json=body)
+            data, r_headers = self.post_with_retry(url, headers, body, return_headers=True)
 
-            r_headers = r.headers
             tr_cont = r_headers.get('tr_cont')
             tr_cont_key = r_headers.get('tr_cont_key')
-
-            data = r.json()
 
             out_block = data.get(f'{tr_cd}OutBlock')
             cts_date = out_block.get('cts_date', '').strip()
@@ -318,13 +328,10 @@ class EBestStocks(EBest):
                 }
             }
 
-            r = self.session.post(url, headers=headers, json=body)
+            data, r_headers = self.post_with_retry(url, headers=headers, json=body, return_headers=True)
 
-            r_headers = r.headers
             tr_cont = r_headers.get('tr_cont')
             tr_cont_key = r_headers.get('tr_cont_key')
-
-            data = r.json()
 
             out_block = data.get(f'{tr_cd}OutBlock')
             cts_date = out_block.get('cts_date', '').strip()
@@ -374,8 +381,7 @@ class EBestStocks(EBest):
             }
         }
 
-        r = self.session.post(url, headers=headers, json=body)
-        data = r.json()
+        data = self.post_with_retry(url, headers, body)
 
         out_block_2 = data.get(f'{tr_cd}OutBlock2')
         if out_block_2 is None:
@@ -506,8 +512,7 @@ class EBestStocks(EBest):
                 }
             }
 
-            r = self.session.post(url, headers=headers, json=body)
-            data = r.json()
+            data = self.post_with_retry(url, headers, body)
 
             if f'{tr_cd}OutBlock' in data:
                 out_block = data.get(f'{tr_cd}OutBlock')
@@ -599,8 +604,7 @@ class EBestStocks(EBest):
                 }
             }
 
-            r = self.session.post(url, headers=headers, json=body)
-            data = r.json()
+            data = self.post_with_retry(url, headers, body)
 
             if f'{tr_cd}OutBlock' in data:
                 out_block = data.get(f'{tr_cd}OutBlock')
@@ -656,8 +660,7 @@ class EBestStocks(EBest):
             }
         }
 
-        r = self.session.post(url, headers=headers, json=body)
-        data = r.json()
+        data = self.post_with_retry(url, headers, body)
         print(data)
 
 
@@ -682,8 +685,7 @@ class EBestStocks(EBest):
             }
         }
 
-        r = self.session.post(url, headers=headers, json=body)
-        data = r.json()
+        data = self.post_with_retry(url, headers, body)
         print(data)
 
 
@@ -705,8 +707,7 @@ class EBestStocks(EBest):
             }
         }
 
-        r = self.session.post(url, headers=headers, json=body)
-        data = r.json()
+        data = self.post_with_retry(url, headers, body)
         print(data)
 
         return
