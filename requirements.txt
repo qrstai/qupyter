@@ -3,10 +3,8 @@ sphinxcontrib-youtube==1.4.1
 myst-parser==2.0.0
 pydata-sphinx-theme==0.14.0
 pandas>=2.1.0
-pykrx>=1.0.45
 numpy>=1.26.0
 websockets>=11.0.3
 requests>=2.31.0
-boto3>=1.28.49
 python-dotenv>=1.0.0
 
