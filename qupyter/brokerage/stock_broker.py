@@ -19,7 +19,6 @@ class StockBroker:
         DataFrame에는 다음 필드들이 포함됩니다.
 
         * code: 종목코드
-        * name: 종목명
         * current_price: 현재가
         * volume: 거래량
         * volume_nominal: 거래대금
@@ -43,9 +42,9 @@ class StockBroker:
             >>> price_df = broker.get_price(asset_code='005930')
             >>> print(price_df)
 
-                    name  current_price    volume  volume_nominal  open_price  high_price  ...  ask_price_5  bid_price_5  ask_volume_5  bid_volume_5  ask_volume_total  bid_volume_total
+                    current_price    volume  volume_nominal  open_price  high_price  ...  ask_price_5  bid_price_5  ask_volume_5  bid_volume_5  ask_volume_total  bid_volume_total
             code                                                                           ...
-            005930  삼성전자          68000  10527625    718811000000       68800       68800  ...        68500        67600        107929         99315            554013           1069461
+            005930          68000  10527625    718811000000       68800       68800  ...        68500        67600        107929         99315            554013           1069461
 
         """
         pass
@@ -63,7 +62,6 @@ class StockBroker:
         DataFrame에는 다음 필드들이 포함됩니다.
 
         * code: 종목코드
-        * name: 종목명
         * current_price: 현재가
         * volume: 거래량
         * volume_nominal: 거래대금
@@ -84,10 +82,10 @@ class StockBroker:
             >>> price_df = broker.get_price_for_multiple_stocks(asset_codes=['005930', '000660'])
             >>> print(price_df)
 
-                    name  current_price    volume  volume_nominal  open_price  high_price  ...  max_price  min_price  ask_price_1  bid_price_1  ask_volume_total  bid_volume_total
+                    current_price    volume  volume_nominal  open_price  high_price  ...  max_price  min_price  ask_price_1  bid_price_1  ask_volume_total  bid_volume_total
             code                                                                           ...
-            005930  삼성전자          68000  10542622    719831000000       68800       68800  ...      89000      48000        68100        68000            554013           1069461
-            005380   현대차         182000    373131     68135000000      182700      183700  ...     237500     128000       182100       182000              8070             45848
+            005930          68000  10542622    719831000000       68800       68800  ...      89000      48000        68100        68000            554013           1069461
+            005380          182000    373131     68135000000      182700      183700  ...     237500     128000       182100       182000              8070             45848
 
             [2 rows x 13 columns]
         """
