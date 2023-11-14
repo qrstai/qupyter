@@ -25,6 +25,9 @@ class EBestStocks(EBest):
         body = r.json()
         if r.status_code != 200:
             print(body)
+            if body.get('rsp_cd') == 'IGW00121': # 유효하지 않은 토큰
+                self.refresh_token()
+
             r.raise_for_status()
 
         if return_headers:

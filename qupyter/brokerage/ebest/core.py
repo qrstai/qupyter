@@ -40,15 +40,19 @@ class EBest:
     @property
     def session(self):
         if self._session == None or datetime.now() > self._token_valid_until:
-            self._get_access_token()
-
-            self._session = requests.Session()
-            self._session.headers.update({
-                'content-type': 'application/json; charset=UTF-8',
-                'authorization': f'Bearer {self._access_token}'
-            })
+            self.refresh_token()
 
         return self._session
+
+
+    def refresh_token(self):
+        self._get_access_token()
+
+        self._session = requests.Session()
+        self._session.headers.update({
+            'content-type': 'application/json; charset=UTF-8',
+            'authorization': f'Bearer {self._access_token}'
+        })
 
 
     def _load_credentials(self, test_trade: bool, account_type: str):
@@ -91,7 +95,12 @@ class EBest:
         if not self._access_token:
             raise Exception('Access token cannot be obtained. Check if API keys are valid.')
         else:
-            self._token_valid_until = datetime.now() + timedelta(seconds=data.get('expires_in') - 300)
+            expired_at = datetime.now() + timedelta(seconds=data.get('expires_in'))
+            # 이베스트는 expires_in 값과 관계 없이 매일 오전 7시에 키를 초기화 시킨다.
+            # https://openapi.ebestsec.co.kr/howto-use - 03.접근토큰 발급 탭 참고
+            forced_expire_time = datetime.now().replace(hour=7, minute=0, second=0, microsecond=0) + timedelta(days=1)
+
+            self._token_valid_until = min(expired_at, forced_expire_time)
 
 
     def _check_key_expire_date(self):
