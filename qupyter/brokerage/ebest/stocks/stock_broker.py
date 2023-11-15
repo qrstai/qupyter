@@ -52,7 +52,7 @@ class EBestStockBroker(StockBroker):
             if first_date > last_date:
                 raise ValueError('조회 시작일자는 조회 마지막일자 이후일 수 없습니다.')
             elif first_date == last_date:
-                raise ValueError('당일 조회는 get_price() 메서드를 사용해주세요.')
+                raise ValueError('조회 시작일자와 조회 마지막일자는 같을 수 없습니다.')
 
         if not first_date and not last_date:
             raise ValueError('당일 조회는 get_price() 메서드를 사용해주세요.')
