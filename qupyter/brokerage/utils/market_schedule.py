@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 import datetime
 from typing import Optional
+from cachetools.func import ttl_cache
 
 import requests
 
@@ -31,6 +32,8 @@ class MarketSchedule:
     reason: Optional[str]
 
 
+
+@ttl_cache(maxsize=1, ttl=60)
 def get_market_schedule(date: datetime.date = datetime.datetime.today().date()) -> MarketSchedule:
     """
     주어진 날짜에 대한 장 운영 정보를 반환합니다.
