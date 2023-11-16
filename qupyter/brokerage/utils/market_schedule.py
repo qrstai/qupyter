@@ -33,8 +33,16 @@ class MarketSchedule:
 
 
 
-@ttl_cache(maxsize=1, ttl=60)
+
 def get_market_schedule(date: datetime.date = None) -> MarketSchedule:
+    if date is None:
+        date = datetime.date.today()
+
+    return _get_market_schedule(date)
+
+
+@ttl_cache(maxsize=1, ttl=60)
+def _get_market_schedule(date: datetime.date) -> MarketSchedule:
     """
     주어진 날짜에 대한 장 운영 정보를 반환합니다.
 
@@ -43,9 +51,6 @@ def get_market_schedule(date: datetime.date = None) -> MarketSchedule:
     :return: 장 운영 정보
     :rtype: MarketSchedule
     """
-
-    if date is None:
-        date = datetime.date.today()
 
     r = requests.get(config.QUPYTER_API_URL + '/market-schedule', params={'date': date.strftime('%Y%m%d')})
     r.raise_for_status()
