@@ -55,6 +55,13 @@ class EBest:
         })
 
 
+    def get_access_token(self):
+        if self._access_token == None or datetime.now() > self._token_valid_until:
+            self.refresh_token()
+
+        return self._access_token
+
+
     def _load_credentials(self, test_trade: bool, account_type: str):
         params = {
             'brokerage': 'ebest',
