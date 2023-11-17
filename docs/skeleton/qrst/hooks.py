@@ -78,11 +78,8 @@ async def on_market_open(account_info: Dict, pending_orders: List[StockOrder], p
     .. code-block:: python
 
         async def on_market_open(account_info: Dict, pending_orders: List, positions: List, broker: StockBroker) -> List[Tuple[str, int, int]]:
-            asset_codes = list(map(lambda x: x.asset_code, positions)))
-            price_df = broker.get_price_for_multiple_stocks(asset_codes)
-
             # 보유 중인 수량 전량 매도
-            return list(map(lambda x: (x.asset_code, -x.quantity, x.price), positions))
+            return list(map(lambda x: (x.asset_code, x.current_price, -x.quantity), positions))
     '''
     pass
 
@@ -111,7 +108,7 @@ async def on_market_close(account_info: Dict, pending_orders: List[StockOrder], 
     :param broker: 주식 거래를 위한 객체
     :type broker: StockBroker
 
-    :return: 거래 할 종목 리스트. 종목 코드, 거래 수량, 지정 가격을 반환합니다.
+    :return: 거래 할 종목 리스트. 종목 코드, 지정가격, 거래 수량 을 반환합니다.
                 매수 인 경우 양수, 매도 인 경우 음수로 수량을 설정합니다.
     :rtype: List[Tuple[str, int, int]]
 
@@ -120,11 +117,8 @@ async def on_market_close(account_info: Dict, pending_orders: List[StockOrder], 
     .. code-block:: python
 
         async def on_market_close(account_info: Dict, pending_orders: List, positions: List, broker: StockBroker) -> List[Tuple[str, int, int]]:
-            asset_codes = list(map(lambda x: x.asset_code, positions)))
-            price_df = broker.get_price_for_multiple_stocks(asset_codes)
-
             # 보유 중인 수량 전량 매도
-            return list(map(lambda x: (x.asset_code, -x.quantity, x.price), positions))
+            return list(map(lambda x: (x.asset_code, x.current_price, -x.quantity), positions))
     '''
     pass
 
