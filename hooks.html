@@ -492,7 +492,7 @@ document.write(`
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>거래 할 종목 리스트. 종목 코드, 거래 수량, 지정 가격을 반환합니다.
+<dd class="field-even"><p>거래 할 종목 리스트. 종목 코드, 지정가격, 거래 수량 을 반환합니다.
 매수 인 경우 양수, 매도 인 경우 음수로 수량을 설정합니다.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
@@ -502,11 +502,8 @@ document.write(`
 <dd class="field-even"><p></p></dd>
 </dl>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">on_market_close</span><span class="p">(</span><span class="n">account_info</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">positions</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">broker</span><span class="p">:</span> <span class="n">StockBroker</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
-    <span class="n">asset_codes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">positions</span><span class="p">)))</span>
-    <span class="n">price_df</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="n">get_price_for_multiple_stocks</span><span class="p">(</span><span class="n">asset_codes</span><span class="p">)</span>
-
     <span class="c1"># 보유 중인 수량 전량 매도</span>
-    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">asset_code</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="o">.</span><span class="n">quantity</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">price</span><span class="p">),</span> <span class="n">positions</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">current_price</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="o">.</span><span class="n">quantity</span><span class="p">),</span> <span class="n">positions</span><span class="p">))</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -539,11 +536,8 @@ document.write(`
 <dd class="field-even"><p></p></dd>
 </dl>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">on_market_open</span><span class="p">(</span><span class="n">account_info</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">positions</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">broker</span><span class="p">:</span> <span class="n">StockBroker</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
-    <span class="n">asset_codes</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">positions</span><span class="p">)))</span>
-    <span class="n">price_df</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="n">get_price_for_multiple_stocks</span><span class="p">(</span><span class="n">asset_codes</span><span class="p">)</span>
-
     <span class="c1"># 보유 중인 수량 전량 매도</span>
-    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">asset_code</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="o">.</span><span class="n">quantity</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">price</span><span class="p">),</span> <span class="n">positions</span><span class="p">))</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">current_price</span><span class="p">,</span> <span class="o">-</span><span class="n">x</span><span class="o">.</span><span class="n">quantity</span><span class="p">),</span> <span class="n">positions</span><span class="p">))</span>
 </pre></div>
 </div>
 </dd></dl>
