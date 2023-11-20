@@ -155,3 +155,38 @@ async def trade_func(account_info, pending_orders, positions, broker):
 파라미터에 대한 자세한 설명은 [Hooks - trade_func()](qrst.hooks.trade_func)
 문서를 참고하세요.
 ```
+
+### handle_pending_orders
+
+미체결 주문을 확인하고 정정/취소할 내역을 반환합니다. 매 주기마다 `trade_func` 가 호출되기 전 미체결주문이 남아있으면 호출됩니다.
+
+```{info}
+이 hook을 구현하지 않은 경우의 기본 동작은 미체결 주문을 모두 취소하는 것입니다.
+```
+
+```python
+async def handle_pending_orders(pending_orders, broker):
+  result = []
+
+  for (asset_code, orders) in pending_orders:
+    for order in orders:
+      if order.price != order.current_price: # 제출한 주문 가격과 현재 가격이 달라진 경우
+        if order.trade_type == 1: # 매도 주문의 경우 변경된 주문으로 정정하는 주문을 제출합니다.
+          print(f"[handle_pending_orders] update order price: {order.asset_code}) {order.price} -> {order.current_price}")
+          result.append((asset_code, order.order_id, order.current_price, order.quantity))
+        else: # 매수 주문의 경우 기존 주문을 취소합니다.
+          print(f"[handle_pending_orders] cancel order: {order.asset_code} {order.price} -> {order.current_price}")
+          result.append((asset_code, order.order_id, 0, -1*order.quantity))
+
+  return result
+```
+
+`(종목코드, 원주문번호, 정정가격, 수량)` 형식의 튜플을 원소로 갖는 리스트를 반환합니다.
+
+- 전량/일부 취소의 경우 가격은 None 으로 지정하고 취소하고자하는 수량을 음수로 지정합니다.
+- 정정의 경우 가격과 수량을 지정합니다.
+
+```{note}
+파라미터와 응답형식에 대한 자세한 설명은 [Hooks - handle_pending_orders()](qrst.hooks.handle_pending_orders)
+문서를 참고하세요.
+```
