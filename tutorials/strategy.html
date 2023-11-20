@@ -536,6 +536,36 @@ document.write(`
 문서를 참고하세요.</p>
 </div>
 </section>
+<section id="handle-pending-orders">
+<h3>handle_pending_orders<a class="headerlink" href="#handle-pending-orders" title="Permalink to this heading">#</a></h3>
+<p>미체결 주문을 확인하고 정정/취소할 내역을 반환합니다. 매 주기마다 <code class="docutils literal notranslate"><span class="pre">trade_func</span></code> 가 호출되기 전 미체결주문이 남아있으면 호출됩니다.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">handle_pending_orders</span><span class="p">(</span><span class="n">pending_orders</span><span class="p">,</span> <span class="n">broker</span><span class="p">):</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">orders</span><span class="p">)</span> <span class="ow">in</span> <span class="n">pending_orders</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">order</span> <span class="ow">in</span> <span class="n">orders</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">order</span><span class="o">.</span><span class="n">price</span> <span class="o">!=</span> <span class="n">order</span><span class="o">.</span><span class="n">current_price</span><span class="p">:</span> <span class="c1"># 제출한 주문 가격과 현재 가격이 달라진 경우</span>
+        <span class="k">if</span> <span class="n">order</span><span class="o">.</span><span class="n">trade_type</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="c1"># 매도 주문의 경우 변경된 주문으로 정정하는 주문을 제출합니다.</span>
+          <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[handle_pending_orders] update order price: </span><span class="si">{</span><span class="n">order</span><span class="o">.</span><span class="n">asset_code</span><span class="si">}</span><span class="s2">) </span><span class="si">{</span><span class="n">order</span><span class="o">.</span><span class="n">price</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">order</span><span class="o">.</span><span class="n">current_price</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+          <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">order</span><span class="o">.</span><span class="n">order_id</span><span class="p">,</span> <span class="n">order</span><span class="o">.</span><span class="n">current_price</span><span class="p">,</span> <span class="n">order</span><span class="o">.</span><span class="n">quantity</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1"># 매수 주문의 경우 기존 주문을 취소합니다.</span>
+          <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[handle_pending_orders] cancel order: </span><span class="si">{</span><span class="n">order</span><span class="o">.</span><span class="n">asset_code</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">order</span><span class="o">.</span><span class="n">price</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">order</span><span class="o">.</span><span class="n">current_price</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+          <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">asset_code</span><span class="p">,</span> <span class="n">order</span><span class="o">.</span><span class="n">order_id</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="n">order</span><span class="o">.</span><span class="n">quantity</span><span class="p">))</span>
+
+  <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">(종목코드,</span> <span class="pre">원주문번호,</span> <span class="pre">정정가격,</span> <span class="pre">수량)</span></code> 형식의 튜플을 원소로 갖는 리스트를 반환합니다.</p>
+<ul class="simple">
+<li><p>전량/일부 취소의 경우 가격은 None 으로 지정하고 취소하고자하는 수량을 음수로 지정합니다.</p></li>
+<li><p>정정의 경우 가격과 수량을 지정합니다.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>파라미터와 응답형식에 대한 자세한 설명은 <a class="reference internal" href="../hooks.html#qrst.hooks.handle_pending_orders" title="qrst.hooks.handle_pending_orders"><span class="xref myst py py-func">Hooks - handle_pending_orders()</span></a>
+문서를 참고하세요.</p>
+</div>
+</section>
 </section>
 </section>
 
@@ -587,6 +617,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#on-market-open">on_market_open</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#on-market-close">on_market_close</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#trade-func">trade_func</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#handle-pending-orders">handle_pending_orders</a></li>
 </ul>
 </li>
 </ul>
