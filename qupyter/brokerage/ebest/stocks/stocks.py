@@ -483,7 +483,7 @@ class EBestStocks(EBest):
 
 
     @limit_calls(max_calls=2, scope='CSPAQ12300')
-    def get_positions(self):
+    def get_positions(self, exclude_empty_positions: bool):
         """ 보유 포지션 목록 조회 """
 
         url = f'{self.host_url}/stock/accno'
@@ -524,6 +524,10 @@ class EBestStocks(EBest):
                 out_block_1 = data.get(f'{tr_cd}OutBlock1', [])
                 for item in out_block_1:
                     position = self._create_stock_position_from_json(item)
+
+                    if exclude_empty_positions and position.quantity == 0:
+                        continue
+
                     positions.append(position)
 
                 if cts_expcode.strip() == '':

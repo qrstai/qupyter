@@ -100,8 +100,8 @@ class EBestStockBroker(StockBroker):
         )
 
 
-    def get_positions(self) -> List[StockPosition]:
-        stock_positions = self.api.get_positions()
+    def get_positions(self, exclude_empty_positions: bool = True) -> List[StockPosition]:
+        stock_positions = self.api.get_positions(exclude_empty_positions)
 
         return stock_positions
 
