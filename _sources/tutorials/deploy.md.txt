@@ -82,7 +82,7 @@ finance-datareader==0.9.50
 배포는 `qup deploy` 명령을 사용해서 진행합니다.
 
 ```bash
-jovyan@jupyter-kghoon:~/strategy2$ qup deploy --help
+jovyan@jupyter-qupyter:~/strategy2$ qup deploy --help
 Usage: qup deploy [OPTIONS] ENTRY_FILENAME
 
   Deploy strategy
@@ -101,7 +101,7 @@ Options:
 아래와 같이 실행하여 배포를 진행합니다.
 
 ```bash
-jovyan@jupyter-kghoon:~/strategy2$ qup deploy ./5min_breakout_strategy.py
+jovyan@jupyter-qupyter:~/strategy2$ qup deploy ./5min_breakout_strategy.py
 START DEPLOYMENT
 - strategy_name: 5min-breakout-strategy
 - entry_filename: ./5min_breakout_strategy.py
@@ -109,9 +109,9 @@ START DEPLOYMENT
 done. kghoon_7e888d06.zip
 Create new pod...
 Wait for pod ready...
-Pod is ready - name: kghoon-volatility-break-zfclnmrp
+Pod is ready - name: qupyter-volatility-break-zfclnmrp
 done
-jovyan@jupyter-kghoon:~/strategy2$
+jovyan@jupyter-qupyter:~/strategy2$
 ```
 
 ### 배포된 전략 목록 확인
@@ -119,10 +119,10 @@ jovyan@jupyter-kghoon:~/strategy2$
 배포가 완료되면 아래와 같이 `qup list` 명령을 사용해서 배포된 전략 목록에서 확인 할 수 있습니다.
 
 ```bash
-jovyan@jupyter-kghoon:~/strategy2$ qup list
+jovyan@jupyter-qupyter:~/strategy2$ qup list
 STRATEGY           DEPLOYMENT ID                      STATUS     CREATED AT
-5min-breakout-strategy   kghoon-5min-breakout-strategy-zfclnmrp   Running    2023-10-19 06:49:28
-jovyan@jupyter-kghoon:~/strategy2$
+5min-breakout-strategy   qupyter-5min-breakout-strategy-zfclnmrp   Running    2023-10-19 06:49:28
+jovyan@jupyter-qupyter:~/strategy2$
 ```
 
 ### 배포된 전략 실행 로그 확인
@@ -143,7 +143,7 @@ Options:
 `-f` 옵션을 사용하면 로그를 실시간으로 tailing 할 수 있습니다.
 
 ```bash
-jovyan@jupyter-kghoon:~/strategy2$ qup logs kghoon-5min-breakout-strategy-zfclnmrp
+jovyan@jupyter-qupyter:~/strategy2$ qup logs qupyter-5min-breakout-strategy-zfclnmrp
 Collecting finance-datareader==0.9.50
   Downloading finance_datareader-0.9.50-py3-none-any.whl (19 kB)
 Collecting bs4==0.0.1
@@ -166,5 +166,5 @@ today_open:69700 yesterday_range:1700.0 k:0.5
 target_price:70550.0 current_price:69500
 today_open:189900 yesterday_range:3500.0 k:0.5
 target_price:191650.0 current_price:188900
-jovyan@jupyter-kghoon:~/strategy2$
+jovyan@jupyter-qupyter:~/strategy2$
 ```

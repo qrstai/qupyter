@@ -464,7 +464,7 @@ document.write(`
 <section id="id3">
 <h2>배포<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
 <p>배포는 <code class="docutils literal notranslate"><span class="pre">qup</span> <span class="pre">deploy</span></code> 명령을 사용해서 진행합니다.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jovyan@jupyter-kghoon:~/strategy2$<span class="w"> </span>qup<span class="w"> </span>deploy<span class="w"> </span>--help
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jovyan@jupyter-qupyter:~/strategy2$<span class="w"> </span>qup<span class="w"> </span>deploy<span class="w"> </span>--help
 Usage:<span class="w"> </span>qup<span class="w"> </span>deploy<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>ENTRY_FILENAME
 
 <span class="w">  </span>Deploy<span class="w"> </span>strategy
@@ -480,7 +480,7 @@ Options:
 <p>작성한 전략 파일을 인자로 전달합니다. <code class="docutils literal notranslate"><span class="pre">-n</span></code> 옵션을 사용해 전략의 이름을 따로 지정할 수 있습니다.
 지정하지 않는 경우 파일이름을 전략 이름으로 사용합니다.</p>
 <p>아래와 같이 실행하여 배포를 진행합니다.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jovyan@jupyter-kghoon:~/strategy2$<span class="w"> </span>qup<span class="w"> </span>deploy<span class="w"> </span>./5min_breakout_strategy.py
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jovyan@jupyter-qupyter:~/strategy2$<span class="w"> </span>qup<span class="w"> </span>deploy<span class="w"> </span>./5min_breakout_strategy.py
 START<span class="w"> </span>DEPLOYMENT
 -<span class="w"> </span>strategy_name:<span class="w"> </span>5min-breakout-strategy
 -<span class="w"> </span>entry_filename:<span class="w"> </span>./5min_breakout_strategy.py
@@ -488,18 +488,18 @@ START<span class="w"> </span>DEPLOYMENT
 <span class="k">done</span>.<span class="w"> </span>kghoon_7e888d06.zip
 Create<span class="w"> </span>new<span class="w"> </span>pod...
 Wait<span class="w"> </span><span class="k">for</span><span class="w"> </span>pod<span class="w"> </span>ready...
-Pod<span class="w"> </span>is<span class="w"> </span>ready<span class="w"> </span>-<span class="w"> </span>name:<span class="w"> </span>kghoon-volatility-break-zfclnmrp
+Pod<span class="w"> </span>is<span class="w"> </span>ready<span class="w"> </span>-<span class="w"> </span>name:<span class="w"> </span>qupyter-volatility-break-zfclnmrp
 <span class="k">done</span>
-jovyan@jupyter-kghoon:~/strategy2$
+jovyan@jupyter-qupyter:~/strategy2$
 </pre></div>
 </div>
 <section id="id4">
 <h3>배포된 전략 목록 확인<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
 <p>배포가 완료되면 아래와 같이 <code class="docutils literal notranslate"><span class="pre">qup</span> <span class="pre">list</span></code> 명령을 사용해서 배포된 전략 목록에서 확인 할 수 있습니다.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jovyan@jupyter-kghoon:~/strategy2$<span class="w"> </span>qup<span class="w"> </span>list
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jovyan@jupyter-qupyter:~/strategy2$<span class="w"> </span>qup<span class="w"> </span>list
 STRATEGY<span class="w">           </span>DEPLOYMENT<span class="w"> </span>ID<span class="w">                      </span>STATUS<span class="w">     </span>CREATED<span class="w"> </span>AT
-5min-breakout-strategy<span class="w">   </span>kghoon-5min-breakout-strategy-zfclnmrp<span class="w">   </span>Running<span class="w">    </span><span class="m">2023</span>-10-19<span class="w"> </span><span class="m">06</span>:49:28
-jovyan@jupyter-kghoon:~/strategy2$
+5min-breakout-strategy<span class="w">   </span>qupyter-5min-breakout-strategy-zfclnmrp<span class="w">   </span>Running<span class="w">    </span><span class="m">2023</span>-10-19<span class="w"> </span><span class="m">06</span>:49:28
+jovyan@jupyter-qupyter:~/strategy2$
 </pre></div>
 </div>
 </section>
@@ -517,7 +517,7 @@ Options:
 </div>
 <p>로그 확인 시에는 <code class="docutils literal notranslate"><span class="pre">qup</span> <span class="pre">list</span></code>에서 확인 할 수 있는 <code class="docutils literal notranslate"><span class="pre">DEPLOYMENT</span> <span class="pre">ID</span></code> 를 인자로 전달합니다.
 <code class="docutils literal notranslate"><span class="pre">-f</span></code> 옵션을 사용하면 로그를 실시간으로 tailing 할 수 있습니다.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jovyan@jupyter-kghoon:~/strategy2$<span class="w"> </span>qup<span class="w"> </span>logs<span class="w"> </span>kghoon-5min-breakout-strategy-zfclnmrp
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jovyan@jupyter-qupyter:~/strategy2$<span class="w"> </span>qup<span class="w"> </span>logs<span class="w"> </span>qupyter-5min-breakout-strategy-zfclnmrp
 Collecting<span class="w"> </span>finance-datareader<span class="o">==</span><span class="m">0</span>.9.50
 <span class="w">  </span>Downloading<span class="w"> </span>finance_datareader-0.9.50-py3-none-any.whl<span class="w"> </span><span class="o">(</span><span class="m">19</span><span class="w"> </span>kB<span class="o">)</span>
 Collecting<span class="w"> </span><span class="nv">bs4</span><span class="o">==</span><span class="m">0</span>.0.1
@@ -540,7 +540,7 @@ today_open:69700<span class="w"> </span>yesterday_range:1700.0<span class="w"> <
 target_price:70550.0<span class="w"> </span>current_price:69500
 today_open:189900<span class="w"> </span>yesterday_range:3500.0<span class="w"> </span>k:0.5
 target_price:191650.0<span class="w"> </span>current_price:188900
-jovyan@jupyter-kghoon:~/strategy2$
+jovyan@jupyter-qupyter:~/strategy2$
 </pre></div>
 </div>
 </section>

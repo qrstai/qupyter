@@ -42,7 +42,7 @@ qup secret-set ./my-credentials.yaml
 터미널에서 `qup secret-list`를 실행하여 확인할 수 있습니다.
 
 ```text
-jovyan@jupyter-kghoon:~$ qup secret-list
+jovyan@jupyter-qupyter:~$ qup secret-list
 MARKET_TYPE     ENVIRONMENT EXPIRE_DATE
 stock           live        20231231
 ```

@@ -33,7 +33,7 @@ To grant access to the server, please log into https://github.com/login/device a
 4. GitHub 인증을 완료하면 브라우저에서 접속할 수 있는 링크가 화면에 출력됩니다.
 
 ```text
-Open this link in your browser https://vscode.dev/tunnel/jupyter-kghoon/home/jovyan/volatility-break
+Open this link in your browser https://vscode.dev/tunnel/jupyter-qupyter/home/jovyan/volatility-break
 
 [2023-10-25 02:24:47] info [tunnels::connections::relay_tunnel_host] Opened new client on channel 2
 [2023-10-25 02:24:47] info [russh::server] wrote id
