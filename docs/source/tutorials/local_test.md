@@ -11,7 +11,7 @@ Qupyter platform 에 전략을 배포하기 전 `qup run` 커맨드를 사용하
 작성한 전략 소스코드가 있는 위치에서 `qup run <파일 이름>`으로 실행합니다.
 
 ```bash
-(base) jovyan@jupyter-kghoon:~/5min_breakout$ qup run ./5min_breakout.py
+(base) jovyan@jupyter-qupyter:~/5min_breakout$ qup run ./5min_breakout.py
 2023-11-02 14:13:16.018177 [EXECUTOR] Call on_initialize hook
 New day. 2023-11-02
 -       market_open_time: 09:00:00
@@ -30,7 +30,7 @@ New day. 2023-11-02
 실행 중 멈추고 싶으면 `Ctrl` + `C` 를 누르시면 됩니다.
 
 ```bash
-(base) jovyan@jupyter-kghoon:~/5min_breakout$ qup run ./5min_breakout.py
+(base) jovyan@jupyter-qupyter:~/5min_breakout$ qup run ./5min_breakout.py
 2023-11-02 14:17:34.151357 [EXECUTOR] Call on_initialize hook
 New day. 2023-11-02
 -       market_open_time: 09:00:00
@@ -43,6 +43,6 @@ New day. 2023-11-02
 
 # ->> Ctrl + C 누름
 ^CGot keyboard interrupt. stop loop
-(base) jovyan@jupyter-kghoon:~/5min_breakout$
+(base) jovyan@jupyter-qupyter:~/5min_breakout$
 ```
 

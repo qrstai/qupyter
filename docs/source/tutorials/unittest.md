@@ -68,7 +68,7 @@ if __name__ == '__main__':
 위 코드를 실행한 결과는 다음과 같습니다.
 
 ```bash
-(base) jovyan@jupyter-kghoon:~/5min_breakout$ python ./tests.py
+(base) jovyan@jupyter-qupyter:~/5min_breakout$ python ./tests.py
 .F
 ======================================================================
 FAIL: test_sell_signal (__main__.Test5MinBreakoutStrategy)
@@ -102,7 +102,7 @@ Ran 2 tests in 0.019s
 다시 실행.
 
 ```bash
-(base) jovyan@jupyter-kghoon:~/5min_breakout$ python ./tests.py
+(base) jovyan@jupyter-qupyter:~/5min_breakout$ python ./tests.py
 ..
 ----------------------------------------------------------------------
 Ran 1 tests in 0.020s
