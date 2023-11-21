@@ -552,9 +552,9 @@ class EBestStocks(EBest):
         current_price = int(json_dict.get('price1'))  # 현재가
 
         if '매수' in trade_type:
-            trade_type = 1
+            trade_type = 2
         elif '매도' in trade_type:
-            trade_type = -1
+            trade_type = 1
         else:
             # NOTE 발생되지 않아야하는 케이스 (type hint를 int에 맞추기 위하여 추가됨)
             trade_type = 0

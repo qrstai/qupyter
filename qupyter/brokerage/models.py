@@ -1,8 +1,10 @@
+from dataclasses import dataclass
 from decimal import Decimal
 import datetime
 from typing import List, Dict, Optional
 
 
+@dataclass
 class StockOrder:
     """미체결 주문에 대한 class.
 
@@ -29,22 +31,20 @@ class StockOrder:
     :param current_price: 현재가
     :type current_price: int
     """
-
-    def __init__(self, order_id: int, asset_code: str, trade_type: int, quantity: int, price: int, filled_quantity: int, filled_price: int,
-                 pending_quantity: int, order_time: datetime.datetime, order_method: str, current_price: int):
-        self.order_id = order_id
-        self.asset_code = asset_code
-        self.trade_type = trade_type
-        self.quantity = quantity
-        self.price = price
-        self.filled_quantity = filled_quantity
-        self.filled_price = filled_price
-        self.pending_quantity = pending_quantity
-        self.order_time = order_time
-        self.order_method = order_method
-        self.current_price = current_price
+    order_id: int
+    asset_code: str
+    trade_type: int
+    quantity: int
+    price: int
+    filled_quantity: int
+    filled_price: int
+    pending_quantity: int
+    order_time: datetime.datetime
+    order_method: str
+    current_price: int
 
 
+@dataclass
 class StockPosition:
     '''보유 포지션에 대한 클래스
 
@@ -81,24 +81,20 @@ class StockPosition:
     :param loan_interest: 신용이자
     :type loan_interest: int
     '''
-
-    def __init__(self, asset_code: str, asset_name: str, quantity: int, exit_available_quantity: int, average_purchase_price: int, purchase_value: int,
-                 loan_value: int, loan_date: Optional[datetime.date], expiration_date: Optional[datetime.date], current_price: int, current_value: int,
-                 current_pnl: int, current_pnl_pct: Decimal, commission: int, tax: int, loan_interest: int):
-        self.asset_code = asset_code
-        self.asset_name = asset_name
-        self.quantity = quantity
-        self.exit_available_quantity = exit_available_quantity
-        self.average_purchase_price = average_purchase_price
-        self.purchase_value = purchase_value
-        self.loan_value = loan_value
-        self.loan_date = loan_date
-        self.expiration_date = expiration_date
-        self.current_price = current_price
-        self.current_value = current_value
-        self.current_pnl = current_pnl
-        self.current_pnl_pct = current_pnl_pct
-        self.commission = commission
-        self.tax = tax
-        self.loan_interest = loan_interest
+    asset_code: str
+    asset_name: str
+    quantity: int
+    exit_available_quantity: int
+    average_purchase_price: int
+    purchase_value: int
+    loan_value: int
+    loan_date: Optional[datetime.date]
+    expiration_date: Optional[datetime.date]
+    current_price: int
+    current_value: int
+    current_pnl: int
+    current_pnl_pct: Decimal
+    commission: int
+    tax: int
+    loan_interest: int
 
