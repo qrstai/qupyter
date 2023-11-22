@@ -136,7 +136,6 @@ class EBestStocks(EBest):
         return price_info
 
 
-
     def get_price_for_multiple_stocks(self, asset_codes: List[str] = []):
         """ 복수 종목 시세 조회 """
         url = f'{self.host_url}/stock/market-data'
@@ -191,13 +190,53 @@ class EBestStocks(EBest):
 
         return res
 
+
+    def get_today_minute_data(self, asset_code: str):
+        return self.get_historical_minute_data(asset_code, first_date=datetime.date.today())
+
+
     def get_historical_minute_data(self, asset_code: str, interval: int = 1, first_date: datetime.date = None, last_date: datetime.date = None):
         """과거 분봉 데이터 조회
-        :param str asset_code: 종목코드
-        :param int interval: 단위(n분)
-        :param date first_date: 조회 시작일자 (`None`일 경우 당일 조회)
-        :param date last_date: 조회 종료일자 (`None`인 경우 당일 조회)
 
+        :param asset_code: 종목코드
+        :type asset_code: str
+
+        :param interval: 단위(n분)
+        :type interval: int
+
+        :param first_date: 조회 시작일자 (None일 경우 당일 조회)
+        :type first_date: datetime.date
+
+        :param date last_date: 조회 종료일자 (None인 경우 당일 조회)
+        :type last_date: datetime.date
+
+        :return: 분봉 데이터
+        :rtype: pandas.DataFrame
+
+        DataFrame에는 다음 필드들이 포함됩니다.
+
+        - datetime (str): 일자 및 시간
+        - open (int): 시가
+        - high (int): 고가
+        - low (int): 저가
+        - close (int): 종가
+        - volume (int): 거래량
+        - volume_nominal (int): 거래대금 (단위: 백만원).
+
+        :examples:
+
+        .. code-block:: python
+
+            >>> df = broker.get_historical_minute_data(asset_code='005930', interval=1, first_date=datetime.date(2023, 10, 25), last_date=datetime.date(2023, 10, 26))
+            >>> print(df)
+
+                                  open   high    low  close  volume  volume_nominal
+            datetime
+            2023-10-25 09:01:00  68800  68800  68500  68700  513985     35345000000
+            2023-10-25 09:02:00  68600  68700  68600  68700   46971      3226000000
+            2023-10-25 09:03:00  68600  68800  68600  68700   68890      4733000000
+            2023-10-25 09:04:00  68700  68700  68500  68600  121569      8343000000
+            2023-10-25 09:05:00  68500  68700  68500  68600   57472      3942000000
         """
         if len(asset_code) > 6:
             asset_code = asset_code[1:]
@@ -394,48 +433,8 @@ class EBestStocks(EBest):
         res = {
             'investable_cash': out_block_2.get('MnyOrdAbleAmt'),  # 현금주문가능금액
             'asset_value': out_block_2.get('BalEvalAmt'),  # 잔고평가금액
-            'receivable_amount': out_block_2.get('RcvblAmt'),  # 미수금액
             'total_balance': out_block_2.get('DpsastTotamt'),  # 예탁자산총액
-            'pnl_pct': out_block_2.get('PnlRat'),  # 손익율
-            'investment_principal': out_block_2.get('InvstOrgAmt'),  # 투자원금
-            'investment_pnl_amount': out_block_2.get('InvstPlAmt'),  # 투자손익금액
-            'credit_order_amount': out_block_2.get('CrdtPldgOrdAmt'),  # 신용담보주문금액
-            'credit_orderable_amount': out_block_2.get('CrdtOrdAbleAmt'),  # 신용주문가능금액
-            'deposit': out_block_2.get('Dps'),  # 예수금
-            'substitute_amount': out_block_2.get('SubstAmt'),  # 대용금액
-            'deposit_d1': out_block_2.get('D1Dps'),  # D+1 예수금
-            'deposit_d2': out_block_2.get('D2Dps'),  # D+2 예수금
-            'cash_receivables': out_block_2.get('MnyrclAmt'),  # 현금미수금액
-            'cash_collateral': out_block_2.get('MgnMny'),  # 증거금현금
-            'substitute_collateral': out_block_2.get('MgnSubst'),  # 증거금대용
-            'cheque_amount': out_block_2.get('ChckAmt'),  # 수표금액
-            'substitute_orderable_amount': out_block_2.get('SubstOrdAbleAmt'),  # 대용주문가능금액
-            'margin_rate_35_pct_orderable_amount': out_block_2.get('MgnRat35ordAbleAmt'),  # 증거금률 35% 주문 가능금액
-            'margin_rate_50_pct_orderable_amount': out_block_2.get('MgnRat50ordAbleAmt'),  # 증거금률 50% 주문 가능금액
-            'margin_rate_100_pct_orderable_amount': out_block_2.get('MgnRat100pctOrdAbleAmt'),  # 증거금률 100% 주문가능금액
-            'd1_overdraft_fee': out_block_2.get('D1ovdRepayRqrdAmt'),  # D+1 연체변제소요금액
-            'd2_overdraft_fee': out_block_2.get('D2ovdRepayRqrdAmt'),  # D+2 연체변제소요금액
-            'deposit_pledge_loan_amount': out_block_2.get('DpspdgLoanAmt'),  # 예탁담보대출금액
-            'credit_setting_collateral': out_block_2.get('Imreq'),  # 신용설정보증금
-            'margin_loan_amount': out_block_2.get('MloanAmt'),  # 융자금액
-            'original_pledge_amount': out_block_2.get('OrgPldgAmt'),  # 원담보금액
-            'subordinate_pledge_amount': out_block_2.get('SubPldgAmt'),  # 부담보금액
-            'required_pledge_amount': out_block_2.get('RqrdPldgAmt'),  # 소요담보금액
-            'original_pledge_shortage': out_block_2.get('OrgPdlckAmt'),  # 원담보부족금액
-            'subordinate_pledge_shortage': out_block_2.get('PdlckAmt'),  # 담보부족금액
-            'additional_collateral_cash': out_block_2.get('AddPldgMny'),  # 추가담보현금
-            'unpaid_interest': out_block_2.get('CrdtIntdltAmt'),  # 신용이자미납금액
-            'other_loan_amount': out_block_2.get('EtclndAmt'),  # 기타대여금액
-            'd1_margin_call_amount': out_block_2.get('NtdayPrsmptCvrgAmt'),  # 익일추정반대매매금액
-            'original_pledge_total_amount': out_block_2.get('OrgPldgSumAmt'),  # 원담보합계금액
-            'subordinate_pledge_total_amount': out_block_2.get('SubPldgSumAmt'),  # 부담보합계금액
-            'credit_collateral_cash': out_block_2.get('CrdtPldgAmtMny'),  # 신용담보금현금
-            'credit_collateral_substitute': out_block_2.get('CrdtPldgSubstAmt'),  # 신용담보대용금액
-            'additional_credit_collateral_cash': out_block_2.get('AddCrdtPldgMny'),  # 추가신용담보현금
-            'reused_credit_collateral_amount': out_block_2.get('CrdtPldgRuseAmt'),  # 신용담보재사용금액
-            'additional_credit_collateral_substitute': out_block_2.get('AddCrdtPldgSubst'),  # 추가신용담보대용
-            'sellout_collateral_loan_amount': out_block_2.get('CslLoanAmtdt1'),  # 매도대금담보대출금액
-            'disposal_limit_amount': out_block_2.get('DpslRestrcAmt'),  # 처분제한금액
+            'broker_data': out_block_2,
         }
 
         return res

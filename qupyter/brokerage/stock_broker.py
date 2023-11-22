@@ -91,33 +91,24 @@ class StockBroker:
         """
         pass
 
-    def get_historical_minute_data(self, asset_code: str, interval: int = 1, first_date: datetime.date = None, last_date: datetime.date = None) -> pd.DataFrame:
-        """과거 분봉 데이터 조회
+
+    def get_today_minute_data(self, asset_code: str) -> pd.DataFrame:
+        """당일 분봉 데이터 조회
 
         :param asset_code: 종목코드
         :type asset_code: str
-
-        :param interval: 단위(n분)
-        :type interval: int
-
-        :param first_date: 조회 시작일자 (None일 경우 당일 조회)
-        :type first_date: datetime.date
-
-        :param date last_date: 조회 종료일자 (None인 경우 당일 조회)
-        :type last_date: datetime.date
 
         :return: 분봉 데이터
         :rtype: pandas.DataFrame
 
         DataFrame에는 다음 필드들이 포함됩니다.
 
-        - datetime (str): 일자 및 시간
+        - time (str): 일자 및 시간
         - open (int): 시가
         - high (int): 고가
         - low (int): 저가
         - close (int): 종가
         - volume (int): 거래량
-        - volume_nominal (int): 거래대금 (단위: 백만원).
 
         :examples:
 
@@ -126,13 +117,13 @@ class StockBroker:
             >>> df = broker.get_historical_minute_data(asset_code='005930', interval=1, first_date=datetime.date(2023, 10, 25), last_date=datetime.date(2023, 10, 26))
             >>> print(df)
 
-                                  open   high    low  close  volume  volume_nominal
-            datetime
-            2023-10-25 09:01:00  68800  68800  68500  68700  513985     35345000000
-            2023-10-25 09:02:00  68600  68700  68600  68700   46971      3226000000
-            2023-10-25 09:03:00  68600  68800  68600  68700   68890      4733000000
-            2023-10-25 09:04:00  68700  68700  68500  68600  121569      8343000000
-            2023-10-25 09:05:00  68500  68700  68500  68600   57472      3942000000
+                                  open   high    low  close  volume
+            time
+            2023-10-25 09:01:00  68800  68800  68500  68700  513985
+            2023-10-25 09:02:00  68600  68700  68600  68700   46971
+            2023-10-25 09:03:00  68600  68800  68600  68700   68890
+            2023-10-25 09:04:00  68700  68700  68500  68600  121569
+            2023-10-25 09:05:00  68500  68700  68500  68600   57472
         """
         pass
 
