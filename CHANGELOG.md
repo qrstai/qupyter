@@ -20,3 +20,8 @@
   * 한투에서 정보를 제공하지 않아 모델에서 제거되었습니다.
 * StockOrder - order_method 필드 제거
   * 한투에서 정보를 제공하지 않아 모델에서 제거되었습니다.
+
+### Fixed
+
+* EBestStockBroker.get_positions 응답에서 CMA RP 종목 필터링
+* EBestStockBroker.get_pending_orders 응답에 trade_type 잘못된 값 수정
