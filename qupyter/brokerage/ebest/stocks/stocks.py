@@ -527,6 +527,9 @@ class EBestStocks(EBest):
                     if exclude_empty_positions and position.quantity == 0:
                         continue
 
+                    if item.get('jonggb') == '9' or item.get('expcode').startswith('CMA'):
+                        continue
+
                     positions.append(position)
 
                 if cts_expcode.strip() == '':
