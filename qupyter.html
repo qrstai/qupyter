@@ -498,54 +498,6 @@ document.write(`
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="qupyter.brokerage.StockBroker.get_historical_minute_data">
-<span class="sig-name descname"><span class="pre">get_historical_minute_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asset_code:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_date:</span> <span class="pre">~.datetime.date</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">last_date:</span> <span class="pre">~.datetime.date</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#qupyter.brokerage.StockBroker.get_historical_minute_data" title="Permalink to this definition">#</a></dt>
-<dd><p>과거 분봉 데이터 조회</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>asset_code</strong> (<em>str</em>) – 종목코드</p></li>
-<li><p><strong>interval</strong> (<em>int</em>) – 단위(n분)</p></li>
-<li><p><strong>first_date</strong> (<em>datetime.date</em>) – 조회 시작일자 (None일 경우 당일 조회)</p></li>
-<li><p><strong>last_date</strong> (<em>datetime.date</em>) – 조회 종료일자 (None인 경우 당일 조회)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>분봉 데이터</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pandas.DataFrame</p>
-</dd>
-</dl>
-<p>DataFrame에는 다음 필드들이 포함됩니다.</p>
-<ul class="simple">
-<li><p>datetime (str): 일자 및 시간</p></li>
-<li><p>open (int): 시가</p></li>
-<li><p>high (int): 고가</p></li>
-<li><p>low (int): 저가</p></li>
-<li><p>close (int): 종가</p></li>
-<li><p>volume (int): 거래량</p></li>
-<li><p>volume_nominal (int): 거래대금 (단위: 백만원).</p></li>
-</ul>
-<dl class="field-list simple">
-<dt class="field-odd">Examples<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="n">get_historical_minute_data</span><span class="p">(</span><span class="n">asset_code</span><span class="o">=</span><span class="s1">&#39;005930&#39;</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">first_date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span> <span class="n">last_date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">26</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-
-<span class="go">                      open   high    low  close  volume  volume_nominal</span>
-<span class="go">datetime</span>
-<span class="go">2023-10-25 09:01:00  68800  68800  68500  68700  513985     35345000000</span>
-<span class="go">2023-10-25 09:02:00  68600  68700  68600  68700   46971      3226000000</span>
-<span class="go">2023-10-25 09:03:00  68600  68800  68600  68700   68890      4733000000</span>
-<span class="go">2023-10-25 09:04:00  68700  68700  68500  68600  121569      8343000000</span>
-<span class="go">2023-10-25 09:05:00  68500  68700  68500  68600   57472      3942000000</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="qupyter.brokerage.StockBroker.get_price">
 <span class="sig-name descname"><span class="pre">get_price</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asset_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#qupyter.brokerage.StockBroker.get_price" title="Permalink to this definition">#</a></dt>
 <dd><p>단일 종목 시세 조회</p>
@@ -637,6 +589,48 @@ document.write(`
 <span class="go">005380          182000    373131     68135000000      182700      183700  ...     237500     128000       182100       182000              8070             45848</span>
 
 <span class="go">[2 rows x 13 columns]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="qupyter.brokerage.StockBroker.get_today_minute_data">
+<span class="sig-name descname"><span class="pre">get_today_minute_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">asset_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#qupyter.brokerage.StockBroker.get_today_minute_data" title="Permalink to this definition">#</a></dt>
+<dd><p>당일 분봉 데이터 조회</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>asset_code</strong> (<em>str</em>) – 종목코드</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>분봉 데이터</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+<p>DataFrame에는 다음 필드들이 포함됩니다.</p>
+<ul class="simple">
+<li><p>time (str): 일자 및 시간</p></li>
+<li><p>open (int): 시가</p></li>
+<li><p>high (int): 고가</p></li>
+<li><p>low (int): 저가</p></li>
+<li><p>close (int): 종가</p></li>
+<li><p>volume (int): 거래량</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Examples<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">broker</span><span class="o">.</span><span class="n">get_historical_minute_data</span><span class="p">(</span><span class="n">asset_code</span><span class="o">=</span><span class="s1">&#39;005930&#39;</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">first_date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span> <span class="n">last_date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">26</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+<span class="go">                      open   high    low  close  volume</span>
+<span class="go">time</span>
+<span class="go">2023-10-25 09:01:00  68800  68800  68500  68700  513985</span>
+<span class="go">2023-10-25 09:02:00  68600  68700  68600  68700   46971</span>
+<span class="go">2023-10-25 09:03:00  68600  68800  68600  68700   68890</span>
+<span class="go">2023-10-25 09:04:00  68700  68700  68500  68600  121569</span>
+<span class="go">2023-10-25 09:05:00  68500  68700  68500  68600   57472</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -762,9 +756,9 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.brokerage.StockBroker"><code class="docutils literal notranslate"><span class="pre">StockBroker</span></code></a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.brokerage.StockBroker.get_account"><code class="docutils literal notranslate"><span class="pre">StockBroker.get_account()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.brokerage.StockBroker.get_historical_daily_data"><code class="docutils literal notranslate"><span class="pre">StockBroker.get_historical_daily_data()</span></code></a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.brokerage.StockBroker.get_historical_minute_data"><code class="docutils literal notranslate"><span class="pre">StockBroker.get_historical_minute_data()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.brokerage.StockBroker.get_price"><code class="docutils literal notranslate"><span class="pre">StockBroker.get_price()</span></code></a></li>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.brokerage.StockBroker.get_price_for_multiple_stocks"><code class="docutils literal notranslate"><span class="pre">StockBroker.get_price_for_multiple_stocks()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#qupyter.brokerage.StockBroker.get_today_minute_data"><code class="docutils literal notranslate"><span class="pre">StockBroker.get_today_minute_data()</span></code></a></li>
 </ul>
 </li>
 </ul>
