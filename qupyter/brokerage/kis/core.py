@@ -133,7 +133,7 @@ class KIS:
             'appsecret': self._app_secret,
         }
 
-        r = requests.post(f"{self.host_url}/oauth2/tokenP", headers=headers, data=json.dumps(body))
+        r = requests.post(f"{self.host_url}/oauth2/tokenP", headers=headers, json=body)
         data = r.json()
         print(json.dumps(data, indent=4))
 
