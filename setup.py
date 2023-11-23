@@ -14,7 +14,7 @@ setup(
     author_email=('qrst.partners@gmail.com',),
     long_description=long_description,
     long_description_content_type='text/markdown',
-    install_requires=['requests', 'pandas', 'python-dotenv'],
+    install_requires=['requests', 'pandas', 'python-dotenv', 'httpx'],
     license='MIT',
     packages=find_packages(include=['qupyter', 'qupyter.*']),
     python_requires='>=3',
