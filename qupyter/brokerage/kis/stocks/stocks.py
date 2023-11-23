@@ -16,8 +16,8 @@ from qupyter.brokerage.utils.retry import async_retry, retry
 
 
 class KISStocks(KIS):
-    def __init__(self, test_trade: bool, **kwargs):
-        super().__init__(test_trade=test_trade, **kwargs)
+    def __init__(self, test_trade: bool, account_number: str, product_code: str, **kwargs):
+        super().__init__(test_trade, account_number, product_code, **kwargs)
 
     @retry(HTTPError, delay=0.1)
     def request_with_retry(self, method: str, url: str, headers: dict = None, params: dict = None, body: dict = None, return_headers: bool = False) -> Dict | Tuple[Dict, Dict]:
@@ -445,7 +445,7 @@ class KISStocks(KIS):
 
         params = {
             'CANO': self.account_number,
-            'ACNT_PRDT_CD': self.product_number,
+            'ACNT_PRDT_CD': self.product_code,
             'AFHR_FLPR_YN': 'N',
             'OFL_YN': '',
             'INQR_DVSN': '02',
@@ -478,7 +478,7 @@ class KISStocks(KIS):
         }
         params = {
             "CANO": self.account_number,
-            "ACNT_PRDT_CD": self.product_number,
+            "ACNT_PRDT_CD": self.product_code,
             "PDNO": asset_code,
             "ORD_UNPR": "",
             "ORD_DVSN": "01",
@@ -534,7 +534,7 @@ class KISStocks(KIS):
 
         params = {
             'CANO': self.account_number,
-            'ACNT_PRDT_CD': self.product_number,
+            'ACNT_PRDT_CD': self.product_code,
             'AFHR_FLPR_YN': 'N',
             'OFL_YN': '',
             'INQR_DVSN': '02',
@@ -616,7 +616,7 @@ class KISStocks(KIS):
 
             params = {
                 'CANO': self.account_number,
-                'ACNT_PRDT_CD': self.product_number,
+                'ACNT_PRDT_CD': self.product_code,
                 'CTX_AREA_FK100': '',
                 'CTX_AREA_NK100': '',
                 'INQR_DVSN_1': '1',  # 0: 조회순서, 1: 주문순
@@ -710,7 +710,7 @@ class KISStocks(KIS):
 
         body = {
             'CANO': self.account_number,
-            'ACNT_PRDT_CD': self.product_number,
+            'ACNT_PRDT_CD': self.product_code,
             'PDNO': asset_code,
             'ORD_DVSN': order_type,  # 주문구분
             'ORD_QTY': str(quantity),  # 주문주식수
@@ -735,7 +735,7 @@ class KISStocks(KIS):
 
         body = {
             'CANO': self.account_number,
-            'ACNT_PRDT_CD': self.product_number,
+            'ACNT_PRDT_CD': self.product_code,
             'KRX_FWDG_ORD_ORGNO': '',  # 한국거래소전송주문조직번호 (주문시 한국투자증권 시스템에서 지정된 영업점코드) - "" (Null 값 설정)
             'ORGN_ODNO': str(org_order_no),  # 원주문번호
             'ORD_DVSN': order_type,  # 주문구분
@@ -763,7 +763,7 @@ class KISStocks(KIS):
 
         body = {
             'CANO': self.account_number,
-            'ACNT_PRDT_CD': self.product_number,
+            'ACNT_PRDT_CD': self.product_code,
             'KRX_FWDG_ORD_ORGNO': '',  # 한국거래소전송주문조직번호 (주문시 한국투자증권 시스템에서 지정된 영업점코드) - "" (Null 값 설정)
             'ORGN_ODNO': str(org_order_no),  # 원주문번호
             'ORD_DVSN': order_type,  # 주문구분
