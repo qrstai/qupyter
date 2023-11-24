@@ -11,8 +11,8 @@ class KISStockBroker(StockBroker):
     한국투자증권 StockBroker 구현체
     """
 
-    def __init__(self, test_trade: bool, account_number: str, product_code: str, **kwargs):
-        self.api = KISStocks(test_trade, account_number, product_code, **kwargs)
+    def __init__(self, test_trade: bool, **kwargs):
+        self.api = KISStocks(test_trade, **kwargs)
 
 
     def get_price(self, asset_code: str) -> pd.DataFrame:

@@ -8,8 +8,8 @@ from qupyter import config
 class KIS:
     def __init__(self,
                  test_trade: bool,
-                 account_number: str,
-                 product_code: str,
+                 account_number: str = None,
+                 product_code: str = None,
                  app_key: str = None,
                  app_secret: str = None,
                  expire_date: str = None,
@@ -28,12 +28,12 @@ class KIS:
             self._phone_number = kwargs.get('phone_number', '')
             self._ip_addr = kwargs.get('ip_addr', '')
 
-        self._access_token = None
-        self._token_valid_until = None
-        self._session = None
         self._app_key = None
         self._app_secret = None
         self._key_expire_date = None
+        self._access_token = None
+        self._token_valid_until = None
+        self._session = None
 
         if app_key and app_secret:
             self._app_key = app_key
@@ -76,6 +76,15 @@ class KIS:
         if 'access_token' in data:
             self._access_token = data.get('access_token')
             self._token_valid_until = datetime.fromtimestamp(data.get('token_expire_time')/1000)
+
+        if 'account_number' in data:
+            account_number = data['account_number']
+            tokens = account_number.split('-')
+            if len(tokens) != 2:
+                raise Exception(f'Invalid account number: {account_number}')
+
+            self.account_number = tokens[0]
+            self.product_code = tokens[1]
 
 
     @property
