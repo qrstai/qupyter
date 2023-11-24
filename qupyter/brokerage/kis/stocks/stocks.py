@@ -625,6 +625,7 @@ class KISStocks(KIS):
 
             pending_orders: List = []
 
+
             while make_call:
                 print(f"url: {url}")
                 print(f"headers: {headers}")
@@ -656,10 +657,19 @@ class KISStocks(KIS):
                 data = self._get_price_info(asset_code)
                 price_dict[asset_code] = data.get('current_price', 0)
 
+            pending_orders_dict = {}
             for order in pending_orders:
                 order.current_price = price_dict.get(order.asset_code, 0)
 
-            return pending_orders
+                if order.asset_code in pending_orders_dict:
+                    pending_orders_dict[order.asset_code].append(order)
+                else:
+                    pending_orders_dict[order.asset_code] = [order]
+
+            result = []
+            for k, v in pending_orders_dict.items():
+                result.extend((k, v))
+            return result
 
         else:
             return []

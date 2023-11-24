@@ -37,6 +37,7 @@ class KISStockBroker(StockBroker):
         df.set_index('time', inplace=True)
         return df
 
+
     def get_historical_daily_data(self, asset_code: str, adjusted_price: bool = False, first_date: datetime.date = None, last_date: datetime.date = None) -> pd.DataFrame:
         if first_date and last_date:
             if first_date > last_date:
@@ -57,6 +58,7 @@ class KISStockBroker(StockBroker):
         df.set_index('date', inplace=True)
 
         return df
+
 
     def get_account(self) -> Dict:
         data = self.api.get_account()
