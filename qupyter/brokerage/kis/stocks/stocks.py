@@ -26,6 +26,9 @@ class KISStocks(KIS):
         if r.status_code != 200:
             if body.get('rt_cd') in ['EGW00121', 'EGW00123']: # 만료된 토큰
                 self.refresh_token()
+            else:
+                print('KIS API response error:', body)
+
             r.raise_for_status()
 
         if return_headers:
