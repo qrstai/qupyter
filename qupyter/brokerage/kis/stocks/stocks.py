@@ -663,7 +663,7 @@ class KISStocks(KIS):
 
             result = []
             for k, v in pending_orders_dict.items():
-                result.extend((k, v))
+                result.append((k, v))
             return result
 
         else:
