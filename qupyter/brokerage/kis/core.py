@@ -141,7 +141,6 @@ class KIS:
 
         r = requests.post(f"{self.host_url}/oauth2/tokenP", headers=headers, json=body)
         data = r.json()
-        print(json.dumps(data, indent=4))
 
         self._access_token = data.get('access_token')
 

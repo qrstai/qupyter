@@ -606,7 +606,6 @@ class KISStocks(KIS):
         - 한 번의 호출에 최대 50건까지 확인 가능하며, 이후의 값은 연속조회를 통해 확인하실 수 있습니다.
         """
 
-        print('get_pending_orders. test_trade:', self.test_trade)
         if not self.test_trade:
             url = f'{self.host_url}/uapi/domestic-stock/v1/trading/inquire-psbl-rvsecncl'
 
