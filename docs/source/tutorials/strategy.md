@@ -86,12 +86,6 @@ async def on_initialize():
 
     # 증권사 계좌 상세 정보
     'broker_settings': {
-      # 계좌번호 (56781234-01 중 앞 부분)
-      'account_number': '56781234',
-
-      # 계좌 상품번호 (56781234-01 중 뒤 2자리)
-      'product_code': '01',
-
       # (법인) 법인 계좌 여부
       'is_corp': False,
 
@@ -122,11 +116,6 @@ async def on_initialize():
 - open_market_time_margin : 거래 시작시간을 조정하기 위해 사용됩니다. 지정된 시간 만큼 거래 시작 시간을 지연합니다.
 - close_market_time_margin: 거래 종료시간을 조정하기 위해 사용됩니다. 지정된 시간 만큼 먼저 당일 거래를 마감합니다.
 - test_trade: 모의투자 환경 여부. True로 설정하면 모의투자용 API key를 사용하여 모의투자 환경에서 거래를 진행합니다.
-
-아래 항목은 증권사 계정 상세 정보에 대한 설명입니다. 현재 한국투자증권을 이용하는 경우에만 필요합니다.
-
-- broker_settings.account_number : 계좌번호.
-- broker_settings.product_code: 계좌상품번호.
 
 아래 항목들은 법인계좌를 이용하는 경우에만 필요합니다.
 

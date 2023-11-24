@@ -19,6 +19,7 @@ brokerage: ebest
 app_key: <your-app-key>
 app_secret: <your-app-secret>
 environment: live
+account_number: 123456789-12
 expire_date: 20231231
 market_type: stock
 ```
@@ -26,6 +27,7 @@ market_type: stock
 - brokerage - 증권사 식별자 입니다. `ebest` 로 입력합니다
 - app_key, app_secret - API key 입니다. 이베스트 증권 OPEN API 사이트에서 발급받을 수 있습니다.
 - environment - 실행환경을 의미합니다. 모의투자의 경우엔 `test`를 실전투자의 경우 `live`로 값을 설정합니다
+- account_number - 계좌번호 입니다. 증권사 홈페이지 MTS나 HTS에서 확인이 가능합니다. `(계좌번호)-(상품코드 2자리)` 로 구성되어 있습니다.
 - expire_date - 키 만료일자 입니다. 개인 사용자는 발급일로 부터 1년입니다. 2023년 11월 1일에 키를 발급 받으신 경우, 1년 후인 '20241101' 로 지정하시면 됩니다.
 - market_type - 현재 증권 거래를 의미하는 `stock` 만 입력 가능합니다.
 
@@ -36,12 +38,14 @@ brokerage: kis
 app_key: <your-app-key>
 app_secret: <your-app-secret>
 environment: live
+account_number: 12345678-12
 expire_date: 20231231
 ```
 
 - brokerage - 증권사 식별자 입니다. `kis` 로 입력합니다.
 - app_key, app_secret - API key 입니다. 한국투자증권 OPEN API 사이트에서 발급받을 수 있습니다.
 - environment - 실행환경을 의미합니다. 모의투자의 경우엔 `test`를 실전투자의 경우 `live`로 값을 설정합니다.
+- account_number - 계좌번호 입니다. 증권사 홈페이지 MTS나 HTS에서 확인이 가능합니다. `(계좌번호)-(상품코드 2자리)` 로 구성되어 있습니다.
 - expire_date - 키 만료일자 입니다. 개인 사용자는 발급일로 부터 1년입니다. 2023년 11월 1일에 키를 발급 받으신 경우, 1년 후인 '20241101' 로 지정하시면 됩니다.
 
 2. Qupyter platform 에서 터미널을 실행합니다.

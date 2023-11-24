@@ -6,6 +6,7 @@ from cachetools.func import ttl_cache
 import requests
 
 from qupyter import config
+from qupyter.brokerage.utils.retry import retry
 
 @dataclass
 class MarketSchedule:
@@ -74,6 +75,7 @@ def _get_market_schedule(date: datetime.date) -> MarketSchedule:
         close_time=close_time,
         reason=data.get('reason'),
     )
+
 
 
 
