@@ -59,21 +59,54 @@ async def run():
 async def on_initialize():
   """ 필요한 사용자 초기화 코드를 실행합니다 """
   config = {
-    'interval': 60, # 전략 실행 주기(초). 기본값: 1분
+    # 증권사 식별자. ebest 또는 kis
+    'brokerage': 'ebest',
 
-    'stop_loss_config': { # 손절 조건 등록 (optional)
+    # 전략 실행 주기(초). 기본값: 1분
+    'interval': 60,
+
+    # 손절 조건 등록 (optional)
+    'stop_loss_config': {
       'A005930': -0.1 # 삼성전자 종목을 평단가 대비 -10% 손실인 경우 손절
     },
 
-    'take_profit_config': { # 익절 조건 (optional)
+    # 익절 조건 (optional)
+    'take_profit_config': {
       'A005930': 0.1 # 삼성전자 종목을 평단가 대비 10% 이상 수익인 경우 익절
     },
 
-    'open_market_time_margin': 300, # 거래 시작 시간 조정 (초). 기본값 300(5분)
+    # 거래 시작 시간 조정 (초). 기본값 300(5분)
+    'open_market_time_margin': 300,
 
-    'close_market_time_margin': 300, # 거래 마감 시간 조정 (초). 기본값 300(5분)
+    # 거래 마감 시간 조정 (초). 기본값 300(5분)
+    'close_market_time_margin': 300,
 
-    'test_trade': False, # 모의 투자 환경 여부. 기본값 False(실거래)
+    # 모의 투자 환경 여부. 기본값 False(실거래)
+    'test_trade': False,
+
+    # 증권사 계좌 상세 정보
+    'broker_settings': {
+      # 계좌번호 (56781234-01 중 앞 부분)
+      'account_number': '56781234',
+
+      # 계좌 상품번호 (56781234-01 중 뒤 2자리)
+      'product_code': '01',
+
+      # (법인) 법인 계좌 여부
+      'is_corp': False,
+
+      # (법인) 증권사에 등록된 전화번호
+      'phone_number': '',
+
+      # (법인) 제휴사 회원 관리를 위한 고객식별키
+      'personal_secret_key': ''
+
+      # (법인) 증권사 등록 일련번호
+      'seq_no': '',
+
+      # (법인) 증권사 등록 IP 주소
+      'ip_addr': '',
+    }
   }
 
   return config
@@ -82,12 +115,26 @@ async def on_initialize():
 
 다음은 각 설정값에 대한 설명입니다.
 
+- brokerage: 증권사 식별자 (ebest: 이베스트증권, kis: 한국투자증권)
 - interval : 거래 주기 (trade_func 가 호출되는 간격) 입니다. 기본 값은 1분입니다.
 - stop_loss_config : 손절 조건을 등록합니다. 가격을 확인하는 주기는 위 `interval`과 같습니다.
 - take_profit_config : 익절 조건을 등록합니다. 가격을 확인하는 주기는 위 `interval`과 같습니다.
 - open_market_time_margin : 거래 시작시간을 조정하기 위해 사용됩니다. 지정된 시간 만큼 거래 시작 시간을 지연합니다.
 - close_market_time_margin: 거래 종료시간을 조정하기 위해 사용됩니다. 지정된 시간 만큼 먼저 당일 거래를 마감합니다.
 - test_trade: 모의투자 환경 여부. True로 설정하면 모의투자용 API key를 사용하여 모의투자 환경에서 거래를 진행합니다.
+
+아래 항목은 증권사 계정 상세 정보에 대한 설명입니다. 현재 한국투자증권을 이용하는 경우에만 필요합니다.
+
+- broker_settings.account_number : 계좌번호.
+- broker_settings.product_code: 계좌상품번호.
+
+아래 항목들은 법인계좌를 이용하는 경우에만 필요합니다.
+
+- broker_settings.is_corp: 법인계좌여부 (기본값: False)
+- broker_settings.phone_number: 법인 전화번호. 한국투자증권 법인계좌인 경우 필요합니다.
+- broker_settings.personal_secret_key: 제휴사 회원 관리를 위한 고객식별키. 한국투자증권 법인계좌이고 제휴사인 경우 필요합니다.
+- broker_settings.seq_no: 일련번호. 한국투자증권 법인계좌인 경우 필요합니다.
+- broker_settings.ip_addr: IP 주소. 한국투자증권 법인계좌인 경우 필요합니다.
 
 ### on_market_open
 
@@ -160,7 +207,7 @@ async def trade_func(account_info, pending_orders, positions, broker):
 
 미체결 주문을 확인하고 정정/취소할 내역을 반환합니다. 매 주기마다 `trade_func` 가 호출되기 전 미체결주문이 남아있으면 호출됩니다.
 
-```{info}
+```{note}
 이 hook을 구현하지 않은 경우의 기본 동작은 미체결 주문을 모두 취소하는 것입니다.
 ```
 
