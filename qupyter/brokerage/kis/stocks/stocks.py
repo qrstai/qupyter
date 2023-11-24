@@ -627,14 +627,7 @@ class KISStocks(KIS):
 
 
             while make_call:
-                print(f"url: {url}")
-                print(f"headers: {headers}")
-                print(f"params: {params}")
-
                 res_data, res_header = self.get_with_retry(url=url, headers=headers, params=params, return_headers=True)
-
-                print(json.dumps(res_data, indent=4))
-
                 output = res_data.get('output', [])
                 for item in output:
                     pending_orders.append(self._create_stock_order(item))
