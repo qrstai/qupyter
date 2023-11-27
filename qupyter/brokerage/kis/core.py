@@ -69,6 +69,8 @@ class KIS:
 
         data = r.json()
 
+
+        self.secret_id = data.get('id')
         self._app_key = data.get('app_key')
         self._app_secret = data.get('app_secret')
         self._key_expire_date = data.get('expire_date')
@@ -85,6 +87,8 @@ class KIS:
 
             self.account_number = tokens[0]
             self.product_code = tokens[1]
+
+
 
 
     @property

@@ -78,6 +78,7 @@ class EBest:
             raise Exception(f"fail to get brokerage credentials from qupyter server: {r.status_code} {r.text}")
 
         data = r.json()
+        self.secret_id = data.get('id')
         self._app_key = data.get('app_key')
         self._app_secret = data.get('app_secret')
         self._key_expire_date = data.get('expire_date')
