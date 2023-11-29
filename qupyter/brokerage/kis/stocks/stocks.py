@@ -16,8 +16,8 @@ from qupyter.brokerage.utils.retry import async_retry, retry
 
 
 class KISStocks(KIS):
-    def __init__(self, test_trade: bool, account_number: str, product_code: str, **kwargs):
-        super().__init__(test_trade, account_number, product_code, **kwargs)
+    def __init__(self, test_trade: bool, **kwargs):
+        super().__init__(test_trade, **kwargs)
 
     @retry(HTTPError, delay=0.1)
     def request_with_retry(self, method: str, url: str, headers: dict = None, params: dict = None, body: dict = None, return_headers: bool = False) -> Dict | Tuple[Dict, Dict]:
