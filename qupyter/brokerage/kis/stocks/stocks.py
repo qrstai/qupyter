@@ -24,7 +24,7 @@ class KISStocks(KIS):
         r = self.session.request(method=method, url=url, headers=headers, params=params, json=body)
         body = r.json()
         if r.status_code != 200:
-            if body.get('rt_cd') in ['EGW00121', 'EGW00123']: # 만료된 토큰
+            if body.get('msg_cd') in ['EGW00121', 'EGW00123']: # 만료된 토큰
                 self.refresh_token()
             else:
                 print('KIS API response error:', body)
