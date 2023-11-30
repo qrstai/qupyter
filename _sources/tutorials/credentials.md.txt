@@ -66,8 +66,8 @@ qup secret-set ./my-credentials.yaml
 
 ```text
 jovyan@jupyter-qupyter:~$ qup secret-list
-BROKERAGE       MARKET_TYPE     ENVIRONMENT EXPIRE_DATE
-ebest           stock           test        20240201
-ebest           stock           live        20240723
-kis             multi           live        20240704
+SECRET_ID                                BROKERAGE   MARKET_TYPE  ENVIRONMENT ACCOUNT_NUMBER  EXPIRE_DATE
+86f7e437faa5a7fce15d1ddcb9eaeaea377667b8 kis         multi        live        12345678-01     20240703
+e9d71f5ee7c92d6dc9e92ffdad17b8bd49418f98 ebest       stock        live        234567891-01    20240701
+84a516841ba77a5b4648de2cd0dfcb30ea46dbb4 ebest       stock        live        345678912-01    20240201
 ```

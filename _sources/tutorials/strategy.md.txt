@@ -59,8 +59,8 @@ async def run():
 async def on_initialize():
   """ 필요한 사용자 초기화 코드를 실행합니다 """
   config = {
-    # 증권사 식별자. ebest 또는 kis
-    'brokerage': 'ebest',
+    # 등록된 API Key ID. `qup secret-list` 명령으로 확인 가능.
+    'secret_id': '86f7e437faa5a7fce15d1ddcb9eaeaea377667b8',
 
     # 전략 실행 주기(초). 기본값: 1분
     'interval': 60,
@@ -80,9 +80,6 @@ async def on_initialize():
 
     # 거래 마감 시간 조정 (초). 기본값 300(5분)
     'close_market_time_margin': 300,
-
-    # 모의 투자 환경 여부. 기본값 False(실거래)
-    'test_trade': False,
 
     # 증권사 계좌 상세 정보
     'broker_settings': {
@@ -109,13 +106,12 @@ async def on_initialize():
 
 다음은 각 설정값에 대한 설명입니다.
 
-- brokerage: 증권사 식별자 (ebest: 이베스트증권, kis: 한국투자증권)
+- secret_id: 등록 된 증권사 API Key의 ID. `qup secret-list` 명령으로 확인이 가능합니다.
 - interval : 거래 주기 (trade_func 가 호출되는 간격) 입니다. 기본 값은 1분입니다.
 - stop_loss_config : 손절 조건을 등록합니다. 가격을 확인하는 주기는 위 `interval`과 같습니다.
 - take_profit_config : 익절 조건을 등록합니다. 가격을 확인하는 주기는 위 `interval`과 같습니다.
 - open_market_time_margin : 거래 시작시간을 조정하기 위해 사용됩니다. 지정된 시간 만큼 거래 시작 시간을 지연합니다.
 - close_market_time_margin: 거래 종료시간을 조정하기 위해 사용됩니다. 지정된 시간 만큼 먼저 당일 거래를 마감합니다.
-- test_trade: 모의투자 환경 여부. True로 설정하면 모의투자용 API key를 사용하여 모의투자 환경에서 거래를 진행합니다.
 
 아래 항목들은 법인계좌를 이용하는 경우에만 필요합니다.
 
