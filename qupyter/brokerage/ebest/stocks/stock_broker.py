@@ -10,9 +10,8 @@ class EBestStockBroker(StockBroker):
     """
     이베스트 증권 StockBroker 구현체
     """
-
-    def __init__(self, test_trade: bool = None, app_key: str = None, app_secret: str = None, expire_date: str = None):
-        self.api = EBestStocks(test_trade, app_key, app_secret, expire_date)
+    def __init__(self, test_trade: bool, **kwargs):
+        self.api = EBestStocks(test_trade, **kwargs)
 
 
     def get_price(self, asset_code: str) -> pd.DataFrame:

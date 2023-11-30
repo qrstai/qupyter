@@ -15,9 +15,8 @@ from qupyter.brokerage.utils.retry import retry
 
 
 class EBestStocks(EBest):
-
-    def __init__(self, test_trade: bool = None, app_key: str = None, app_secret: str = None, expire_date: str = None):
-        super().__init__(test_trade=test_trade, account_type='stock', app_key=app_key, app_secret=app_secret, expire_date=expire_date)
+    def __init__(self, test_trade: bool, **kwargs):
+        super().__init__(test_trade=test_trade, account_type='stock', **kwargs)
 
     @retry(HTTPError)
     def post_with_retry(self, url: str, headers: Dict, body: Dict, return_headers: bool = False) -> Dict | Tuple[Dict, Dict]:
