@@ -57,6 +57,7 @@ class KIS:
         params = {
             'brokerage': 'kis',
             'test_trade': test_trade,
+            'account_number': self.account_number + '-' + self.product_code,
         }
         headers = {
             'Authorization': f'Bearer {config.JUPYTERHUB_API_TOKEN}'
@@ -69,7 +70,6 @@ class KIS:
 
         data = r.json()
 
-
         self.secret_id = data.get('id')
         self._app_key = data.get('app_key')
         self._app_secret = data.get('app_secret')
@@ -79,7 +79,7 @@ class KIS:
             self._access_token = data.get('access_token')
             self._token_valid_until = datetime.fromtimestamp(data.get('token_expire_time')/1000)
 
-        if 'account_number' in data:
+        if self.account_number is None and 'account_number' in data:
             account_number = data['account_number']
             tokens = account_number.split('-')
             if len(tokens) != 2:

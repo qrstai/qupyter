@@ -6,7 +6,7 @@ from qupyter import config
 
 
 class EBest:
-    def __init__(self, test_trade: bool = None, account_type: str = None, app_key: str = None, app_secret: str = None, expire_date: str = None):
+    def __init__(self, test_trade: bool = None, account_type: str = None, app_key: str = None, app_secret: str = None, expire_date: str = None, account_number: str = None):
 
         if app_key and app_secret:
             self._app_key = app_key
@@ -23,7 +23,7 @@ class EBest:
             if account_type == None:
                 raise Exception('account_type is not defined.')
 
-            self._load_credentials(test_trade, account_type)
+            self._load_credentials(test_trade, account_type, account_number)
 
         if self._app_key == None or self._app_secret == None:
             raise Exception('API keys are required.')
@@ -62,11 +62,12 @@ class EBest:
         return self._access_token
 
 
-    def _load_credentials(self, test_trade: bool, account_type: str):
+    def _load_credentials(self, test_trade: bool, account_type: str, account_number: str = None):
         params = {
             'brokerage': 'ebest',
             'market_type': account_type,
             'test_trade': test_trade,
+            'account_number': account_number,
         }
         headers = {
             'Authorization': f'Bearer {config.JUPYTERHUB_API_TOKEN}'
