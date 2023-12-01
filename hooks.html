@@ -421,6 +421,71 @@ document.write(`
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="qrst.hooks.on_after_market_close">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qrst.hooks.</span></span><span class="sig-name descname"><span class="pre">on_after_market_close</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">account_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pending_orders</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockOrder" title="qupyter.brokerage.models.StockOrder"><span class="pre">StockOrder</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockPosition" title="qupyter.brokerage.models.StockPosition"><span class="pre">StockPosition</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">broker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockBroker" title="qupyter.brokerage.stock_broker.StockBroker"><span class="pre">StockBroker</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#qrst.hooks.on_after_market_close" title="Permalink to this definition">#</a></dt>
+<dd><p>매일 거래 마감 후 1회 호출 됩니다.</p>
+<p>이 hook은 거래일에만 호출됩니다.</p>
+<p>이 hook이 호출되는 시간은 <cite>on_initialize</cite> hook 에서 반환하는 <cite>after_market_close_schedule</cite> 에 값에 의해 결정됩니다.
+기본 값은 사용자 지정 장 종료 시간 1시간 후입니다. 따라서 사용자가 아무값도 지정하지 않은 경우 보통 오전 4시 15분에 호출됩니다.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul class="simple">
+<li><p>지정된 시간보다 5분이 경과된 후 새로 배포되거나 업데이트 된 경우 이 hook은 호출되지 않습니다.</p></li>
+<li><p>지정된 시간 5분 이내에 다시 배포하는 경우 이 hook은 다시 호출됩니다.</p></li>
+</ul>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>account_info</strong> (<em>Dict</em>) – 계좌 정보. <a class="reference internal" href="qupyter.html#qupyter.brokerage.StockBroker.get_account" title="qupyter.brokerage.StockBroker.get_account"><code class="xref py py-func docutils literal notranslate"><span class="pre">StockBroker.get_account()</span></code></a> 의 반환 값과 동일합니다.</p></li>
+<li><p><strong>pending_orders</strong> (<em>List</em><em> of </em><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockOrder" title="qupyter.brokerage.StockOrder"><em>StockOrder</em></a>) – 미체결 주문 리스트</p></li>
+<li><p><strong>positions</strong> (<em>List</em><em> of </em><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockPosition" title="qupyter.brokerage.StockPosition"><em>StockPosition</em></a>) – 보유 종목 리스트</p></li>
+<li><p><strong>broker</strong> (<a class="reference internal" href="qupyter.html#qupyter.brokerage.StockBroker" title="qupyter.brokerage.StockBroker"><em>StockBroker</em></a>) – 주식 거래를 위한 객체</p></li>
+</ul>
+</dd>
+<dt class="field-even">Examples<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">on_after_market_close</span><span class="p">(</span><span class="n">account_info</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">positions</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">broker</span><span class="p">:</span> <span class="n">StockBroker</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+    <span class="c1"># 활용예: 미체결 주문 내역, 보유 종목 내역을 저장 또는 증권사 API를 사용해 당일 전체 거래 내역을 가져와서 저장하는 등의 작업을 수행</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="qrst.hooks.on_before_market_open">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qrst.hooks.</span></span><span class="sig-name descname"><span class="pre">on_before_market_open</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">account_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pending_orders</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockOrder" title="qupyter.brokerage.models.StockOrder"><span class="pre">StockOrder</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">positions</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockPosition" title="qupyter.brokerage.models.StockPosition"><span class="pre">StockPosition</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">broker</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockBroker" title="qupyter.brokerage.stock_broker.StockBroker"><span class="pre">StockBroker</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#qrst.hooks.on_before_market_open" title="Permalink to this definition">#</a></dt>
+<dd><p>매일 거래 시작 전 1회 호출 됩니다.</p>
+<p>이 hook은 거래일에만 호출됩니다.</p>
+<p>이 hook이 호출되는 시간은 <cite>on_initialize</cite> hook 에서 반환하는 <cite>before_market_open_schedule</cite> 에 값에 의해 결정됩니다.
+기본 값은 사용자 지정 장 시작 시간 1시간 전입니다. 따라서 사용자가 아무값도 지정하지 않은 경우 보통 오전 8시 5분에 호출됩니다.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul class="simple">
+<li><p>지정된 시간보다 5분이 경과된 후 새로 배포되거나 업데이트 된 경우 이 hook은 호출되지 않습니다.</p></li>
+<li><p>지정된 시간 5분 이내에 다시 배포하는 경우 이 hook은 다시 호출됩니다.</p></li>
+</ul>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>account_info</strong> (<em>Dict</em>) – 계좌 정보. <a class="reference internal" href="qupyter.html#qupyter.brokerage.StockBroker.get_account" title="qupyter.brokerage.StockBroker.get_account"><code class="xref py py-func docutils literal notranslate"><span class="pre">StockBroker.get_account()</span></code></a> 의 반환 값과 동일합니다.</p></li>
+<li><p><strong>pending_orders</strong> (<em>List</em><em> of </em><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockOrder" title="qupyter.brokerage.StockOrder"><em>StockOrder</em></a>) – 미체결 주문 리스트</p></li>
+<li><p><strong>positions</strong> (<em>List</em><em> of </em><a class="reference internal" href="qupyter.html#qupyter.brokerage.StockPosition" title="qupyter.brokerage.StockPosition"><em>StockPosition</em></a>) – 보유 종목 리스트</p></li>
+<li><p><strong>broker</strong> (<a class="reference internal" href="qupyter.html#qupyter.brokerage.StockBroker" title="qupyter.brokerage.StockBroker"><em>StockBroker</em></a>) – 주식 거래를 위한 객체</p></li>
+</ul>
+</dd>
+<dt class="field-even">Examples<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">on_after_market_close</span><span class="p">(</span><span class="n">account_info</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">pending_orders</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">positions</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">broker</span><span class="p">:</span> <span class="n">StockBroker</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+    <span class="c1"># 예: 전일 거래량을 순위를 조회하여 당일 매수할 종목과 수량을 결정하여 저장</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="qrst.hooks.on_initiailze">
 <em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">qrst.hooks.</span></span><span class="sig-name descname"><span class="pre">on_initiailze</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span></span></span><a class="headerlink" href="#qrst.hooks.on_initiailze" title="Permalink to this definition">#</a></dt>
 <dd><p>사용자 전략 초기화.</p>
@@ -615,6 +680,8 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.handle_pending_orders"><code class="docutils literal notranslate"><span class="pre">handle_pending_orders()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.on_after_market_close"><code class="docutils literal notranslate"><span class="pre">on_after_market_close()</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.on_before_market_open"><code class="docutils literal notranslate"><span class="pre">on_before_market_open()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.on_initiailze"><code class="docutils literal notranslate"><span class="pre">on_initiailze()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.on_market_close"><code class="docutils literal notranslate"><span class="pre">on_market_close()</span></code></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qrst.hooks.on_market_open"><code class="docutils literal notranslate"><span class="pre">on_market_open()</span></code></a></li>

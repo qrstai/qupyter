@@ -56,6 +56,8 @@ async def run():
 사용자 전략 실행 시 처음 한번 실행되는 함수입니다. 필요한 초기화 작업을 수행하고 실행주기, 손/익절 조건등의 설정 값을 반환하도록 작성합니다.
 
 ```python
+import datetime as dtm
+
 async def on_initialize():
   """ 필요한 사용자 초기화 코드를 실행합니다 """
   config = {
@@ -76,10 +78,16 @@ async def on_initialize():
     },
 
     # 거래 시작 시간 조정 (초). 기본값 300(5분)
-    'open_market_time_margin': 300,
+    'open_market_time_margin': dtm.timedelta(minutes=5),
 
     # 거래 마감 시간 조정 (초). 기본값 300(5분)
-    'close_market_time_margin': 300,
+    'close_market_time_margin': dtm.timedelta(minutes=5),
+
+    # 장 시작 전 'on_before_market_open' hook 호출할 시간. 기본값: 시작 1시간 전
+    'before_market_open_schedule': dtm.timedelta(hours=1), # 또는 dtm.time(08, 00)
+
+    # 장 마감 후 'on_after_market_close' hook 호출할 시간. 기본값: 마감 1시간 후
+    'after_market_close_schedule': dtm.timedelta(hours=1), # 또는 dtm.time(16, 30)
 
     # 증권사 계좌 상세 정보
     'broker_settings': {
@@ -112,6 +120,8 @@ async def on_initialize():
 - take_profit_config : 익절 조건을 등록합니다. 가격을 확인하는 주기는 위 `interval`과 같습니다.
 - open_market_time_margin : 거래 시작시간을 조정하기 위해 사용됩니다. 지정된 시간 만큼 거래 시작 시간을 지연합니다.
 - close_market_time_margin: 거래 종료시간을 조정하기 위해 사용됩니다. 지정된 시간 만큼 먼저 당일 거래를 마감합니다.
+- before_market_open_schedule: 장 시작전 호출되는 `on_before_market_open` hook을 호출할 시간을 설정합니다.
+- after_market_close_schedule: 장 시작전 호출되는 `on_after_market_close` hook을 호출할 시간을 설정합니다.
 
 아래 항목들은 법인계좌를 이용하는 경우에만 필요합니다.
 
@@ -220,5 +230,53 @@ async def handle_pending_orders(pending_orders, broker):
 
 ```{note}
 파라미터와 응답형식에 대한 자세한 설명은 [Hooks - handle_pending_orders()](qrst.hooks.handle_pending_orders)
+문서를 참고하세요.
+```
+
+### on_before_market_open
+
+매일 장 시작 전 정해진 시간에 한번 호출 됩니다. 거래 시작 전 준비가 필요한 경우 등록해 사용할 수 있습니다.
+
+```python
+async def on_before_market_open(account_info, pending_orders, positions, broker):
+  """장 시작 전 처리를 위한 hook
+
+  Args:
+    account_info (dict): 계좌 정보.
+    pending_orders (tuple): 미체결 주문 목록.
+    positions (list): 보유 포지션.
+    broker (StockBroker): 시세 조회를 위한 증권 사 API wrapper.
+  """
+
+
+  ##### 전략 코드 작성 #####
+```
+
+```{note}
+파라미터에 대한 자세한 설명은 [Hooks - on_before_market_open()](qrst.hooks.on_before_market_open)
+문서를 참고하세요.
+```
+
+### on_before_market_close
+
+매일 장 종료 후 정해진 시간에 한번 호출 됩니다. 거래 마감 후 작업이 필요한 경우 등록해 사용할 수 있습니다.
+
+```python
+async def on_before_market_close(account_info, pending_orders, positions, broker):
+  """장 마감 후 처리를 위한 hook
+
+  Args:
+    account_info (dict): 계좌 정보.
+    pending_orders (tuple): 미체결 주문 목록.
+    positions (list): 보유 포지션.
+    broker (StockBroker): 시세 조회를 위한 증권 사 API wrapper.
+  """
+
+
+  ##### 전략 코드 작성 #####
+```
+
+```{note}
+파라미터에 대한 자세한 설명은 [Hooks - on_before_market_open()](qrst.hooks.on_before_market_open)
 문서를 참고하세요.
 ```
