@@ -198,3 +198,71 @@ async def handle_pending_orders(pending_orders: List[Tuple[str, List[StockOrder]
     '''
     pass
 
+async def on_before_market_open(account_info: Dict, pending_orders: List[StockOrder], positions: List[StockPosition], broker: StockBroker) -> List[Tuple[str, int, int]]:
+    '''매일 거래 시작 전 1회 호출 됩니다.
+
+    이 hook은 거래일에만 호출됩니다.
+
+    이 hook이 호출되는 시간은 `on_initialize` hook 에서 반환하는 `before_market_open_schedule` 에 값에 의해 결정됩니다.
+    기본 값은 사용자 지정 장 시작 시간 1시간 전입니다. 따라서 사용자가 아무값도 지정하지 않은 경우 보통 오전 8시 5분에 호출됩니다.
+
+    .. warning::
+      - 지정된 시간보다 5분이 경과된 후 새로 배포되거나 업데이트 된 경우 이 hook은 호출되지 않습니다.
+      - 지정된 시간 5분 이내에 다시 배포하는 경우 이 hook은 다시 호출됩니다.
+
+
+    :param account_info: 계좌 정보. :func:`StockBroker.get_account()<qupyter.brokerage.StockBroker.get_account>` 의 반환 값과 동일합니다.
+    :type account_info: Dict
+
+    :param pending_orders: 미체결 주문 리스트
+    :type pending_orders: List of StockOrder
+
+    :param positions: 보유 종목 리스트
+    :type positions: List of StockPosition
+
+    :param broker: 주식 거래를 위한 객체
+    :type broker: StockBroker
+
+    :examples:
+
+    .. code-block:: python
+
+        async def on_after_market_close(account_info: Dict, pending_orders: List, positions: List, broker: StockBroker) -> List[Tuple[str, int, int]]:
+            # 예: 전일 거래량을 순위를 조회하여 당일 매수할 종목과 수량을 결정하여 저장
+            pass
+    '''
+    pass
+
+async def on_after_market_close(account_info: Dict, pending_orders: List[StockOrder], positions: List[StockPosition], broker: StockBroker) -> List[Tuple[str, int, int]]:
+    '''매일 거래 마감 후 1회 호출 됩니다.
+
+    이 hook은 거래일에만 호출됩니다.
+
+    이 hook이 호출되는 시간은 `on_initialize` hook 에서 반환하는 `after_market_close_schedule` 에 값에 의해 결정됩니다.
+    기본 값은 사용자 지정 장 종료 시간 1시간 후입니다. 따라서 사용자가 아무값도 지정하지 않은 경우 보통 오전 4시 15분에 호출됩니다.
+
+    .. warning::
+      - 지정된 시간보다 5분이 경과된 후 새로 배포되거나 업데이트 된 경우 이 hook은 호출되지 않습니다.
+      - 지정된 시간 5분 이내에 다시 배포하는 경우 이 hook은 다시 호출됩니다.
+
+
+    :param account_info: 계좌 정보. :func:`StockBroker.get_account()<qupyter.brokerage.StockBroker.get_account>` 의 반환 값과 동일합니다.
+    :type account_info: Dict
+
+    :param pending_orders: 미체결 주문 리스트
+    :type pending_orders: List of StockOrder
+
+    :param positions: 보유 종목 리스트
+    :type positions: List of StockPosition
+
+    :param broker: 주식 거래를 위한 객체
+    :type broker: StockBroker
+
+    :examples:
+
+    .. code-block:: python
+
+        async def on_after_market_close(account_info: Dict, pending_orders: List, positions: List, broker: StockBroker) -> List[Tuple[str, int, int]]:
+            # 활용예: 미체결 주문 내역, 보유 종목 내역을 저장 또는 증권사 API를 사용해 당일 전체 거래 내역을 가져와서 저장하는 등의 작업을 수행
+    '''
+    pass
