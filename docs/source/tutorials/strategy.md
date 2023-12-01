@@ -257,12 +257,12 @@ async def on_before_market_open(account_info, pending_orders, positions, broker)
 문서를 참고하세요.
 ```
 
-### on_before_market_close
+### on_after_market_close
 
 매일 장 종료 후 정해진 시간에 한번 호출 됩니다. 거래 마감 후 작업이 필요한 경우 등록해 사용할 수 있습니다.
 
 ```python
-async def on_before_market_close(account_info, pending_orders, positions, broker):
+async def on_after_market_close(account_info, pending_orders, positions, broker):
   """장 마감 후 처리를 위한 hook
 
   Args:
@@ -277,6 +277,6 @@ async def on_before_market_close(account_info, pending_orders, positions, broker
 ```
 
 ```{note}
-파라미터에 대한 자세한 설명은 [Hooks - on_before_market_open()](qrst.hooks.on_before_market_open)
+파라미터에 대한 자세한 설명은 [Hooks - on_after_market_close()](qrst.hooks.on_after_market_close)
 문서를 참고하세요.
 ```
