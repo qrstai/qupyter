@@ -239,7 +239,7 @@ async def on_after_market_close(account_info: Dict, pending_orders: List[StockOr
     이 hook은 거래일에만 호출됩니다.
 
     이 hook이 호출되는 시간은 `on_initialize` hook 에서 반환하는 `after_market_close_schedule` 에 값에 의해 결정됩니다.
-    기본 값은 사용자 지정 장 종료 시간 1시간 후입니다. 따라서 사용자가 아무값도 지정하지 않은 경우 보통 오전 4시 15분에 호출됩니다.
+    기본 값은 사용자 지정 장 종료 시간 1시간 후입니다. 따라서 사용자가 아무값도 지정하지 않은 경우 보통 오후 4시 15분에 호출됩니다.
 
     .. warning::
       - 지정된 시간보다 5분이 경과된 후 새로 배포되거나 업데이트 된 경우 이 hook은 호출되지 않습니다.
