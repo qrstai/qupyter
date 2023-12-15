@@ -153,7 +153,7 @@ class StockBroker:
         - low (int): 저가
         - close (int): 종가
         - volume (int): 거래량
-        - volume_nominal (int): 거래대금 (단위: 백만원)
+        - volume_nominal (int): 거래대금
 
         :examples:
 
