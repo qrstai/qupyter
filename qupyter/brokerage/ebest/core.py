@@ -29,6 +29,7 @@ class EBest:
             raise Exception('API keys are required.')
 
         self._check_key_expire_date()
+        self._access_token = None
         self._session = None
 
 
