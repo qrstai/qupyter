@@ -53,10 +53,7 @@ def _get_market_schedule(date: datetime.date) -> MarketSchedule:
     :rtype: MarketSchedule
     """
 
-    r = requests.get(config.QUPYTER_API_URL + '/market-schedule', params={'date': date.strftime('%Y%m%d')})
-    r.raise_for_status()
-
-    data = r.json()
+    data = _request_market_schedule(date)
 
     open_time = data.get('open_time')
     if open_time:
@@ -77,5 +74,15 @@ def _get_market_schedule(date: datetime.date) -> MarketSchedule:
     )
 
 
+@retry(requests.HTTPError)
+def _request_market_schedule(date: datetime.date) -> MarketSchedule:
+    r = requests.get(config.QUPYTER_API_URL + '/market-schedule', params={'date': date.strftime('%Y%m%d')})
+    if r.status_code != 200:
+        print(r.text)
+        r.raise_for_status()
+
+    data = r.json()
+
+    return data
 
 
