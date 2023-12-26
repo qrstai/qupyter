@@ -6,6 +6,7 @@ pandas>=2.1.0
 numpy>=1.26.0
 websockets>=11.0.3
 requests>=2.31.0
+pykrx==1.0.45
 python-dotenv>=1.0.0
 cachetools>=5.3.2
 httpx==0.25.1
